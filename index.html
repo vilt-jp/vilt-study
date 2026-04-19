@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>ViLT 動作テスト v2</title>
+<title>ViLT 動作テスト v3</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html,body{font-family:-apple-system,"Hiragino Sans","Segoe UI",sans-serif;background:#f4f4f8;color:#222;line-height:1.6;min-height:100vh}
@@ -15,31 +15,50 @@ header{background:linear-gradient(135deg,#da251d,#ffcd00);color:#fff;padding:14p
 header h1{font-size:18px;font-weight:700}
 header .sub{font-size:11px;opacity:.9;margin-top:3px}
 main{flex:1;padding:16px;padding-bottom:100px}
-.step{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#8b6914}
+.step{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#8b6914;line-height:1.6}
 .round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
 .round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
 .round-bar .sep{width:1px;height:30px;background:#e0e0e0}
-.card{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:32px 20px;min-height:240px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:14px;position:relative}
-.card:active{transform:scale(.99)}
-.card .face{font-size:36px;font-weight:700;color:#222;word-break:break-word;line-height:1.3}
-.card .jp{font-size:26px;color:#2e7d32;word-break:break-word;line-height:1.3}
-.card .hint{position:absolute;bottom:10px;left:0;right:0;font-size:11px;color:#aaa}
-.card .idx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
-.speak-btn{position:absolute;top:10px;left:10px;background:#e3f2fd;border:2px solid #1976d2;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1976d2;font-weight:700}
-.speak-btn:active{transform:scale(.9);background:#bbdefb}
-.speak-btn.speaking{background:#1976d2;color:#fff}
-.ctrl{display:flex;gap:10px;margin-bottom:10px}
-.ctrl button{flex:1;padding:16px 6px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
-.ctrl button:active{opacity:.75;transform:scale(.96)}
-.btn-prev{background:#e0e0e0;color:#333}
-.btn-unknown{background:#ffebee;color:#c62828;border:2px solid #ef9a9a}
-.btn-known{background:#e8f5e9;color:#2e7d32;border:2px solid #a5d6a7}
-.btn-next{background:#e0e0e0;color:#333}
+.qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:24px 20px;min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:14px;position:relative}
+.qcard .qlabel{font-size:11px;color:#888;margin-bottom:10px;letter-spacing:2px;font-weight:600}
+.qcard .qword{font-size:36px;font-weight:700;color:#222;word-break:break-word;line-height:1.4}
+.qcard .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+
+.input-area{margin-bottom:14px}
+.input-area label{display:block;font-size:12px;color:#666;margin-bottom:6px;font-weight:600}
+.ans-input{width:100%;padding:16px;border:2px solid #1976d2;border-radius:12px;font-size:22px;font-family:inherit;background:#fafbff;text-align:center;color:#222}
+.ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
+.ans-input.correct{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
+.ans-input.partial{border-color:#f57c00;background:#fff3e0;color:#e65100}
+.ans-input.wrong{border-color:#c62828;background:#ffebee;color:#b71c1c}
+
+.judge-box{border-radius:12px;padding:16px;margin-bottom:14px;text-align:center;display:none}
+.judge-box.show{display:block}
+.judge-box.correct{background:linear-gradient(135deg,#66bb6a,#43a047);color:#fff}
+.judge-box.partial{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
+.judge-box.wrong{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
+.judge-box .icon{font-size:38px;font-weight:700;display:block;margin-bottom:4px}
+.judge-box .msg{font-size:14px;margin-bottom:8px;opacity:.95}
+.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:8px 12px;font-size:20px;font-weight:700;display:inline-block;margin-top:4px}
+.judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:4px;font-weight:400}
+
+.btn-row{display:flex;gap:10px;margin-bottom:10px}
+.btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-row button:active{opacity:.75;transform:scale(.96)}
+.btn-row button:disabled{opacity:.4;cursor:not-allowed}
+.btn-check{background:#1976d2;color:#fff}
+.btn-speak{background:#e3f2fd;color:#1976d2;border:2px solid #1976d2!important}
+.btn-speak.speaking{background:#1976d2;color:#fff}
+.btn-next{background:#2e7d32;color:#fff}
+.btn-retry{background:#ef6c00;color:#fff}
+
 .progress{background:#f0f0f0;height:10px;border-radius:5px;overflow:hidden;margin:12px 0 8px}
 .progress-bar{background:linear-gradient(90deg,#da251d,#ffcd00);height:100%;transition:width .3s}
-.voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:10px 12px;font-size:12px;color:#1565c0;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+
+.voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:10px 12px;font-size:12px;color:#1565c0;margin-bottom:12px}
 .voice-info.warn{background:#fff3e0;border-color:#ffb74d;color:#e65100}
 .voice-info.err{background:#ffebee;border-color:#e57373;color:#c62828}
+
 .reset{display:block;width:100%;padding:10px;margin-top:10px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:12px;cursor:pointer;font-family:inherit}
 .complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .complete h2{font-size:28px;margin-bottom:8px}
@@ -52,16 +71,17 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
 <body>
 <div class="app">
 <header>
-<h1>🇻🇳 ViLT 動作テスト v2</h1>
-<div class="sub">音声 + 5周システム 動作確認</div>
+<h1>🇻🇳 ViLT 動作テスト v3</h1>
+<div class="sub">タイピング + 段階判定（文字/声調）</div>
 </header>
 <main>
 <div class="step">
 <b>📱 確認項目</b><br>
-① <b>🔊ボタン</b>でベトナム語発音が鳴るか<br>
-② <b>✓覚えた</b>でカードが消え、次の周に出ないか<br>
-③ <b>✗まだ</b>で次の周に残るか<br>
-④ 5周完了 or 全✓で<b>完了画面</b>が出るか
+① 日本語を見てベトナム語を<b>入力</b>できるか<br>
+② <b>完全正解</b>(文字+声調)で緑表示<br>
+③ <b>部分正解</b>(文字だけ)で黄表示<br>
+④ <b>不正解</b>で赤表示 + 正解表示<br>
+⑤ 部分・不正解は次の周に残るか
 </div>
 
 <div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
@@ -75,18 +95,31 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
 <div>習得<b id="s-done">0 / 5</b></div>
 </div>
 
-<div class="card" id="card">
-<button class="speak-btn" id="btnSpeak" aria-label="発音">🔊</button>
-<div class="idx" id="idx">1/5</div>
-<div class="face" id="face">読み込み中...</div>
-<div class="hint" id="hint">タップして日本語を見る</div>
+<div class="qcard">
+<div class="qidx" id="idx">1/5</div>
+<div class="qlabel">以下を ベトナム語 で入力</div>
+<div class="qword" id="qword">読み込み中...</div>
 </div>
 
-<div class="ctrl">
-<button class="btn-prev" id="btnPrev">◀ 前</button>
-<button class="btn-unknown" id="btnUnknown">✗ まだ</button>
-<button class="btn-known" id="btnKnown">✓ 覚えた</button>
-<button class="btn-next" id="btnNext">次 ▶</button>
+<div class="input-area">
+<label for="ans">答え (ベトナム語)</label>
+<input type="text" class="ans-input" id="ans" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="例: xin chào" />
+</div>
+
+<div class="judge-box" id="judge">
+<span class="icon" id="judgeIcon">✓</span>
+<div class="msg" id="judgeMsg"></div>
+<div class="correct-ans" id="correctAns"></div>
+</div>
+
+<div class="btn-row" id="beforeCheck">
+<button class="btn-check" id="btnCheck">答え合わせ</button>
+</div>
+
+<div class="btn-row hidden" id="afterCheck">
+<button class="btn-speak" id="btnSpeak">🔊 発音</button>
+<button class="btn-retry hidden" id="btnRetry">もう一度</button>
+<button class="btn-next" id="btnNext">次の問題 ▶</button>
 </div>
 
 <div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
@@ -101,7 +134,7 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
 <button class="reset" id="btnReset">進捗をリセット</button>
 
 </main>
-<footer>第2テスト: 音声 + 5周フィルター方式<br>データはこの端末だけに保存されます</footer>
+<footer>第3テスト: タイピング + 段階判定<br>声調記号 (á, à, ả, ã, ạ 等) を正しく入力できると完全正解</footer>
 </div>
 
 <script>
@@ -113,10 +146,11 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
     {vi:"tạm biệt",    jp:"さようなら"},
     {vi:"hẹn gặp lại", jp:"また会いましょう"}
   ];
-  var STORAGE_KEY = "vilt_test_v2";
+  var STORAGE_KEY = "vilt_test_v3";
   var MAX_ROUND = 5;
 
   var state = null;
+  var lastJudge = null;
 
   function initState(){
     return {
@@ -125,62 +159,65 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
       nextQueue: [],
       done: [],
       idx: 0,
-      flipped: false,
       finished: false
     };
   }
-
   function load(){
     try{
       var s = localStorage.getItem(STORAGE_KEY);
-      if(s){
-        state = JSON.parse(s);
-        if(!state.queue || state.queue.length === 0 && !state.finished){
-          state = initState();
-        }
-        return;
-      }
+      if(s){ state = JSON.parse(s); return; }
     }catch(e){}
     state = initState();
   }
-
   function save(){
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }catch(e){}
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  // ===== String normalization =====
+  function stripDiacritics(s){
+    return s.normalize("NFD")
+      .replace(/[\u0300-\u036f]/g,"")
+      .replace(/đ/g,"d").replace(/Đ/g,"D");
+  }
+  function normalize(s){
+    return s.trim().toLowerCase().replace(/\s+/g," ");
+  }
+
+  // ===== Judge =====
+  function judge(input, correct){
+    var inp = normalize(input);
+    var ans = normalize(correct);
+    if(inp === "") return "empty";
+    if(inp === ans) return "correct";
+    if(stripDiacritics(inp) === stripDiacritics(ans)) return "partial";
+    return "wrong";
   }
 
   // ===== Voice / TTS =====
   var viVoice = null;
-  var voiceReady = false;
-
   function loadVoices(){
     var voices = window.speechSynthesis.getVoices();
     viVoice = voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf("vi") === 0; });
-    updateVoiceInfo(voices);
-    voiceReady = true;
+    updateVoiceInfo();
   }
-  function updateVoiceInfo(voices){
+  function updateVoiceInfo(){
     var el = document.getElementById("voiceInfo");
     if(!("speechSynthesis" in window)){
-      el.className = "voice-info err";
-      el.textContent = "❌ このブラウザは音声合成に未対応です";
-      return;
+      el.className="voice-info err"; el.textContent="❌ このブラウザは音声合成に未対応です"; return;
     }
     if(viVoice){
-      el.className = "voice-info";
-      el.innerHTML = "✅ ベトナム語音声: <b>" + viVoice.name + "</b> (" + viVoice.lang + ")";
+      el.className="voice-info";
+      el.innerHTML="✅ ベトナム語音声: <b>"+viVoice.name+"</b> ("+viVoice.lang+")";
     }else{
-      el.className = "voice-info warn";
-      el.innerHTML = "⚠️ ベトナム語音声が見つかりません<br><small>iPhone「設定→アクセシビリティ→読み上げコンテンツ→声→Tiếng Việt」で音声をダウンロードできます</small>";
+      el.className="voice-info warn";
+      el.innerHTML="⚠️ ベトナム語音声が見つかりません<br><small>設定→アクセシビリティ→読み上げコンテンツ→声→Tiếng Việt でDL可</small>";
     }
   }
   function speak(text){
     if(!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
     var msg = new SpeechSynthesisUtterance(text);
-    msg.lang = "vi-VN";
-    msg.rate = 0.85;
+    msg.lang="vi-VN"; msg.rate=0.85;
     if(viVoice) msg.voice = viVoice;
     var btn = document.getElementById("btnSpeak");
     btn.classList.add("speaking");
@@ -195,35 +232,35 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
     return state.queue[state.idx];
   }
   function render(){
-    if(state.finished){
-      showComplete();
-      return;
-    }
+    if(state.finished){ showComplete(); return; }
     document.getElementById("learnArea").classList.remove("hidden");
     document.getElementById("completeArea").classList.add("hidden");
 
-    var cardIdx = currentCardIdx();
-    if(cardIdx < 0){ return; }
-    var c = CARDS[cardIdx];
-    var face = document.getElementById("face");
-    var hint = document.getElementById("hint");
-    var idxEl = document.getElementById("idx");
-    if(state.flipped){
-      face.textContent = c.jp;
-      face.className = "face jp";
-      hint.textContent = "もう一度タップでベトナム語に戻す";
-    }else{
-      face.textContent = c.vi;
-      face.className = "face";
-      hint.textContent = "タップして日本語を見る";
-    }
-    idxEl.textContent = (state.idx+1) + "/" + state.queue.length;
+    var ci = currentCardIdx();
+    if(ci < 0) return;
+    var c = CARDS[ci];
 
-    document.getElementById("s-round").textContent = state.round + " / " + MAX_ROUND;
+    document.getElementById("qword").textContent = c.jp;
+    document.getElementById("idx").textContent = (state.idx+1)+"/"+state.queue.length;
+    document.getElementById("s-round").textContent = state.round+" / "+MAX_ROUND;
     document.getElementById("s-remain").textContent = state.queue.length;
-    document.getElementById("s-done").textContent = state.done.length + " / " + CARDS.length;
-    var pct = Math.round((state.done.length / CARDS.length) * 100);
-    document.getElementById("bar").style.width = pct + "%";
+    document.getElementById("s-done").textContent = state.done.length+" / "+CARDS.length;
+    document.getElementById("bar").style.width = Math.round((state.done.length/CARDS.length)*100)+"%";
+
+    // Reset input
+    var input = document.getElementById("ans");
+    input.value = "";
+    input.className = "ans-input";
+    input.disabled = false;
+
+    // Hide judge / after-check
+    document.getElementById("judge").classList.remove("show");
+    document.getElementById("beforeCheck").classList.remove("hidden");
+    document.getElementById("afterCheck").classList.add("hidden");
+    document.getElementById("btnRetry").classList.add("hidden");
+
+    lastJudge = null;
+    setTimeout(function(){ try{ input.focus(); }catch(e){} }, 50);
   }
 
   function showComplete(){
@@ -232,81 +269,71 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
     ca.classList.remove("hidden");
     var msg = document.getElementById("completeMsg");
     if(state.done.length === CARDS.length){
-      msg.textContent = "全" + CARDS.length + "単語を習得しました！";
+      msg.textContent = "全"+CARDS.length+"単語を完全習得しました！";
     }else{
-      msg.textContent = MAX_ROUND + "周完了。習得: " + state.done.length + " / " + CARDS.length + "語";
+      msg.textContent = MAX_ROUND+"周完了。完全習得: "+state.done.length+" / "+CARDS.length+"語";
     }
-    document.getElementById("s-round").textContent = "完了";
-    document.getElementById("s-remain").textContent = "0";
-    document.getElementById("s-done").textContent = state.done.length + " / " + CARDS.length;
-    document.getElementById("bar").style.width = "100%";
+    document.getElementById("bar").style.width="100%";
   }
 
-  // ===== Actions =====
-  function flip(){
-    if(state.finished) return;
-    state.flipped = !state.flipped;
-    render();
-  }
-  function nextCard(){
-    if(state.finished) return;
-    state.idx++;
-    state.flipped = false;
-    if(state.idx >= state.queue.length){
-      // End of round
-      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
-        state.finished = true;
-      }else{
-        state.round++;
-        state.queue = state.nextQueue;
-        state.nextQueue = [];
-        state.idx = 0;
-      }
+  // ===== Check action =====
+  function doCheck(){
+    var ci = currentCardIdx();
+    if(ci < 0) return;
+    var c = CARDS[ci];
+    var input = document.getElementById("ans");
+    var val = input.value;
+    var result = judge(val, c.vi);
+
+    var jbox = document.getElementById("judge");
+    var icon = document.getElementById("judgeIcon");
+    var msg = document.getElementById("judgeMsg");
+    var ans = document.getElementById("correctAns");
+
+    if(result === "empty"){
+      input.focus();
+      return;
     }
-    render();
-    save();
-  }
-  function prevCard(){
-    if(state.finished) return;
-    state.flipped = false;
-    if(state.idx > 0){
-      state.idx--;
+
+    lastJudge = result;
+    jbox.className = "judge-box show " + result;
+
+    if(result === "correct"){
+      input.className = "ans-input correct";
+      icon.textContent = "✓";
+      msg.textContent = "完全正解！（文字 + 声調）";
+      ans.innerHTML = c.vi + "<small>= " + c.jp + "</small>";
+      document.getElementById("btnRetry").classList.add("hidden");
+    }else if(result === "partial"){
+      input.className = "ans-input partial";
+      icon.textContent = "△";
+      msg.textContent = "惜しい！文字は正解、声調記号が違います";
+      ans.innerHTML = c.vi + "<small>あなたの答え: " + val + "</small>";
+      document.getElementById("btnRetry").classList.remove("hidden");
+    }else{
+      input.className = "ans-input wrong";
+      icon.textContent = "✗";
+      msg.textContent = "不正解。正解を見て覚えましょう";
+      ans.innerHTML = c.vi + "<small>あなたの答え: " + val + "</small>";
+      document.getElementById("btnRetry").classList.remove("hidden");
     }
-    render();
-    save();
+    input.disabled = true;
+
+    document.getElementById("beforeCheck").classList.add("hidden");
+    document.getElementById("afterCheck").classList.remove("hidden");
   }
-  function markKnown(){
-    if(state.finished) return;
-    var cardIdx = currentCardIdx();
-    if(cardIdx < 0) return;
-    if(state.done.indexOf(cardIdx) < 0) state.done.push(cardIdx);
-    // Remove from current queue
+
+  function doNext(){
+    var ci = currentCardIdx();
+    if(ci < 0) return;
+
+    if(lastJudge === "correct"){
+      if(state.done.indexOf(ci) < 0) state.done.push(ci);
+    }else if(lastJudge === "partial" || lastJudge === "wrong"){
+      if(state.nextQueue.indexOf(ci) < 0) state.nextQueue.push(ci);
+    }
     state.queue.splice(state.idx, 1);
-    state.flipped = false;
-    if(state.idx >= state.queue.length){
-      // End of round
-      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
-        state.finished = true;
-      }else{
-        state.round++;
-        state.queue = state.nextQueue;
-        state.nextQueue = [];
-        state.idx = 0;
-      }
-    }
-    render();
-    save();
-  }
-  function markUnknown(){
-    if(state.finished) return;
-    var cardIdx = currentCardIdx();
-    if(cardIdx < 0) return;
-    if(state.nextQueue.indexOf(cardIdx) < 0) state.nextQueue.push(cardIdx);
-    // Remove from done if there
-    var di = state.done.indexOf(cardIdx);
-    if(di >= 0) state.done.splice(di, 1);
-    state.idx++;
-    state.flipped = false;
+
     if(state.idx >= state.queue.length){
       if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
         state.finished = true;
@@ -317,44 +344,50 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
         state.idx = 0;
       }
     }
-    render();
     save();
+    render();
   }
+
+  function doRetry(){
+    var input = document.getElementById("ans");
+    input.value = "";
+    input.className = "ans-input";
+    input.disabled = false;
+    document.getElementById("judge").classList.remove("show");
+    document.getElementById("beforeCheck").classList.remove("hidden");
+    document.getElementById("afterCheck").classList.add("hidden");
+    lastJudge = null;
+    try{ input.focus(); }catch(e){}
+  }
+
   function reset(){
     state = initState();
     save();
     render();
   }
 
-  // ===== Event binding =====
-  document.getElementById("card").addEventListener("click", function(e){
-    // Prevent flip when speak button clicked
-    if(e.target.closest && e.target.closest(".speak-btn")) return;
-    flip();
+  // ===== Events =====
+  document.getElementById("btnCheck").addEventListener("click", doCheck);
+  document.getElementById("btnNext").addEventListener("click", doNext);
+  document.getElementById("btnRetry").addEventListener("click", doRetry);
+  document.getElementById("btnSpeak").addEventListener("click", function(){
+    var ci = currentCardIdx();
+    if(ci >= 0) speak(CARDS[ci].vi);
   });
-  document.getElementById("btnSpeak").addEventListener("click", function(e){
-    e.stopPropagation();
-    var cardIdx = currentCardIdx();
-    if(cardIdx >= 0) speak(CARDS[cardIdx].vi);
+  document.getElementById("ans").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); doCheck(); }
   });
-  document.getElementById("btnPrev").addEventListener("click", prevCard);
-  document.getElementById("btnNext").addEventListener("click", nextCard);
-  document.getElementById("btnKnown").addEventListener("click", markKnown);
-  document.getElementById("btnUnknown").addEventListener("click", markUnknown);
   document.getElementById("btnReset").addEventListener("click", function(){
     if(confirm("進捗をリセットしますか?")) reset();
   });
   document.getElementById("btnRestart").addEventListener("click", reset);
 
-  // Voice loading (async on some browsers)
   if("speechSynthesis" in window){
     loadVoices();
     if(window.speechSynthesis.onvoiceschanged !== undefined){
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
-  }else{
-    updateVoiceInfo([]);
-  }
+  }else{ updateVoiceInfo(); }
 
   load();
   render();
