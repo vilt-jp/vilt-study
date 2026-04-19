@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ViLT 学習スケジュール</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+.week{background:#fff;border:1px solid #e0e0e0;border-radius:12px;padding:14px;margin-bottom:10px;transition:all .2s}
+.week.today{border-color:#da251d;background:linear-gradient(135deg,#fff8f8,#fff);box-shadow:0 3px 10px rgba(218,37,29,.15)}
+.week.past{opacity:.55;background:#fafafa}
+.week h3{font-size:15px;color:#333;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between}
+.week h3 .num{color:#da251d;font-weight:700}
+.week h3 .tag{font-size:11px;padding:3px 8px;border-radius:10px;font-weight:600}
+.tag-now{background:#da251d;color:#fff}
+.tag-past{background:#9e9e9e;color:#fff}
+.tag-future{background:#e0e0e0;color:#666}
+.week .dates{font-size:12px;color:#888;margin-bottom:8px}
+.week .theme{font-size:13px;color:#444;margin-bottom:8px;padding:6px 10px;background:#f8f8f8;border-radius:6px}
+.week ul.tasks{list-style:none;padding:0;margin-top:4px}
+.week ul.tasks li{padding:4px 0;font-size:13px;color:#555;padding-left:20px;position:relative}
+.week ul.tasks li:before{content:"・";position:absolute;left:6px;color:#da251d}
+.summary{background:linear-gradient(135deg,#1976d2,#42a5f5);color:#fff;border-radius:12px;padding:14px;margin-bottom:14px;font-size:13px}
+.summary .n{font-size:28px;font-weight:800;display:block}
+.tip{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:10px 12px;font-size:12px;color:#8b6914;margin-bottom:12px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="site">
+<button class="nav-back" onclick="location.href='../'">← ホーム</button>
+<h1>学習スケジュール</h1>
+<div class="sub">9週間プラン (2026-04-20 ~ 2026-06-21)</div>
+</header>
+<main>
+
+<div class="summary" id="summary">
+<span>今日は試験まで</span>
+<span class="n" id="daysLeft">-</span>
+<span>日</span>
+</div>
+
+<div class="tip">
+<b>📝 進め方のポイント</b><br>
+・平日: 1時間 (朝30分 語彙 + 夜30分 リスニング/文法)<br>
+・週末: 2.5時間 (模試・長文・復習)<br>
+・週合計10時間 × 9週 = 約90時間を確保
+</div>
+
+<div id="weeks"></div>
+
+</main>
+<footer class="site">Huong先生レッスンと並行して活用</footer>
+</div>
+
+<script>
+var EXAM_DATE = new Date(2026, 5, 21); // 2026-06-21
+var TODAY = new Date(); TODAY.setHours(0,0,0,0);
+
+var WEEKS = [
+  {n:1, start:"2026-04-20", end:"2026-04-26", theme:"🎯 現状診断・弱点特定",
+   tasks:["既存 study.html 総復習 (4級 身体・健康)","4級過去問 1回 → スコア分析","弱点を聴解/文法/語彙で特定","本アプリの 4級語彙タイピングで1周目"]},
+  {n:2, start:"2026-04-27", end:"2026-05-03", theme:"📝 4級文法強化① 受動態",
+   tasks:["bị + V (不利益) vs được + V (利益)","bị/được の例文30本音読","4級語彙タイピング 感情・自然カテゴリ","Huong先生: 受動態課題依頼"]},
+  {n:3, start:"2026-05-04", end:"2026-05-10", theme:"📝 4級文法強化② 複文・間接話法",
+   tasks:["Mặc dù...nhưng... / Vì...nên... 徹底","Không những...mà còn... / Càng...càng...","nói rằng + 間接話法","cứ 用法5種 (cứ+V / cứ V là / cứ+時間 等)","4級語彙タイピング 社会・動詞カテゴリ"]},
+  {n:4, start:"2026-05-11", end:"2026-05-17", theme:"🎧 4級聴解集中",
+   tasks:["①Luyện nghe cấp 4 PDF を1日1題","VTV1 ニュース短編 (2-3分) 毎日1本","Dictation (書き取り) 練習","4級語彙タイピング 時間・漢越カテゴリ","Huong先生: 聴解課題依頼"]},
+  {n:5, start:"2026-05-18", end:"2026-05-24", theme:"📈 3級入り・上級文法",
+   tasks:["使役 làm cho / khiến / bắt","強調構文 chính là / chính...mới","dù...vẫn / giá mà...","漢越語 追加300語インプット","4級語彙タイピング 残カテゴリ完了"]},
+  {n:6, start:"2026-05-25", end:"2026-05-31", theme:"📰 3級読解・新聞語彙",
+   tasks:["経済・政治・社会の漢越語","新聞記事レベル長文読解 (300-500字)","3級過去問 分野別演習","4級語彙タイピング 2周目 (全カテゴリ)"]},
+  {n:7, start:"2026-06-01", end:"2026-06-07", theme:"📋 模試①(本番形式)",
+   tasks:["4級模試 1回 (筆記55分+聴解30分)","3級模試 1回 (筆記65分+聴解30分)","誤答分野を特定","4級語彙タイピング 3周目"]},
+  {n:8, start:"2026-06-08", end:"2026-06-14", theme:"🔧 弱点補強",
+   tasks:["模試①の誤答分野を集中学習","Huong先生: 弱点分野の総仕上げ","4級語彙タイピング 4周目","過去問解き直し"]},
+  {n:9, start:"2026-06-15", end:"2026-06-21", theme:"🏁 直前調整・本番",
+   tasks:["模試② (最終確認)","軽めの維持 + 体調管理","6/20 土: 持ち物確認・会場確認","6/21 日 本番 🎯 (4級 10:10- / 3級 13:30-)","4級語彙タイピング 5周目 完了"]}
+];
+
+function fmtDate(dStr){
+  var d = new Date(dStr + "T00:00:00");
+  return d.getMonth()+1 + "/" + d.getDate();
+}
+function dayDiff(a, b){
+  return Math.round((a - b) / (1000*60*60*24));
+}
+
+function weekStatus(week){
+  var start = new Date(week.start + "T00:00:00");
+  var end = new Date(week.end + "T23:59:59");
+  if(TODAY > end) return "past";
+  if(TODAY >= start && TODAY <= end) return "today";
+  return "future";
+}
+
+function render(){
+  // Countdown
+  var days = dayDiff(EXAM_DATE, TODAY);
+  document.getElementById("daysLeft").textContent = days >= 0 ? days : 0;
+
+  // Weeks
+  var wrap = document.getElementById("weeks");
+  wrap.innerHTML = "";
+  WEEKS.forEach(function(w){
+    var status = weekStatus(w);
+    var div = document.createElement("div");
+    div.className = "week " + status;
+    var tagCls = status === "today" ? "tag-now" : status === "past" ? "tag-past" : "tag-future";
+    var tagTxt = status === "today" ? "📍 今週" : status === "past" ? "完了" : "";
+    var html = "<h3><span><span class='num'>W"+w.n+"</span> "+w.theme+"</span>"+
+               (tagTxt ? "<span class='tag "+tagCls+"'>"+tagTxt+"</span>" : "")+"</h3>" +
+               "<div class='dates'>"+fmtDate(w.start)+" ～ "+fmtDate(w.end)+"</div>" +
+               "<ul class='tasks'>";
+    w.tasks.forEach(function(t){ html += "<li>"+t+"</li>"; });
+    html += "</ul>";
+    div.innerHTML = html;
+    wrap.appendChild(div);
+
+    if(status === "today"){
+      setTimeout(function(){ div.scrollIntoView({behavior:"smooth",block:"center"}); }, 300);
+    }
+  });
+}
+render();
+</script>
+</body>
+</html>
