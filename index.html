@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="mobile-web-app-capable" content="yes">
-<title>ViLT 動作テスト</title>
+<title>ViLT 動作テスト v2</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html,body{font-family:-apple-system,"Hiragino Sans","Segoe UI",sans-serif;background:#f4f4f8;color:#222;line-height:1.6;min-height:100vh}
@@ -14,47 +14,69 @@ html,body{font-family:-apple-system,"Hiragino Sans","Segoe UI",sans-serif;backgr
 header{background:linear-gradient(135deg,#da251d,#ffcd00);color:#fff;padding:14px 16px;text-align:center}
 header h1{font-size:18px;font-weight:700}
 header .sub{font-size:11px;opacity:.9;margin-top:3px}
-main{flex:1;padding:20px 16px;padding-bottom:100px}
-.step{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:#8b6914}
-.card{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:40px 20px;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:16px;position:relative}
-.card:active{transform:scale(.98)}
-.card .face{font-size:36px;font-weight:700;color:#222;word-break:break-word}
-.card .jp{font-size:26px;color:#2e7d32;word-break:break-word}
-.card .hint{position:absolute;bottom:14px;left:0;right:0;font-size:11px;color:#999}
-.card .idx{position:absolute;top:14px;right:18px;font-size:12px;color:#aaa;font-weight:600}
-.ctrl{display:flex;gap:10px;margin-bottom:12px}
-.ctrl button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+main{flex:1;padding:16px;padding-bottom:100px}
+.step{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:12px;margin-bottom:14px;font-size:13px;color:#8b6914}
+.round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
+.round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
+.round-bar .sep{width:1px;height:30px;background:#e0e0e0}
+.card{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:32px 20px;min-height:240px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:14px;position:relative}
+.card:active{transform:scale(.99)}
+.card .face{font-size:36px;font-weight:700;color:#222;word-break:break-word;line-height:1.3}
+.card .jp{font-size:26px;color:#2e7d32;word-break:break-word;line-height:1.3}
+.card .hint{position:absolute;bottom:10px;left:0;right:0;font-size:11px;color:#aaa}
+.card .idx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+.speak-btn{position:absolute;top:10px;left:10px;background:#e3f2fd;border:2px solid #1976d2;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#1976d2;font-weight:700}
+.speak-btn:active{transform:scale(.9);background:#bbdefb}
+.speak-btn.speaking{background:#1976d2;color:#fff}
+.ctrl{display:flex;gap:10px;margin-bottom:10px}
+.ctrl button{flex:1;padding:16px 6px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
 .ctrl button:active{opacity:.75;transform:scale(.96)}
 .btn-prev{background:#e0e0e0;color:#333}
-.btn-unknown{background:#ffebee;color:#c62828}
-.btn-known{background:#e8f5e9;color:#2e7d32}
+.btn-unknown{background:#ffebee;color:#c62828;border:2px solid #ef9a9a}
+.btn-known{background:#e8f5e9;color:#2e7d32;border:2px solid #a5d6a7}
 .btn-next{background:#e0e0e0;color:#333}
-.progress{background:#f0f0f0;height:8px;border-radius:4px;overflow:hidden;margin:10px 0}
+.progress{background:#f0f0f0;height:10px;border-radius:5px;overflow:hidden;margin:12px 0 8px}
 .progress-bar{background:linear-gradient(90deg,#da251d,#ffcd00);height:100%;transition:width .3s}
-.stats{display:flex;justify-content:space-around;font-size:13px;color:#555;background:#f8f8f8;padding:10px;border-radius:10px;margin-top:12px}
-.stats b{color:#222;font-size:16px}
-.reset{display:block;width:100%;padding:10px;margin-top:14px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:12px;cursor:pointer;font-family:inherit}
-.ok{background:#e8f5e9;border:1px solid #81c784;color:#2e7d32;padding:10px;border-radius:8px;margin-top:14px;font-size:13px;display:none}
-.ok.show{display:block}
+.voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:10px 12px;font-size:12px;color:#1565c0;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.voice-info.warn{background:#fff3e0;border-color:#ffb74d;color:#e65100}
+.voice-info.err{background:#ffebee;border-color:#e57373;color:#c62828}
+.reset{display:block;width:100%;padding:10px;margin-top:10px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:12px;cursor:pointer;font-family:inherit}
+.complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.complete h2{font-size:28px;margin-bottom:8px}
+.complete p{font-size:14px;opacity:.95;margin-bottom:16px}
+.complete button{background:#fff;color:#2e7d32;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
+.hidden{display:none!important}
 footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px solid #eee;margin-top:20px}
 </style>
 </head>
 <body>
 <div class="app">
 <header>
-<h1>🇻🇳 ViLT 動作テスト</h1>
-<div class="sub">iPhone Safari 動作確認用 (v1)</div>
+<h1>🇻🇳 ViLT 動作テスト v2</h1>
+<div class="sub">音声 + 5周システム 動作確認</div>
 </header>
 <main>
 <div class="step">
-<b>📱 テスト手順</b><br>
-① カードを<b>タップ</b> → 日本語が出るか<br>
-② 「✓覚えた」「×まだ」ボタンが反応するか<br>
-③ 「◀前」「次▶」でカードが切替わるか<br>
-④ ページを閉じて開き直しても<b>進捗が残る</b>か
+<b>📱 確認項目</b><br>
+① <b>🔊ボタン</b>でベトナム語発音が鳴るか<br>
+② <b>✓覚えた</b>でカードが消え、次の周に出ないか<br>
+③ <b>✗まだ</b>で次の周に残るか<br>
+④ 5周完了 or 全✓で<b>完了画面</b>が出るか
+</div>
+
+<div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
+
+<div id="learnArea">
+<div class="round-bar">
+<div>周回<b id="s-round">1 / 5</b></div>
+<div class="sep"></div>
+<div>残り<b id="s-remain">5</b></div>
+<div class="sep"></div>
+<div>習得<b id="s-done">0 / 5</b></div>
 </div>
 
 <div class="card" id="card">
+<button class="speak-btn" id="btnSpeak" aria-label="発音">🔊</button>
 <div class="idx" id="idx">1/5</div>
 <div class="face" id="face">読み込み中...</div>
 <div class="hint" id="hint">タップして日本語を見る</div>
@@ -62,64 +84,127 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
 
 <div class="ctrl">
 <button class="btn-prev" id="btnPrev">◀ 前</button>
-<button class="btn-unknown" id="btnUnknown">× まだ</button>
+<button class="btn-unknown" id="btnUnknown">✗ まだ</button>
 <button class="btn-known" id="btnKnown">✓ 覚えた</button>
 <button class="btn-next" id="btnNext">次 ▶</button>
 </div>
 
 <div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
-
-<div class="stats">
-<div>覚えた: <b id="s-known">0</b></div>
-<div>まだ: <b id="s-unknown">0</b></div>
-<div>進捗: <b id="s-pct">0</b>%</div>
 </div>
 
-<button class="reset" id="btnReset">進捗をリセットする</button>
-<div class="ok" id="ok">✅ 進捗が保存されました</div>
+<div id="completeArea" class="complete hidden">
+<h2>🎉 完了！</h2>
+<p id="completeMsg">全単語を習得しました！</p>
+<button id="btnRestart">もう一度最初から</button>
+</div>
+
+<button class="reset" id="btnReset">進捗をリセット</button>
 
 </main>
-<footer>動作確認できたら本格版に進みます<br>データはこの端末だけに保存されます</footer>
+<footer>第2テスト: 音声 + 5周フィルター方式<br>データはこの端末だけに保存されます</footer>
 </div>
 
 <script>
 (function(){
   var CARDS = [
-    {vi:"xin chào",  jp:"こんにちは"},
-    {vi:"cảm ơn",    jp:"ありがとう"},
-    {vi:"xin lỗi",   jp:"すみません"},
-    {vi:"tạm biệt",  jp:"さようなら"},
+    {vi:"xin chào",    jp:"こんにちは"},
+    {vi:"cảm ơn",      jp:"ありがとう"},
+    {vi:"xin lỗi",     jp:"すみません"},
+    {vi:"tạm biệt",    jp:"さようなら"},
     {vi:"hẹn gặp lại", jp:"また会いましょう"}
   ];
-  var STORAGE_KEY = "vilt_test_v1";
-  var state = {idx:0, flipped:false, known:{}, unknown:{}};
+  var STORAGE_KEY = "vilt_test_v2";
+  var MAX_ROUND = 5;
+
+  var state = null;
+
+  function initState(){
+    return {
+      round: 1,
+      queue: CARDS.map(function(_,i){return i;}),
+      nextQueue: [],
+      done: [],
+      idx: 0,
+      flipped: false,
+      finished: false
+    };
+  }
 
   function load(){
     try{
       var s = localStorage.getItem(STORAGE_KEY);
       if(s){
-        var p = JSON.parse(s);
-        state.idx = p.idx || 0;
-        state.known = p.known || {};
-        state.unknown = p.unknown || {};
+        state = JSON.parse(s);
+        if(!state.queue || state.queue.length === 0 && !state.finished){
+          state = initState();
+        }
+        return;
       }
     }catch(e){}
+    state = initState();
   }
+
   function save(){
     try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        idx: state.idx,
-        known: state.known,
-        unknown: state.unknown
-      }));
-      var ok = document.getElementById("ok");
-      ok.classList.add("show");
-      setTimeout(function(){ ok.classList.remove("show"); }, 1200);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }catch(e){}
   }
 
+  // ===== Voice / TTS =====
+  var viVoice = null;
+  var voiceReady = false;
+
+  function loadVoices(){
+    var voices = window.speechSynthesis.getVoices();
+    viVoice = voices.find(function(v){ return v.lang && v.lang.toLowerCase().indexOf("vi") === 0; });
+    updateVoiceInfo(voices);
+    voiceReady = true;
+  }
+  function updateVoiceInfo(voices){
+    var el = document.getElementById("voiceInfo");
+    if(!("speechSynthesis" in window)){
+      el.className = "voice-info err";
+      el.textContent = "❌ このブラウザは音声合成に未対応です";
+      return;
+    }
+    if(viVoice){
+      el.className = "voice-info";
+      el.innerHTML = "✅ ベトナム語音声: <b>" + viVoice.name + "</b> (" + viVoice.lang + ")";
+    }else{
+      el.className = "voice-info warn";
+      el.innerHTML = "⚠️ ベトナム語音声が見つかりません<br><small>iPhone「設定→アクセシビリティ→読み上げコンテンツ→声→Tiếng Việt」で音声をダウンロードできます</small>";
+    }
+  }
+  function speak(text){
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    var msg = new SpeechSynthesisUtterance(text);
+    msg.lang = "vi-VN";
+    msg.rate = 0.85;
+    if(viVoice) msg.voice = viVoice;
+    var btn = document.getElementById("btnSpeak");
+    btn.classList.add("speaking");
+    msg.onend = function(){ btn.classList.remove("speaking"); };
+    msg.onerror = function(){ btn.classList.remove("speaking"); };
+    window.speechSynthesis.speak(msg);
+  }
+
+  // ===== Render =====
+  function currentCardIdx(){
+    if(!state.queue || state.queue.length === 0) return -1;
+    return state.queue[state.idx];
+  }
   function render(){
-    var c = CARDS[state.idx];
+    if(state.finished){
+      showComplete();
+      return;
+    }
+    document.getElementById("learnArea").classList.remove("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+
+    var cardIdx = currentCardIdx();
+    if(cardIdx < 0){ return; }
+    var c = CARDS[cardIdx];
     var face = document.getElementById("face");
     var hint = document.getElementById("hint");
     var idxEl = document.getElementById("idx");
@@ -132,60 +217,144 @@ footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px s
       face.className = "face";
       hint.textContent = "タップして日本語を見る";
     }
-    idxEl.textContent = (state.idx+1) + "/" + CARDS.length;
+    idxEl.textContent = (state.idx+1) + "/" + state.queue.length;
 
-    var kCount = Object.keys(state.known).length;
-    var uCount = Object.keys(state.unknown).length;
-    var total = CARDS.length;
-    var pct = Math.round((kCount/total)*100);
-    document.getElementById("s-known").textContent = kCount;
-    document.getElementById("s-unknown").textContent = uCount;
-    document.getElementById("s-pct").textContent = pct;
+    document.getElementById("s-round").textContent = state.round + " / " + MAX_ROUND;
+    document.getElementById("s-remain").textContent = state.queue.length;
+    document.getElementById("s-done").textContent = state.done.length + " / " + CARDS.length;
+    var pct = Math.round((state.done.length / CARDS.length) * 100);
     document.getElementById("bar").style.width = pct + "%";
   }
 
+  function showComplete(){
+    document.getElementById("learnArea").classList.add("hidden");
+    var ca = document.getElementById("completeArea");
+    ca.classList.remove("hidden");
+    var msg = document.getElementById("completeMsg");
+    if(state.done.length === CARDS.length){
+      msg.textContent = "全" + CARDS.length + "単語を習得しました！";
+    }else{
+      msg.textContent = MAX_ROUND + "周完了。習得: " + state.done.length + " / " + CARDS.length + "語";
+    }
+    document.getElementById("s-round").textContent = "完了";
+    document.getElementById("s-remain").textContent = "0";
+    document.getElementById("s-done").textContent = state.done.length + " / " + CARDS.length;
+    document.getElementById("bar").style.width = "100%";
+  }
+
+  // ===== Actions =====
   function flip(){
+    if(state.finished) return;
     state.flipped = !state.flipped;
     render();
   }
-  function next(){
-    state.idx = (state.idx + 1) % CARDS.length;
+  function nextCard(){
+    if(state.finished) return;
+    state.idx++;
     state.flipped = false;
+    if(state.idx >= state.queue.length){
+      // End of round
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
+        state.finished = true;
+      }else{
+        state.round++;
+        state.queue = state.nextQueue;
+        state.nextQueue = [];
+        state.idx = 0;
+      }
+    }
     render();
     save();
   }
-  function prev(){
-    state.idx = (state.idx - 1 + CARDS.length) % CARDS.length;
+  function prevCard(){
+    if(state.finished) return;
     state.flipped = false;
+    if(state.idx > 0){
+      state.idx--;
+    }
     render();
     save();
   }
   function markKnown(){
-    var key = String(state.idx);
-    state.known[key] = 1;
-    delete state.unknown[key];
-    next();
+    if(state.finished) return;
+    var cardIdx = currentCardIdx();
+    if(cardIdx < 0) return;
+    if(state.done.indexOf(cardIdx) < 0) state.done.push(cardIdx);
+    // Remove from current queue
+    state.queue.splice(state.idx, 1);
+    state.flipped = false;
+    if(state.idx >= state.queue.length){
+      // End of round
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
+        state.finished = true;
+      }else{
+        state.round++;
+        state.queue = state.nextQueue;
+        state.nextQueue = [];
+        state.idx = 0;
+      }
+    }
+    render();
+    save();
   }
   function markUnknown(){
-    var key = String(state.idx);
-    state.unknown[key] = 1;
-    delete state.known[key];
-    next();
+    if(state.finished) return;
+    var cardIdx = currentCardIdx();
+    if(cardIdx < 0) return;
+    if(state.nextQueue.indexOf(cardIdx) < 0) state.nextQueue.push(cardIdx);
+    // Remove from done if there
+    var di = state.done.indexOf(cardIdx);
+    if(di >= 0) state.done.splice(di, 1);
+    state.idx++;
+    state.flipped = false;
+    if(state.idx >= state.queue.length){
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND){
+        state.finished = true;
+      }else{
+        state.round++;
+        state.queue = state.nextQueue;
+        state.nextQueue = [];
+        state.idx = 0;
+      }
+    }
+    render();
+    save();
   }
   function reset(){
-    state = {idx:0, flipped:false, known:{}, unknown:{}};
+    state = initState();
     save();
     render();
   }
 
-  document.getElementById("card").addEventListener("click", flip);
-  document.getElementById("btnPrev").addEventListener("click", prev);
-  document.getElementById("btnNext").addEventListener("click", next);
+  // ===== Event binding =====
+  document.getElementById("card").addEventListener("click", function(e){
+    // Prevent flip when speak button clicked
+    if(e.target.closest && e.target.closest(".speak-btn")) return;
+    flip();
+  });
+  document.getElementById("btnSpeak").addEventListener("click", function(e){
+    e.stopPropagation();
+    var cardIdx = currentCardIdx();
+    if(cardIdx >= 0) speak(CARDS[cardIdx].vi);
+  });
+  document.getElementById("btnPrev").addEventListener("click", prevCard);
+  document.getElementById("btnNext").addEventListener("click", nextCard);
   document.getElementById("btnKnown").addEventListener("click", markKnown);
   document.getElementById("btnUnknown").addEventListener("click", markUnknown);
   document.getElementById("btnReset").addEventListener("click", function(){
     if(confirm("進捗をリセットしますか?")) reset();
   });
+  document.getElementById("btnRestart").addEventListener("click", reset);
+
+  // Voice loading (async on some browsers)
+  if("speechSynthesis" in window){
+    loadVoices();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }else{
+    updateVoiceInfo([]);
+  }
 
   load();
   render();
