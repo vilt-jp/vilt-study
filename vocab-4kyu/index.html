@@ -14,48 +14,69 @@
 .cat-menu button.done{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
 .cat-menu button .count{font-size:11px;color:#888;margin-top:4px;font-weight:500}
 .cat-menu button.done .count{color:#2e7d32}
+
 .round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
 .round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
 .round-bar .sep{width:1px;height:30px;background:#e0e0e0}
+
+.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:1px}
+.stage-badge.s1{background:#e3f2fd;color:#1565c0}
+.stage-badge.s2{background:#fff3e0;color:#ef6c00}
+
 .qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:24px 20px;min-height:160px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:14px;position:relative}
 .qcard .qlabel{font-size:11px;color:#888;margin-bottom:10px;letter-spacing:2px;font-weight:600}
 .qcard .qword{font-size:32px;font-weight:700;color:#222;word-break:break-word;line-height:1.4}
 .qcard .qnote{font-size:11px;color:#aaa;margin-top:8px;display:none}
 .qcard.revealed .qnote{display:block}
 .qcard .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+
 .input-area{margin-bottom:14px}
 .input-area label{display:block;font-size:12px;color:#666;margin-bottom:6px;font-weight:600}
 .ans-input{width:100%;padding:16px;border:2px solid #1976d2;border-radius:12px;font-size:22px;font-family:inherit;background:#fafbff;text-align:center;color:#222}
 .ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
-.ans-input.correct{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
-.ans-input.partial{border-color:#f57c00;background:#fff3e0;color:#e65100}
-.ans-input.wrong{border-color:#c62828;background:#ffebee;color:#b71c1c}
+.ans-input.excellent{border-color:#1b5e20;background:#c8e6c9;color:#1b5e20}
+.ans-input.good{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+.ans-input.okay{border-color:#ef6c00;background:#fff3e0;color:#e65100}
+.ans-input.bad{border-color:#c62828;background:#ffebee;color:#b71c1c}
+
 .judge-box{border-radius:12px;padding:16px;margin-bottom:14px;text-align:center;display:none}
 .judge-box.show{display:block}
-.judge-box.correct{background:linear-gradient(135deg,#66bb6a,#43a047);color:#fff}
-.judge-box.partial{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
-.judge-box.wrong{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
-.judge-box .icon{font-size:38px;font-weight:700;display:block;margin-bottom:4px}
+.judge-box.excellent{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff}
+.judge-box.good{background:linear-gradient(135deg,#66bb6a,#81c784);color:#fff}
+.judge-box.okay{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
+.judge-box.bad{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
+.judge-box.listen{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff}
+.judge-box .icon{font-size:42px;font-weight:800;display:block;margin-bottom:4px;line-height:1}
 .judge-box .msg{font-size:14px;margin-bottom:8px;opacity:.95}
 .judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:8px 12px;font-size:20px;font-weight:700;display:inline-block;margin-top:4px}
 .judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:4px;font-weight:400}
+
 .btn-row{display:flex;gap:10px;margin-bottom:10px}
 .btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
 .btn-row button:active{opacity:.75;transform:scale(.96)}
 .btn-row button:disabled{opacity:.4}
 .btn-check{background:#1976d2;color:#fff}
-.btn-speak{background:#e3f2fd;color:#1976d2;border:2px solid #1976d2!important}
-.btn-speak.speaking{background:#1976d2;color:#fff}
+.btn-speak-big{background:#5c6bc0;color:#fff;font-size:16px!important;padding:20px!important;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-speak-big.speaking{background:#3949ab}
 .btn-next{background:#2e7d32;color:#fff}
-.btn-retry{background:#ef6c00;color:#fff}
 .btn-skip{background:#f5f5f5;color:#666;border:1px solid #ddd!important}
+
 .voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:8px 12px;font-size:12px;color:#1565c0;margin-bottom:10px}
 .voice-info.warn{background:#fff3e0;border-color:#ffb74d;color:#e65100}
 .voice-info.err{background:#ffebee;border-color:#e57373;color:#c62828}
+
+.rank-legend{background:#f8f8f8;border-radius:8px;padding:10px;font-size:11px;color:#555;margin-bottom:12px;line-height:1.8}
+.rank-legend .r{display:inline-block;width:22px;text-align:center;font-weight:800;margin-right:4px}
+.rank-legend .r-ex{color:#1b5e20}
+.rank-legend .r-gd{color:#43a047}
+.rank-legend .r-ok{color:#ef6c00}
+.rank-legend .r-bd{color:#c62828}
+
 .complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .complete h2{font-size:28px;margin-bottom:8px}
 .complete p{font-size:14px;opacity:.95;margin-bottom:16px}
 .complete button{background:#fff;color:#2e7d32;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;margin:4px}
+
 .reset-bar{display:flex;gap:8px;margin-top:12px}
 .reset-bar button{flex:1;padding:8px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:11px;cursor:pointer;font-family:inherit}
 </style>
@@ -65,12 +86,19 @@
 <header class="site">
 <button class="nav-back" onclick="location.href='../'">← ホーム</button>
 <h1>4級 語彙 - タイピング</h1>
-<div class="sub">日本語 → ベトナム語 を入力</div>
+<div class="sub">音声なしで挑戦 → 失敗したら音声あり</div>
 </header>
 <main>
 
 <div id="catArea">
 <div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
+<div class="rank-legend">
+<span class="r r-ex">◎</span>音声なしで完全正解(文字+声調) → <b>合格</b>（次周に出ない）<br>
+<span class="r r-gd">〇</span>音声なしで声調違い → <b>要復習</b><br>
+<span class="r r-ok">△</span>音声を聞いて書けた → <b>要復習</b><br>
+<span class="r r-bd">×</span>音声を聞いても書けず → <b>要復習</b><br>
+<small>※ ◎ だけが合格。最終的に全単語を ◎ にすると完了</small>
+</div>
 <div class="section-title">カテゴリを選択</div>
 <div class="cat-menu" id="catMenu"></div>
 <div class="reset-bar">
@@ -84,8 +112,10 @@
 <div class="sep"></div>
 <div>残り<b id="s-remain">-</b></div>
 <div class="sep"></div>
-<div>習得<b id="s-done">-</b></div>
+<div>習得(◎)<b id="s-done">-</b></div>
 </div>
+
+<div id="stageBadge" class="stage-badge s1">STEP 1: 音声なしで挑戦</div>
 
 <div class="qcard" id="qcard">
 <div class="qidx" id="idx">-</div>
@@ -95,7 +125,7 @@
 </div>
 
 <div class="input-area">
-<label for="ans">答え (ベトナム語)</label>
+<label for="ans" id="ansLabel">答え (ベトナム語)</label>
 <input type="text" class="ans-input" id="ans" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="ベトナム語で入力" />
 </div>
 
@@ -105,14 +135,24 @@
 <div class="correct-ans" id="correctAns"></div>
 </div>
 
-<div class="btn-row" id="beforeCheck">
+<!-- Stage 1 ボタン -->
+<div class="btn-row" id="btnsStage1">
 <button class="btn-skip" id="btnSkip">わからない</button>
 <button class="btn-check" id="btnCheck">答え合わせ</button>
 </div>
 
-<div class="btn-row hidden" id="afterCheck">
-<button class="btn-speak" id="btnSpeak">🔊 発音</button>
-<button class="btn-retry hidden" id="btnRetry">もう一度</button>
+<!-- Stage 2 への橋渡しボタン -->
+<div class="btn-row hidden" id="btnsListen">
+<button class="btn-speak-big" id="btnSpeakBig">🔊 音声を聞く</button>
+</div>
+
+<!-- Stage 2 入力後のボタン -->
+<div class="btn-row hidden" id="btnsStage2">
+<button class="btn-check" id="btnCheck2">もう一度 答え合わせ</button>
+</div>
+
+<!-- 判定後の進行ボタン -->
+<div class="btn-row hidden" id="btnsNext">
 <button class="btn-next" id="btnNext">次の問題 ▶</button>
 </div>
 
@@ -131,7 +171,7 @@
 </div>
 
 </main>
-<footer class="site">声調記号(á, à, ả, ã, ạ 等)を正しく入力すると完全正解</footer>
+<footer class="site">◎ (音声なし完全正解) だけが合格 / 〇△× は次周で再挑戦</footer>
 </div>
 
 <script src="vocab-data.js"></script>
@@ -140,10 +180,9 @@
   var MAX_ROUND = 5;
   var currentCat = null;
   var state = null;
-  var lastJudge = null;
   var wordsByCat = {};
+  var rank = null; // '◎' '〇' '△' '×'
 
-  // Group words by category
   VOCAB_4KYU.forEach(function(w){
     if(!wordsByCat[w.cat]) wordsByCat[w.cat] = [];
     wordsByCat[w.cat].push(w);
@@ -152,10 +191,7 @@
 
   function skey(cat){ return "vilt_vocab4kyu_" + cat; }
   function loadCatState(cat){
-    try{
-      var s = localStorage.getItem(skey(cat));
-      if(s) return JSON.parse(s);
-    }catch(e){}
+    try{ var s = localStorage.getItem(skey(cat)); if(s) return JSON.parse(s); }catch(e){}
     return null;
   }
   function saveCatState(cat, st){
@@ -164,13 +200,8 @@
   function initCatState(cat){
     var words = wordsByCat[cat];
     return {
-      round: 1,
-      queue: words.map(function(_,i){return i;}),
-      nextQueue: [],
-      done: [],
-      idx: 0,
-      finished: false,
-      total: words.length
+      round:1, queue:words.map(function(_,i){return i;}), nextQueue:[], done:[],
+      idx:0, stage:1, finished:false, total:words.length
     };
   }
 
@@ -190,16 +221,15 @@
       el.innerHTML="⚠️ ベトナム語音声なし (設定→アクセシビリティ→読み上げコンテンツ→声→Tiếng Việt でDL)";
     }
   }
-  function speak(text){
+  function speak(text, btnEl){
     if(!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
     var msg = new SpeechSynthesisUtterance(text);
     msg.lang="vi-VN"; msg.rate=0.85;
     if(viVoice) msg.voice = viVoice;
-    var btn = document.getElementById("btnSpeak");
-    btn.classList.add("speaking");
-    msg.onend = function(){ btn.classList.remove("speaking"); };
-    msg.onerror = function(){ btn.classList.remove("speaking"); };
+    if(btnEl) btnEl.classList.add("speaking");
+    msg.onend = function(){ if(btnEl) btnEl.classList.remove("speaking"); };
+    msg.onerror = function(){ if(btnEl) btnEl.classList.remove("speaking"); };
     window.speechSynthesis.speak(msg);
   }
 
@@ -208,11 +238,11 @@
     return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D");
   }
   function normalize(s){ return s.trim().toLowerCase().replace(/\s+/g," "); }
-  function judge(input, correct){
+  function compareAns(input, correct){
     var inp = normalize(input), ans = normalize(correct);
     if(inp === "") return "empty";
-    if(inp === ans) return "correct";
-    if(stripDiacritics(inp) === stripDiacritics(ans)) return "partial";
+    if(inp === ans) return "perfect";
+    if(stripDiacritics(inp) === stripDiacritics(ans)) return "tone_only";
     return "wrong";
   }
 
@@ -228,7 +258,7 @@
       var total = words.length;
       var isDone = st && st.finished && doneCount === total;
       btn.className = isDone ? "done" : "";
-      btn.innerHTML = "<div>"+cat+"</div><div class='count'>"+doneCount+" / "+total+" 語"+(isDone?" ✓":"")+"</div>";
+      btn.innerHTML = "<div>"+cat+"</div><div class='count'>◎ "+doneCount+" / "+total+" 語"+(isDone?" ✓":"")+"</div>";
       btn.addEventListener("click", function(){ startLearning(cat); });
       menu.appendChild(btn);
     });
@@ -238,16 +268,15 @@
   function startLearning(cat){
     currentCat = cat;
     state = loadCatState(cat) || initCatState(cat);
-    // If already finished, start fresh
     if(state.finished){ state = initCatState(cat); saveCatState(cat, state); }
+    if(!state.stage) state.stage = 1;
     document.getElementById("catArea").classList.add("hidden");
     document.getElementById("learnArea").classList.remove("hidden");
     document.getElementById("completeArea").classList.add("hidden");
     render();
   }
   function backToCatMenu(){
-    currentCat = null;
-    state = null;
+    currentCat = null; state = null;
     document.getElementById("catArea").classList.remove("hidden");
     document.getElementById("learnArea").classList.add("hidden");
     document.getElementById("completeArea").classList.add("hidden");
@@ -256,8 +285,20 @@
 
   function currentWord(){
     if(!state || state.queue.length === 0) return null;
-    var words = wordsByCat[currentCat];
-    return words[state.queue[state.idx]];
+    return wordsByCat[currentCat][state.queue[state.idx]];
+  }
+
+  function setStageUI(stage){
+    var badge = document.getElementById("stageBadge");
+    if(stage === 1){
+      badge.className = "stage-badge s1";
+      badge.textContent = "STEP 1: 音声なしで挑戦";
+      document.getElementById("ansLabel").textContent = "答え (ベトナム語)";
+    }else{
+      badge.className = "stage-badge s2";
+      badge.textContent = "STEP 2: 音声を聞いてから入力";
+      document.getElementById("ansLabel").textContent = "音声を聞いて、答え (ベトナム語)";
+    }
   }
 
   function render(){
@@ -273,15 +314,20 @@
     document.getElementById("s-done").textContent = state.done.length+" / "+state.total;
     document.getElementById("bar").style.width = Math.round((state.done.length/state.total)*100)+"%";
 
+    state.stage = 1;
+    setStageUI(1);
+    resetInputAndButtons();
+    rank = null;
+  }
+
+  function resetInputAndButtons(){
     var input = document.getElementById("ans");
-    input.value = "";
-    input.className = "ans-input";
-    input.disabled = false;
+    input.value = ""; input.className = "ans-input"; input.disabled = false;
     document.getElementById("judge").classList.remove("show");
-    document.getElementById("beforeCheck").classList.remove("hidden");
-    document.getElementById("afterCheck").classList.add("hidden");
-    document.getElementById("btnRetry").classList.add("hidden");
-    lastJudge = null;
+    document.getElementById("btnsStage1").classList.remove("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.add("hidden");
     setTimeout(function(){ try{ input.focus(); }catch(e){} }, 50);
   }
 
@@ -291,72 +337,125 @@
     ca.classList.remove("hidden");
     var msg = document.getElementById("completeMsg");
     if(state.done.length === state.total){
-      msg.textContent = "「"+currentCat+"」全"+state.total+"語を完全習得！🎊";
+      msg.textContent = "「"+currentCat+"」全"+state.total+"語を ◎ で習得！🎊";
     }else{
-      msg.textContent = MAX_ROUND+"周完了。習得: "+state.done.length+"/"+state.total+"語";
+      msg.textContent = MAX_ROUND+"周完了。◎習得: "+state.done.length+"/"+state.total+"語 (残り"+(state.total-state.done.length)+"語はまた挑戦を)";
     }
   }
 
-  function doCheck(){
-    var w = currentWord();
-    if(!w) return;
+  // ===== Rank helpers =====
+  function applyJudgment(rankSym, w, userInput){
     var input = document.getElementById("ans");
-    var val = input.value;
-    var result = judge(val, w.vi);
-    if(result === "empty"){ input.focus(); return; }
-    lastJudge = result;
-    document.getElementById("qcard").classList.add("revealed");
-
     var jbox = document.getElementById("judge");
     var icon = document.getElementById("judgeIcon");
     var msg = document.getElementById("judgeMsg");
     var ans = document.getElementById("correctAns");
-    jbox.className = "judge-box show " + result;
+    document.getElementById("qcard").classList.add("revealed");
+    rank = rankSym;
 
-    if(result === "correct"){
-      input.className = "ans-input correct";
-      icon.textContent = "✓";
-      msg.textContent = "完全正解！（文字+声調）";
+    if(rankSym === "◎"){
+      input.className = "ans-input excellent";
+      jbox.className = "judge-box show excellent";
+      icon.textContent = "◎";
+      msg.textContent = "音声なしで完全正解！合格";
       ans.innerHTML = w.vi + "<small>= " + w.jp + "</small>";
-      document.getElementById("btnRetry").classList.add("hidden");
-    }else if(result === "partial"){
-      input.className = "ans-input partial";
+    }else if(rankSym === "〇"){
+      input.className = "ans-input good";
+      jbox.className = "judge-box show good";
+      icon.textContent = "〇";
+      msg.textContent = "惜しい！文字は合ってるが声調記号が違います → 次周で再挑戦";
+      ans.innerHTML = w.vi + "<small>あなた: " + (userInput || "-") + "</small>";
+    }else if(rankSym === "△"){
+      input.className = "ans-input okay";
+      jbox.className = "judge-box show okay";
       icon.textContent = "△";
-      msg.textContent = "惜しい！声調記号が違います";
-      ans.innerHTML = w.vi + "<small>あなたの答え: " + val + "</small>";
-      document.getElementById("btnRetry").classList.remove("hidden");
-    }else{
-      input.className = "ans-input wrong";
-      icon.textContent = "✗";
-      msg.textContent = "不正解。正解を覚えましょう";
-      ans.innerHTML = w.vi + "<small>あなたの答え: " + (val || "(未入力)") + "</small>";
-      document.getElementById("btnRetry").classList.remove("hidden");
+      msg.textContent = "音声を聞いて書けました → 次周で再挑戦";
+      ans.innerHTML = w.vi + "<small>あなた: " + (userInput || "-") + "</small>";
+    }else if(rankSym === "×"){
+      input.className = "ans-input bad";
+      jbox.className = "judge-box show bad";
+      icon.textContent = "×";
+      msg.textContent = "音声を聞いても書けず → 次周で再挑戦";
+      ans.innerHTML = w.vi + "<small>あなた: " + (userInput || "(未入力)") + "</small>";
     }
     input.disabled = true;
-    document.getElementById("beforeCheck").classList.add("hidden");
-    document.getElementById("afterCheck").classList.remove("hidden");
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.remove("hidden");
   }
 
-  function doSkip(){
-    lastJudge = "wrong";
+  // ===== Stage 1 =====
+  function doCheckStage1(){
     var w = currentWord(); if(!w) return;
     var input = document.getElementById("ans");
-    input.value = ""; input.className = "ans-input wrong"; input.disabled = true;
-    document.getElementById("qcard").classList.add("revealed");
-    var jbox = document.getElementById("judge");
-    jbox.className = "judge-box show wrong";
-    document.getElementById("judgeIcon").textContent = "?";
-    document.getElementById("judgeMsg").textContent = "スキップ。次の周で再挑戦";
-    document.getElementById("correctAns").innerHTML = w.vi + "<small>= " + w.jp + "</small>";
-    document.getElementById("btnRetry").classList.add("hidden");
-    document.getElementById("beforeCheck").classList.add("hidden");
-    document.getElementById("afterCheck").classList.remove("hidden");
+    var val = input.value;
+    var r = compareAns(val, w.vi);
+    if(r === "empty"){ input.focus(); return; }
+    if(r === "perfect"){
+      applyJudgment("◎", w, val);
+    }else if(r === "tone_only"){
+      applyJudgment("〇", w, val);
+    }else{
+      // wrong -> move to Stage 2 listen prompt
+      showListenPrompt(val);
+    }
   }
 
+  function showListenPrompt(prevVal){
+    var input = document.getElementById("ans");
+    var jbox = document.getElementById("judge");
+    var icon = document.getElementById("judgeIcon");
+    var msg = document.getElementById("judgeMsg");
+    var ans = document.getElementById("correctAns");
+
+    input.className = "ans-input bad";
+    input.disabled = true;
+    jbox.className = "judge-box show listen";
+    icon.textContent = "🔊";
+    msg.textContent = "不正解。音声を聞いて、もう一度入力してください";
+    ans.innerHTML = "あなた: " + (prevVal || "(未入力)");
+
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.remove("hidden");
+  }
+
+  function doSpeakAndAdvance(){
+    var w = currentWord(); if(!w) return;
+    var btn = document.getElementById("btnSpeakBig");
+    speak(w.vi, btn);
+    // Transition to Stage 2 after short delay
+    setTimeout(function(){
+      state.stage = 2;
+      setStageUI(2);
+      var input = document.getElementById("ans");
+      input.value = ""; input.className = "ans-input"; input.disabled = false;
+      document.getElementById("judge").classList.remove("show");
+      document.getElementById("qcard").classList.remove("revealed");
+      document.getElementById("btnsListen").classList.add("hidden");
+      document.getElementById("btnsStage2").classList.remove("hidden");
+      try{ input.focus(); }catch(e){}
+    }, 400);
+  }
+
+  // ===== Stage 2 =====
+  function doCheckStage2(){
+    var w = currentWord(); if(!w) return;
+    var input = document.getElementById("ans");
+    var val = input.value;
+    var r = compareAns(val, w.vi);
+    if(r === "empty"){ input.focus(); return; }
+    if(r === "perfect" || r === "tone_only"){
+      applyJudgment("△", w, val);
+    }else{
+      applyJudgment("×", w, val);
+    }
+  }
+
+  // ===== Next =====
   function doNext(){
-    var words = wordsByCat[currentCat];
     var qIdx = state.queue[state.idx];
-    if(lastJudge === "correct"){
+    if(rank === "◎"){
       if(state.done.indexOf(qIdx) < 0) state.done.push(qIdx);
     }else{
       if(state.nextQueue.indexOf(qIdx) < 0) state.nextQueue.push(qIdx);
@@ -376,34 +475,28 @@
     render();
   }
 
-  function doRetry(){
-    var input = document.getElementById("ans");
-    input.value = ""; input.className = "ans-input"; input.disabled = false;
-    document.getElementById("judge").classList.remove("show");
-    document.getElementById("qcard").classList.remove("revealed");
-    document.getElementById("beforeCheck").classList.remove("hidden");
-    document.getElementById("afterCheck").classList.add("hidden");
-    lastJudge = null;
-    try{ input.focus(); }catch(e){}
+  function doSkip(){
+    // Stage 1 skip: go straight to × without passing through Stage 2
+    var w = currentWord(); if(!w) return;
+    applyJudgment("×", w, "");
   }
 
   // ===== Events =====
-  document.getElementById("btnCheck").addEventListener("click", doCheck);
+  document.getElementById("btnCheck").addEventListener("click", doCheckStage1);
+  document.getElementById("btnCheck2").addEventListener("click", doCheckStage2);
+  document.getElementById("btnSpeakBig").addEventListener("click", doSpeakAndAdvance);
   document.getElementById("btnSkip").addEventListener("click", doSkip);
   document.getElementById("btnNext").addEventListener("click", doNext);
-  document.getElementById("btnRetry").addEventListener("click", doRetry);
-  document.getElementById("btnSpeak").addEventListener("click", function(){
-    var w = currentWord(); if(w) speak(w.vi);
-  });
   document.getElementById("ans").addEventListener("keydown", function(e){
-    if(e.key === "Enter"){ e.preventDefault(); doCheck(); }
+    if(e.key === "Enter"){
+      e.preventDefault();
+      if(state.stage === 1) doCheckStage1(); else doCheckStage2();
+    }
   });
   document.getElementById("btnBackCat").addEventListener("click", backToCatMenu);
   document.getElementById("btnResetCat").addEventListener("click", function(){
     if(confirm("「"+currentCat+"」の進捗をリセットしますか?")){
-      state = initCatState(currentCat);
-      saveCatState(currentCat, state);
-      render();
+      state = initCatState(currentCat); saveCatState(currentCat, state); render();
     }
   });
   document.getElementById("btnResetAll").addEventListener("click", function(){
