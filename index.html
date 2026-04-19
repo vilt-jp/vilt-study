@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>ViLT 動作テスト</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html,body{font-family:-apple-system,"Hiragino Sans","Segoe UI",sans-serif;background:#f4f4f8;color:#222;line-height:1.6;min-height:100vh}
+.app{max-width:600px;margin:0 auto;min-height:100vh;background:#fff;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,#da251d,#ffcd00);color:#fff;padding:14px 16px;text-align:center}
+header h1{font-size:18px;font-weight:700}
+header .sub{font-size:11px;opacity:.9;margin-top:3px}
+main{flex:1;padding:20px 16px;padding-bottom:100px}
+.step{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:12px;margin-bottom:16px;font-size:13px;color:#8b6914}
+.card{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:40px 20px;min-height:260px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:16px;position:relative}
+.card:active{transform:scale(.98)}
+.card .face{font-size:36px;font-weight:700;color:#222;word-break:break-word}
+.card .jp{font-size:26px;color:#2e7d32;word-break:break-word}
+.card .hint{position:absolute;bottom:14px;left:0;right:0;font-size:11px;color:#999}
+.card .idx{position:absolute;top:14px;right:18px;font-size:12px;color:#aaa;font-weight:600}
+.ctrl{display:flex;gap:10px;margin-bottom:12px}
+.ctrl button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.ctrl button:active{opacity:.75;transform:scale(.96)}
+.btn-prev{background:#e0e0e0;color:#333}
+.btn-unknown{background:#ffebee;color:#c62828}
+.btn-known{background:#e8f5e9;color:#2e7d32}
+.btn-next{background:#e0e0e0;color:#333}
+.progress{background:#f0f0f0;height:8px;border-radius:4px;overflow:hidden;margin:10px 0}
+.progress-bar{background:linear-gradient(90deg,#da251d,#ffcd00);height:100%;transition:width .3s}
+.stats{display:flex;justify-content:space-around;font-size:13px;color:#555;background:#f8f8f8;padding:10px;border-radius:10px;margin-top:12px}
+.stats b{color:#222;font-size:16px}
+.reset{display:block;width:100%;padding:10px;margin-top:14px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:12px;cursor:pointer;font-family:inherit}
+.ok{background:#e8f5e9;border:1px solid #81c784;color:#2e7d32;padding:10px;border-radius:8px;margin-top:14px;font-size:13px;display:none}
+.ok.show{display:block}
+footer{padding:12px;text-align:center;font-size:11px;color:#888;border-top:1px solid #eee;margin-top:20px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<h1>🇻🇳 ViLT 動作テスト</h1>
+<div class="sub">iPhone Safari 動作確認用 (v1)</div>
+</header>
+<main>
+<div class="step">
+<b>📱 テスト手順</b><br>
+① カードを<b>タップ</b> → 日本語が出るか<br>
+② 「✓覚えた」「×まだ」ボタンが反応するか<br>
+③ 「◀前」「次▶」でカードが切替わるか<br>
+④ ページを閉じて開き直しても<b>進捗が残る</b>か
+</div>
+
+<div class="card" id="card">
+<div class="idx" id="idx">1/5</div>
+<div class="face" id="face">読み込み中...</div>
+<div class="hint" id="hint">タップして日本語を見る</div>
+</div>
+
+<div class="ctrl">
+<button class="btn-prev" id="btnPrev">◀ 前</button>
+<button class="btn-unknown" id="btnUnknown">× まだ</button>
+<button class="btn-known" id="btnKnown">✓ 覚えた</button>
+<button class="btn-next" id="btnNext">次 ▶</button>
+</div>
+
+<div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
+
+<div class="stats">
+<div>覚えた: <b id="s-known">0</b></div>
+<div>まだ: <b id="s-unknown">0</b></div>
+<div>進捗: <b id="s-pct">0</b>%</div>
+</div>
+
+<button class="reset" id="btnReset">進捗をリセットする</button>
+<div class="ok" id="ok">✅ 進捗が保存されました</div>
+
+</main>
+<footer>動作確認できたら本格版に進みます<br>データはこの端末だけに保存されます</footer>
+</div>
+
+<script>
+(function(){
+  var CARDS = [
+    {vi:"xin chào",  jp:"こんにちは"},
+    {vi:"cảm ơn",    jp:"ありがとう"},
+    {vi:"xin lỗi",   jp:"すみません"},
+    {vi:"tạm biệt",  jp:"さようなら"},
+    {vi:"hẹn gặp lại", jp:"また会いましょう"}
+  ];
+  var STORAGE_KEY = "vilt_test_v1";
+  var state = {idx:0, flipped:false, known:{}, unknown:{}};
+
+  function load(){
+    try{
+      var s = localStorage.getItem(STORAGE_KEY);
+      if(s){
+        var p = JSON.parse(s);
+        state.idx = p.idx || 0;
+        state.known = p.known || {};
+        state.unknown = p.unknown || {};
+      }
+    }catch(e){}
+  }
+  function save(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        idx: state.idx,
+        known: state.known,
+        unknown: state.unknown
+      }));
+      var ok = document.getElementById("ok");
+      ok.classList.add("show");
+      setTimeout(function(){ ok.classList.remove("show"); }, 1200);
+    }catch(e){}
+  }
+
+  function render(){
+    var c = CARDS[state.idx];
+    var face = document.getElementById("face");
+    var hint = document.getElementById("hint");
+    var idxEl = document.getElementById("idx");
+    if(state.flipped){
+      face.textContent = c.jp;
+      face.className = "face jp";
+      hint.textContent = "もう一度タップでベトナム語に戻す";
+    }else{
+      face.textContent = c.vi;
+      face.className = "face";
+      hint.textContent = "タップして日本語を見る";
+    }
+    idxEl.textContent = (state.idx+1) + "/" + CARDS.length;
+
+    var kCount = Object.keys(state.known).length;
+    var uCount = Object.keys(state.unknown).length;
+    var total = CARDS.length;
+    var pct = Math.round((kCount/total)*100);
+    document.getElementById("s-known").textContent = kCount;
+    document.getElementById("s-unknown").textContent = uCount;
+    document.getElementById("s-pct").textContent = pct;
+    document.getElementById("bar").style.width = pct + "%";
+  }
+
+  function flip(){
+    state.flipped = !state.flipped;
+    render();
+  }
+  function next(){
+    state.idx = (state.idx + 1) % CARDS.length;
+    state.flipped = false;
+    render();
+    save();
+  }
+  function prev(){
+    state.idx = (state.idx - 1 + CARDS.length) % CARDS.length;
+    state.flipped = false;
+    render();
+    save();
+  }
+  function markKnown(){
+    var key = String(state.idx);
+    state.known[key] = 1;
+    delete state.unknown[key];
+    next();
+  }
+  function markUnknown(){
+    var key = String(state.idx);
+    state.unknown[key] = 1;
+    delete state.known[key];
+    next();
+  }
+  function reset(){
+    state = {idx:0, flipped:false, known:{}, unknown:{}};
+    save();
+    render();
+  }
+
+  document.getElementById("card").addEventListener("click", flip);
+  document.getElementById("btnPrev").addEventListener("click", prev);
+  document.getElementById("btnNext").addEventListener("click", next);
+  document.getElementById("btnKnown").addEventListener("click", markKnown);
+  document.getElementById("btnUnknown").addEventListener("click", markUnknown);
+  document.getElementById("btnReset").addEventListener("click", function(){
+    if(confirm("進捗をリセットしますか?")) reset();
+  });
+
+  load();
+  render();
+})();
+</script>
+</body>
+</html>
