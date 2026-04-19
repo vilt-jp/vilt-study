@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ViLT 4級 文法ドリル</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+.intro{background:#e3f2fd;border:1px solid #64b5f6;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#1565c0;line-height:1.7}
+.cat-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.cat-menu button{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:12px 8px;font-size:12px;font-weight:700;color:#333;cursor:pointer;font-family:inherit;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3}
+.cat-menu button:active{transform:scale(.97);background:#fff8e6}
+.cat-menu button.done{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
+.cat-menu button .count{font-size:10px;color:#888;margin-top:3px;font-weight:500}
+.cat-menu button.all{grid-column:span 2;background:linear-gradient(135deg,#fff8f8,#fff);border-color:#da251d;color:#da251d;min-height:60px}
+.round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
+.round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
+.round-bar .sep{width:1px;height:30px;background:#e0e0e0}
+.qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:20px;margin-bottom:14px;position:relative}
+.qcard .qlabel{font-size:11px;color:#888;letter-spacing:1px;font-weight:600;margin-bottom:8px}
+.qcard .qcat{display:inline-block;background:#e3f2fd;color:#1565c0;border-radius:10px;padding:3px 10px;font-size:11px;font-weight:700;margin-bottom:10px}
+.qcard .qhint{color:#e65100;font-size:12px;margin-bottom:10px;font-weight:600}
+.qcard .qfill{font-size:22px;font-weight:700;color:#222;line-height:1.6;margin-bottom:6px}
+.qcard .qfill .blank{color:#da251d;background:#fff8e6;padding:2px 10px;border-radius:6px;border:1px dashed #da251d}
+.qcard .qjp{font-size:13px;color:#666;margin-top:6px}
+.qcard .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+.ans-input{width:100%;padding:14px;border:2px solid #1976d2;border-radius:12px;font-size:20px;font-family:inherit;background:#fafbff;text-align:center;color:#222;margin-bottom:14px}
+.ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
+.ans-input.excellent{border-color:#1b5e20;background:#c8e6c9;color:#1b5e20}
+.ans-input.good{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+.ans-input.okay{border-color:#ef6c00;background:#fff3e0;color:#e65100}
+.ans-input.bad{border-color:#c62828;background:#ffebee;color:#b71c1c}
+.judge-box{border-radius:12px;padding:16px;margin-bottom:14px;text-align:center;display:none}
+.judge-box.show{display:block}
+.judge-box.excellent{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff}
+.judge-box.good{background:linear-gradient(135deg,#66bb6a,#81c784);color:#fff}
+.judge-box.okay{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
+.judge-box.bad{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
+.judge-box.listen{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff}
+.judge-box .icon{font-size:42px;font-weight:800;display:block;margin-bottom:4px;line-height:1}
+.judge-box .msg{font-size:14px;margin-bottom:8px;opacity:.95}
+.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:10px;font-size:18px;font-weight:700;display:inline-block;margin-top:4px}
+.judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:4px;font-weight:400}
+.btn-row{display:flex;gap:10px;margin-bottom:10px}
+.btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-row button:active{opacity:.75;transform:scale(.96)}
+.btn-check{background:#1976d2;color:#fff}
+.btn-speak-big{background:#5c6bc0;color:#fff;font-size:16px!important;padding:20px!important}
+.btn-speak-big.speaking{background:#3949ab}
+.btn-next{background:#2e7d32;color:#fff}
+.btn-skip{background:#f5f5f5;color:#666;border:1px solid #ddd!important}
+.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px}
+.stage-badge.s1{background:#e3f2fd;color:#1565c0}
+.stage-badge.s2{background:#fff3e0;color:#ef6c00}
+.complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.complete h2{font-size:28px;margin-bottom:8px}
+.complete p{font-size:14px;opacity:.95;margin-bottom:16px}
+.complete button{background:#fff;color:#2e7d32;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;margin:4px}
+.reset-bar{display:flex;gap:8px;margin-top:12px}
+.reset-bar button{flex:1;padding:8px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:11px;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="site">
+<button class="nav-back" onclick="location.href='../'">← ホーム</button>
+<h1>4級 文法ドリル</h1>
+<div class="sub">穴埋めタイピング / 受動態・複文・間接話法・cứ等</div>
+</header>
+<main>
+
+<div id="catArea">
+<div class="intro">
+<b>📖 このドリルの目的</b><br>
+4級頻出文法パターンを**穴埋め形式**で練習します。受動態 bị/được、複文 (Mặc dù/Vì/Không những/Càng)、間接話法、cứ 用法など、弱点の文法を徹底します。
+</div>
+<div class="section-title">文法パターンを選択</div>
+<div class="cat-menu" id="catMenu"></div>
+<div class="reset-bar">
+<button id="btnResetAll">進捗をリセット</button>
+</div>
+</div>
+
+<div id="learnArea" class="hidden">
+<div class="round-bar">
+<div>周回<b id="s-round">1 / 5</b></div>
+<div class="sep"></div>
+<div>残り<b id="s-remain">-</b></div>
+<div class="sep"></div>
+<div>習得(◎)<b id="s-done">-</b></div>
+</div>
+
+<div id="stageBadge" class="stage-badge s1">STEP 1: 音声なしで挑戦</div>
+
+<div class="qcard" id="qcard">
+<div class="qidx" id="idx">-</div>
+<div class="qcat" id="qcat">-</div>
+<div class="qlabel">下線部に入る語を入力</div>
+<div class="qhint" id="qhint">-</div>
+<div class="qfill" id="qfill">-</div>
+<div class="qjp" id="qjp">-</div>
+</div>
+
+<input type="text" class="ans-input" id="ans" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="答えを入力" />
+
+<div class="judge-box" id="judge">
+<span class="icon" id="judgeIcon">✓</span>
+<div class="msg" id="judgeMsg"></div>
+<div class="correct-ans" id="correctAns"></div>
+</div>
+
+<div class="btn-row" id="btnsStage1">
+<button class="btn-skip" id="btnSkip">わからない</button>
+<button class="btn-check" id="btnCheck">答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsListen">
+<button class="btn-speak-big" id="btnSpeakBig">🔊 音声で文全体を聞く</button>
+</div>
+<div class="btn-row hidden" id="btnsStage2">
+<button class="btn-check" id="btnCheck2">もう一度 答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsNext">
+<button class="btn-next" id="btnNext">次の問題 ▶</button>
+</div>
+
+<div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
+<div class="reset-bar">
+<button id="btnBack">← メニュー</button>
+<button id="btnResetCur">進捗リセット</button>
+</div>
+</div>
+
+<div id="completeArea" class="complete hidden">
+<h2>🎉 完了！</h2>
+<p id="completeMsg">文法ドリル完了</p>
+<button onclick="location.reload()">メニューに戻る</button>
+</div>
+
+</main>
+<footer class="site">文法パターンを体に染み込ませる</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var MAX_ROUND = 5;
+  var state = null, rank = null;
+  var currentCat = null;
+  var byCat = {};
+  GRAMMAR_4KYU.forEach(function(q,i){
+    if(!byCat[q.cat]) byCat[q.cat] = [];
+    byCat[q.cat].push(i);
+  });
+  var CATS = Object.keys(byCat);
+  var ALL_KEY = "_ALL_";
+
+  function skey(cat){ return "vilt_grammar4kyu_"+cat; }
+  function loadSt(cat){ try{ var s = localStorage.getItem(skey(cat)); if(s) return JSON.parse(s); }catch(e){} return null; }
+  function saveSt(cat, st){ try{ localStorage.setItem(skey(cat), JSON.stringify(st)); }catch(e){} }
+  function initSt(cat){
+    var indices = cat === ALL_KEY ? GRAMMAR_4KYU.map(function(_,i){return i;}) : byCat[cat].slice();
+    return { round:1, queue:indices, nextQueue:[], done:[], idx:0, stage:1, finished:false, total:indices.length };
+  }
+
+  var viVoice = null;
+  function loadVoices(){
+    var v = window.speechSynthesis.getVoices();
+    viVoice = v.find(function(x){ return x.lang && x.lang.toLowerCase().indexOf("vi") === 0; });
+  }
+  function speak(text, btn){
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    var msg = new SpeechSynthesisUtterance(text);
+    msg.lang="vi-VN"; msg.rate=0.8;
+    if(viVoice) msg.voice = viVoice;
+    if(btn) btn.classList.add("speaking");
+    msg.onend = function(){ if(btn) btn.classList.remove("speaking"); };
+    msg.onerror = function(){ if(btn) btn.classList.remove("speaking"); };
+    window.speechSynthesis.speak(msg);
+  }
+
+  function stripDiacritics(s){
+    return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D");
+  }
+  function normalize(s){ return s.trim().toLowerCase().replace(/\s+/g," "); }
+  function compareAns(input, correct){
+    var i = normalize(input), a = normalize(correct);
+    if(i === "") return "empty";
+    if(i === a) return "perfect";
+    if(stripDiacritics(i) === stripDiacritics(a)) return "tone_only";
+    return "wrong";
+  }
+
+  function renderCatMenu(){
+    var menu = document.getElementById("catMenu");
+    menu.innerHTML = "";
+    var allBtn = document.createElement("button");
+    allBtn.className = "all";
+    var allSt = loadSt(ALL_KEY);
+    var allDone = allSt ? allSt.done.length : 0;
+    allBtn.innerHTML = "🎯 全部通しで練習<div class='count'>◎"+allDone+" / "+GRAMMAR_4KYU.length+" 問</div>";
+    allBtn.addEventListener("click", function(){ start(ALL_KEY); });
+    menu.appendChild(allBtn);
+    CATS.forEach(function(cat){
+      var btn = document.createElement("button");
+      var st = loadSt(cat);
+      var count = byCat[cat].length;
+      var doneCount = st ? st.done.length : 0;
+      var isDone = st && st.finished && doneCount === count;
+      btn.className = isDone ? "done" : "";
+      btn.innerHTML = "<div>"+cat+"</div><div class='count'>◎"+doneCount+" / "+count+"問"+(isDone?" ✓":"")+"</div>";
+      btn.addEventListener("click", function(){ start(cat); });
+      menu.appendChild(btn);
+    });
+  }
+
+  function start(cat){
+    currentCat = cat;
+    state = loadSt(cat) || initSt(cat);
+    if(state.finished){ state = initSt(cat); saveSt(cat, state); }
+    document.getElementById("catArea").classList.add("hidden");
+    document.getElementById("learnArea").classList.remove("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    render();
+  }
+  function back(){
+    currentCat = null; state = null;
+    document.getElementById("catArea").classList.remove("hidden");
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    renderCatMenu();
+  }
+
+  function curQ(){
+    if(!state || state.queue.length === 0) return null;
+    return GRAMMAR_4KYU[state.queue[state.idx]];
+  }
+
+  function renderFill(q){
+    // Replace __ with styled blank
+    var text = q.fill.replace(/_{2,}|__/g, '<span class="blank">___</span>');
+    document.getElementById("qfill").innerHTML = text;
+  }
+
+  function setStage(st){
+    var b = document.getElementById("stageBadge");
+    if(st === 1){ b.className="stage-badge s1"; b.textContent = "STEP 1: 音声なしで挑戦"; }
+    else { b.className="stage-badge s2"; b.textContent = "STEP 2: 音声を聞いてから入力"; }
+  }
+
+  function render(){
+    if(state.finished){ showComplete(); return; }
+    var q = curQ(); if(!q) return;
+    document.getElementById("qcat").textContent = q.cat;
+    document.getElementById("qhint").textContent = "ヒント: " + q.hint;
+    renderFill(q);
+    document.getElementById("qjp").textContent = q.jp;
+    document.getElementById("idx").textContent = (state.idx+1)+"/"+state.queue.length;
+    document.getElementById("s-round").textContent = state.round+" / "+MAX_ROUND;
+    document.getElementById("s-remain").textContent = state.queue.length;
+    document.getElementById("s-done").textContent = state.done.length+" / "+state.total;
+    document.getElementById("bar").style.width = Math.round((state.done.length/state.total)*100)+"%";
+    state.stage = 1; setStage(1); resetUI(); rank = null;
+  }
+  function resetUI(){
+    var i = document.getElementById("ans");
+    i.value = ""; i.className = "ans-input"; i.disabled = false;
+    document.getElementById("judge").classList.remove("show");
+    document.getElementById("btnsStage1").classList.remove("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.add("hidden");
+    setTimeout(function(){ try{ i.focus(); }catch(e){} }, 50);
+  }
+  function showComplete(){
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.remove("hidden");
+    document.getElementById("completeMsg").textContent =
+      state.done.length === state.total
+        ? "全"+state.total+"問を ◎ で完了！"
+        : MAX_ROUND+"周終了。◎"+state.done.length+"/"+state.total+"問";
+  }
+
+  function applyJudgment(r, q, val){
+    var input = document.getElementById("ans");
+    var jb = document.getElementById("judge");
+    rank = r;
+    if(r === "◎"){ input.className="ans-input excellent"; jb.className="judge-box show excellent";
+      document.getElementById("judgeIcon").textContent="◎"; document.getElementById("judgeMsg").textContent="完全正解！合格"; }
+    else if(r === "〇"){ input.className="ans-input good"; jb.className="judge-box show good";
+      document.getElementById("judgeIcon").textContent="〇"; document.getElementById("judgeMsg").textContent="声調記号のみミス → 次周"; }
+    else if(r === "△"){ input.className="ans-input okay"; jb.className="judge-box show okay";
+      document.getElementById("judgeIcon").textContent="△"; document.getElementById("judgeMsg").textContent="音声を聞いて書けました → 次周"; }
+    else { input.className="ans-input bad"; jb.className="judge-box show bad";
+      document.getElementById("judgeIcon").textContent="×"; document.getElementById("judgeMsg").textContent="音声を聞いても書けず → 次周"; }
+    var filledAns = q.fill.replace(/_{2,}|__/g, '<b style="color:#fff">'+q.ans+'</b>');
+    document.getElementById("correctAns").innerHTML = filledAns + "<small>正解: " + q.ans + " | " + q.jp + "</small>";
+    input.disabled = true;
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.remove("hidden");
+  }
+
+  function doCheck1(){
+    var q = curQ(); if(!q) return;
+    var v = document.getElementById("ans").value;
+    var r = compareAns(v, q.ans);
+    if(r === "empty"){ document.getElementById("ans").focus(); return; }
+    if(r === "perfect") applyJudgment("◎", q, v);
+    else if(r === "tone_only") applyJudgment("〇", q, v);
+    else showListen(v);
+  }
+  function showListen(prev){
+    var i = document.getElementById("ans");
+    i.className="ans-input bad"; i.disabled=true;
+    var jb = document.getElementById("judge");
+    jb.className="judge-box show listen";
+    document.getElementById("judgeIcon").textContent="🔊";
+    document.getElementById("judgeMsg").textContent="不正解。音声で文全体を聞いてもう一度";
+    document.getElementById("correctAns").innerHTML = "あなた: " + (prev || "(未入力)");
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.remove("hidden");
+  }
+  function doSpeakAndAdvance(){
+    var q = curQ(); if(!q) return;
+    var full = q.fill.replace(/_{2,}|__/g, q.ans);
+    speak(full, document.getElementById("btnSpeakBig"));
+    setTimeout(function(){
+      state.stage = 2; setStage(2);
+      var i = document.getElementById("ans");
+      i.value=""; i.className="ans-input"; i.disabled=false;
+      document.getElementById("judge").classList.remove("show");
+      document.getElementById("btnsListen").classList.add("hidden");
+      document.getElementById("btnsStage2").classList.remove("hidden");
+      try{ i.focus(); }catch(e){}
+    }, 500);
+  }
+  function doCheck2(){
+    var q = curQ(); if(!q) return;
+    var v = document.getElementById("ans").value;
+    var r = compareAns(v, q.ans);
+    if(r === "empty"){ document.getElementById("ans").focus(); return; }
+    if(r === "perfect" || r === "tone_only") applyJudgment("△", q, v);
+    else applyJudgment("×", q, v);
+  }
+  function doNext(){
+    var qi = state.queue[state.idx];
+    if(rank === "◎"){ if(state.done.indexOf(qi) < 0) state.done.push(qi); }
+    else{ if(state.nextQueue.indexOf(qi) < 0) state.nextQueue.push(qi); }
+    state.queue.splice(state.idx, 1);
+    if(state.idx >= state.queue.length){
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND) state.finished = true;
+      else{ state.round++; state.queue = state.nextQueue; state.nextQueue = []; state.idx = 0; }
+    }
+    saveSt(currentCat, state); render();
+  }
+  function doSkip(){ var q = curQ(); if(q) applyJudgment("×", q, ""); }
+
+  document.getElementById("btnCheck").addEventListener("click", doCheck1);
+  document.getElementById("btnCheck2").addEventListener("click", doCheck2);
+  document.getElementById("btnSpeakBig").addEventListener("click", doSpeakAndAdvance);
+  document.getElementById("btnSkip").addEventListener("click", doSkip);
+  document.getElementById("btnNext").addEventListener("click", doNext);
+  document.getElementById("ans").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); if(state.stage === 1) doCheck1(); else doCheck2(); }
+  });
+  document.getElementById("btnBack").addEventListener("click", back);
+  document.getElementById("btnResetCur").addEventListener("click", function(){
+    if(confirm("進捗リセット?")){ state = initSt(currentCat); saveSt(currentCat, state); render(); }
+  });
+  document.getElementById("btnResetAll").addEventListener("click", function(){
+    if(confirm("全進捗リセット?")){
+      CATS.forEach(function(c){ localStorage.removeItem(skey(c)); });
+      localStorage.removeItem(skey(ALL_KEY));
+      renderCatMenu();
+    }
+  });
+
+  if("speechSynthesis" in window){
+    loadVoices();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }
+  renderCatMenu();
+})();
+</script>
+</body>
+</html>

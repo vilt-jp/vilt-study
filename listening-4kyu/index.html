@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>ViLT 4級 リスニング</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+.intro{background:#e8eaf6;border:1px solid #9fa8da;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#3949ab;line-height:1.7}
+.level-sel{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.level-sel button{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:16px 8px;font-size:13px;font-weight:700;color:#333;cursor:pointer;font-family:inherit}
+.level-sel button.l1{border-color:#4caf50}
+.level-sel button.l2{border-color:#ff9800}
+.level-sel button.l3{border-color:#f44336}
+.level-sel button.all{grid-column:span 3;border-color:#da251d;background:linear-gradient(135deg,#fff8f8,#fff);color:#da251d}
+.level-sel button.done{background:#e8f5e9;border-color:#2e7d32;color:#1b5e20}
+.level-sel button .count{font-size:11px;color:#888;margin-top:4px;display:block;font-weight:500}
+.round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
+.round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
+.round-bar .sep{width:1px;height:30px;background:#e0e0e0}
+.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px}
+.stage-badge.s1{background:#e8eaf6;color:#3949ab}
+.stage-badge.s2{background:#fff3e0;color:#ef6c00}
+.listen-card{background:linear-gradient(135deg,#fff,#f8f9ff);border:2px solid #5c6bc0;border-radius:16px;padding:30px 20px;text-align:center;margin-bottom:14px;position:relative}
+.listen-card .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+.listen-card .lbl{font-size:12px;color:#5c6bc0;font-weight:700;letter-spacing:2px;margin-bottom:14px}
+.listen-card .level-badge{display:inline-block;padding:3px 12px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:12px}
+.level-badge.l1{background:#e8f5e9;color:#2e7d32}
+.level-badge.l2{background:#fff3e0;color:#ef6c00}
+.level-badge.l3{background:#ffebee;color:#c62828}
+.btn-main-speak{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff;border:none;border-radius:50%;width:100px;height:100px;font-size:40px;cursor:pointer;box-shadow:0 4px 12px rgba(92,107,192,.35);display:inline-flex;align-items:center;justify-content:center}
+.btn-main-speak:active{transform:scale(.93)}
+.btn-main-speak.speaking{background:linear-gradient(135deg,#3949ab,#1a237e);animation:pulse 1s infinite}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.04)}100%{transform:scale(1)}}
+.play-count{font-size:12px;color:#777;margin-top:10px}
+.ans-input{width:100%;padding:16px;border:2px solid #1976d2;border-radius:12px;font-size:18px;font-family:inherit;background:#fafbff;color:#222;margin-bottom:14px}
+.ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
+.ans-input.excellent{border-color:#1b5e20;background:#c8e6c9;color:#1b5e20}
+.ans-input.good{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+.ans-input.okay{border-color:#ef6c00;background:#fff3e0;color:#e65100}
+.ans-input.bad{border-color:#c62828;background:#ffebee;color:#b71c1c}
+.judge-box{border-radius:12px;padding:16px;margin-bottom:14px;text-align:center;display:none}
+.judge-box.show{display:block}
+.judge-box.excellent{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff}
+.judge-box.good{background:linear-gradient(135deg,#66bb6a,#81c784);color:#fff}
+.judge-box.okay{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
+.judge-box.bad{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
+.judge-box .icon{font-size:42px;font-weight:800;display:block;margin-bottom:4px;line-height:1}
+.judge-box .msg{font-size:14px;margin-bottom:8px;opacity:.95}
+.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:10px;font-size:16px;font-weight:700;display:block;margin-top:4px;line-height:1.5;text-align:left}
+.judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:6px;font-weight:400}
+.diff{background:rgba(255,235,0,.25);padding:0 3px;border-radius:3px}
+.btn-row{display:flex;gap:10px;margin-bottom:10px}
+.btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-row button:active{opacity:.75;transform:scale(.96)}
+.btn-check{background:#1976d2;color:#fff}
+.btn-slow{background:#fff3e0;color:#e65100;border:2px solid #ef6c00!important;font-size:13px!important;padding:10px 8px!important}
+.btn-next{background:#2e7d32;color:#fff}
+.btn-skip{background:#f5f5f5;color:#666;border:1px solid #ddd!important}
+.voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:8px 12px;font-size:12px;color:#1565c0;margin-bottom:10px}
+.voice-info.warn{background:#fff3e0;border-color:#ffb74d;color:#e65100}
+.voice-info.err{background:#ffebee;border-color:#e57373;color:#c62828}
+.complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.complete h2{font-size:28px;margin-bottom:8px}
+.complete p{font-size:14px;opacity:.95;margin-bottom:16px}
+.complete button{background:#fff;color:#2e7d32;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit}
+.reset-bar{display:flex;gap:8px;margin-top:12px}
+.reset-bar button{flex:1;padding:8px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:11px;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="site">
+<button class="nav-back" onclick="location.href='../'">← ホーム</button>
+<h1>4級 リスニング</h1>
+<div class="sub">Dictation (聞き取り→書き取り)</div>
+</header>
+<main>
+
+<div id="introArea">
+<div class="intro">
+<b>🎧 Dictation (書き取り) 練習</b><br>
+1. 🔊ボタンで音声再生<br>
+2. 聞こえた通りにベトナム語で入力<br>
+3. 答え合わせ → 不正解なら再度聞いて入力<br>
+<b>判定</b>: ◎音声なし一発合格 / 〇声調のみミス / △もう一度聞いて正解 / ×聞き直しても不正解
+</div>
+<div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
+<div class="section-title">レベル選択</div>
+<div class="level-sel" id="levelSel"></div>
+<div class="reset-bar">
+<button id="btnResetAll">進捗をリセット</button>
+</div>
+</div>
+
+<div id="learnArea" class="hidden">
+<div class="round-bar">
+<div>周回<b id="s-round">1 / 5</b></div>
+<div class="sep"></div>
+<div>残り<b id="s-remain">-</b></div>
+<div class="sep"></div>
+<div>習得(◎)<b id="s-done">-</b></div>
+</div>
+
+<div id="stageBadge" class="stage-badge s1">STEP 1: 1回聞いて書く</div>
+
+<div class="listen-card">
+<div class="qidx" id="idx">-</div>
+<div class="level-badge" id="levelBadge">-</div>
+<div class="lbl">🎧 聞こえた文をベトナム語で書く</div>
+<button class="btn-main-speak" id="btnPlay">▶</button>
+<div class="play-count" id="playCount">再生回数: 0</div>
+</div>
+
+<input type="text" class="ans-input" id="ans" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="聞こえた文を入力" />
+
+<div class="judge-box" id="judge">
+<span class="icon" id="judgeIcon">✓</span>
+<div class="msg" id="judgeMsg"></div>
+<div class="correct-ans" id="correctAns"></div>
+</div>
+
+<div class="btn-row" id="btnsStage1">
+<button class="btn-slow" id="btnSlow">🐢 ゆっくり再生</button>
+<button class="btn-skip" id="btnSkip">わからない</button>
+<button class="btn-check" id="btnCheck">答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsStage2">
+<button class="btn-slow" id="btnSlow2">🐢 ゆっくり</button>
+<button class="btn-check" id="btnCheck2">もう一度 答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsNext">
+<button class="btn-next" id="btnNext">次の問題 ▶</button>
+</div>
+
+<div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
+<div class="reset-bar">
+<button id="btnBack">← メニュー</button>
+<button id="btnResetCur">進捗リセット</button>
+</div>
+</div>
+
+<div id="completeArea" class="complete hidden">
+<h2>🎉 完了！</h2>
+<p id="completeMsg">リスニング完了</p>
+<button onclick="location.reload()">メニューに戻る</button>
+</div>
+
+</main>
+<footer class="site">耳で慣れて・書いて定着</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  var MAX_ROUND = 5;
+  var state = null, rank = null, playCount = 0, currentLevel = null;
+  var ALL_KEY = "_ALL_";
+
+  function filterByLevel(lv){
+    if(lv === ALL_KEY) return LISTENING_4KYU.map(function(_,i){return i;});
+    return LISTENING_4KYU.map(function(q,i){return q.level === lv ? i : -1;}).filter(function(i){return i >= 0;});
+  }
+
+  function skey(lv){ return "vilt_listen4kyu_lv"+lv; }
+  function loadSt(lv){ try{ var s = localStorage.getItem(skey(lv)); if(s) return JSON.parse(s); }catch(e){} return null; }
+  function saveSt(lv, st){ try{ localStorage.setItem(skey(lv), JSON.stringify(st)); }catch(e){} }
+  function initSt(lv){
+    var list = filterByLevel(lv);
+    return { round:1, queue:list.slice(), nextQueue:[], done:[], idx:0, stage:1, finished:false, total:list.length };
+  }
+
+  var viVoice = null;
+  function loadVoices(){
+    var v = window.speechSynthesis.getVoices();
+    viVoice = v.find(function(x){ return x.lang && x.lang.toLowerCase().indexOf("vi") === 0; });
+    var el = document.getElementById("voiceInfo");
+    if(!("speechSynthesis" in window)){ el.className="voice-info err"; el.textContent="❌ 音声未対応"; return; }
+    if(viVoice){ el.className="voice-info"; el.innerHTML="✅ 音声: <b>"+viVoice.name+"</b>"; }
+    else{ el.className="voice-info warn"; el.innerHTML="⚠️ ベトナム語音声がありません。設定から追加してください"; }
+  }
+  function speak(text, rate, btn){
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    var msg = new SpeechSynthesisUtterance(text);
+    msg.lang="vi-VN"; msg.rate = rate || 0.85;
+    if(viVoice) msg.voice = viVoice;
+    if(btn) btn.classList.add("speaking");
+    msg.onend = function(){ if(btn) btn.classList.remove("speaking"); };
+    msg.onerror = function(){ if(btn) btn.classList.remove("speaking"); };
+    window.speechSynthesis.speak(msg);
+  }
+
+  function stripDiacritics(s){
+    return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D");
+  }
+  function normalizePunct(s){
+    return s.trim().toLowerCase()
+      .replace(/[.,!?;:。、？！]/g,"")
+      .replace(/\s+/g," ");
+  }
+  function compareAns(input, correct){
+    var i = normalizePunct(input), a = normalizePunct(correct);
+    if(i === "") return "empty";
+    if(i === a) return "perfect";
+    if(stripDiacritics(i) === stripDiacritics(a)) return "tone_only";
+    return "wrong";
+  }
+
+  function renderLevelSel(){
+    var el = document.getElementById("levelSel");
+    el.innerHTML = "";
+    var all = filterByLevel(ALL_KEY);
+    var allBtn = document.createElement("button");
+    allBtn.className = "all";
+    var allSt = loadSt(ALL_KEY);
+    allBtn.innerHTML = "🎯 全レベル通し<span class='count'>◎ "+(allSt?allSt.done.length:0)+" / "+all.length+" 問</span>";
+    allBtn.addEventListener("click", function(){ start(ALL_KEY); });
+    el.appendChild(allBtn);
+    [1,2,3].forEach(function(lv){
+      var list = filterByLevel(lv);
+      var st = loadSt(lv);
+      var doneCount = st ? st.done.length : 0;
+      var btn = document.createElement("button");
+      btn.className = "l"+lv + (st && st.finished && doneCount === list.length ? " done" : "");
+      var label = lv === 1 ? "Lv1 短文" : lv === 2 ? "Lv2 中文" : "Lv3 長文";
+      btn.innerHTML = label + "<span class='count'>◎ "+doneCount+" / "+list.length+"</span>";
+      btn.addEventListener("click", function(){ start(lv); });
+      el.appendChild(btn);
+    });
+  }
+
+  function start(lv){
+    currentLevel = lv;
+    state = loadSt(lv) || initSt(lv);
+    if(state.finished){ state = initSt(lv); saveSt(lv, state); }
+    document.getElementById("introArea").classList.add("hidden");
+    document.getElementById("learnArea").classList.remove("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    render();
+  }
+  function back(){
+    currentLevel = null; state = null;
+    document.getElementById("introArea").classList.remove("hidden");
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    renderLevelSel();
+  }
+
+  function curQ(){
+    if(!state || state.queue.length === 0) return null;
+    return LISTENING_4KYU[state.queue[state.idx]];
+  }
+  function setStage(st){
+    var b = document.getElementById("stageBadge");
+    if(st === 1){ b.className="stage-badge s1"; b.textContent = "STEP 1: 1回聞いて書く"; }
+    else { b.className="stage-badge s2"; b.textContent = "STEP 2: 何度でも聞いて書く"; }
+  }
+  function render(){
+    if(state.finished){ showComplete(); return; }
+    var q = curQ(); if(!q) return;
+    document.getElementById("idx").textContent = (state.idx+1)+"/"+state.queue.length;
+    var lb = document.getElementById("levelBadge");
+    lb.className = "level-badge l" + q.level;
+    lb.textContent = q.level === 1 ? "Lv1 短文" : q.level === 2 ? "Lv2 中文" : "Lv3 長文";
+    document.getElementById("s-round").textContent = state.round+" / "+MAX_ROUND;
+    document.getElementById("s-remain").textContent = state.queue.length;
+    document.getElementById("s-done").textContent = state.done.length+" / "+state.total;
+    document.getElementById("bar").style.width = Math.round((state.done.length/state.total)*100)+"%";
+    playCount = 0;
+    document.getElementById("playCount").textContent = "再生回数: 0";
+    state.stage = 1; setStage(1); resetUI(); rank = null;
+  }
+  function resetUI(){
+    var i = document.getElementById("ans");
+    i.value = ""; i.className = "ans-input"; i.disabled = false;
+    document.getElementById("judge").classList.remove("show");
+    document.getElementById("btnsStage1").classList.remove("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.add("hidden");
+    setTimeout(function(){ try{ i.focus(); }catch(e){} }, 50);
+  }
+  function showComplete(){
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.remove("hidden");
+    document.getElementById("completeMsg").textContent =
+      state.done.length === state.total
+        ? "全"+state.total+"問を ◎ で完了！"
+        : MAX_ROUND+"周終了。◎"+state.done.length+"/"+state.total+"問";
+  }
+
+  function applyJudgment(r, q, val){
+    var input = document.getElementById("ans");
+    var jb = document.getElementById("judge");
+    rank = r;
+    if(r === "◎"){ input.className="ans-input excellent"; jb.className="judge-box show excellent";
+      document.getElementById("judgeIcon").textContent="◎"; document.getElementById("judgeMsg").textContent="1回で完全正解！合格"; }
+    else if(r === "〇"){ input.className="ans-input good"; jb.className="judge-box show good";
+      document.getElementById("judgeIcon").textContent="〇"; document.getElementById("judgeMsg").textContent="声調のみミス → 次周"; }
+    else if(r === "△"){ input.className="ans-input okay"; jb.className="judge-box show okay";
+      document.getElementById("judgeIcon").textContent="△"; document.getElementById("judgeMsg").textContent="聞き直して書けました → 次周"; }
+    else { input.className="ans-input bad"; jb.className="judge-box show bad";
+      document.getElementById("judgeIcon").textContent="×"; document.getElementById("judgeMsg").textContent="聞いても書けず → 次周"; }
+    document.getElementById("correctAns").innerHTML = q.vi + "<small>= " + q.jp + "<br>あなた: " + (val || "(未入力)") + "</small>";
+    input.disabled = true;
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.remove("hidden");
+  }
+
+  function doPlay(rate){
+    var q = curQ(); if(!q) return;
+    playCount++;
+    document.getElementById("playCount").textContent = "再生回数: " + playCount;
+    speak(q.vi, rate, document.getElementById("btnPlay"));
+  }
+  function doCheck1(){
+    var q = curQ(); if(!q) return;
+    if(playCount === 0){ alert("先に🔊ボタンで音声を聞いてください"); return; }
+    var v = document.getElementById("ans").value;
+    var r = compareAns(v, q.vi);
+    if(r === "empty"){ document.getElementById("ans").focus(); return; }
+    if(playCount === 1 && r === "perfect") applyJudgment("◎", q, v);
+    else if(playCount === 1 && r === "tone_only") applyJudgment("〇", q, v);
+    else if(r === "perfect" || r === "tone_only") applyJudgment("△", q, v);
+    else {
+      // Need to listen again
+      state.stage = 2; setStage(2);
+      var input = document.getElementById("ans");
+      input.className = "ans-input"; input.disabled = false;
+      document.getElementById("btnsStage1").classList.add("hidden");
+      document.getElementById("btnsStage2").classList.remove("hidden");
+      document.getElementById("judge").classList.add("show");
+      document.getElementById("judge").className = "judge-box show bad";
+      document.getElementById("judgeIcon").textContent = "🔊";
+      document.getElementById("judgeMsg").textContent = "不正解。再生して聞き直し、もう一度入力してください";
+      document.getElementById("correctAns").innerHTML = "あなた: " + (v || "(未入力)");
+      try{ input.focus(); }catch(e){}
+    }
+  }
+  function doCheck2(){
+    var q = curQ(); if(!q) return;
+    var v = document.getElementById("ans").value;
+    var r = compareAns(v, q.vi);
+    if(r === "empty"){ document.getElementById("ans").focus(); return; }
+    if(r === "perfect" || r === "tone_only") applyJudgment("△", q, v);
+    else applyJudgment("×", q, v);
+  }
+  function doNext(){
+    var qi = state.queue[state.idx];
+    if(rank === "◎"){ if(state.done.indexOf(qi) < 0) state.done.push(qi); }
+    else{ if(state.nextQueue.indexOf(qi) < 0) state.nextQueue.push(qi); }
+    state.queue.splice(state.idx, 1);
+    if(state.idx >= state.queue.length){
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND) state.finished = true;
+      else{ state.round++; state.queue = state.nextQueue; state.nextQueue = []; state.idx = 0; }
+    }
+    saveSt(currentLevel, state); render();
+  }
+  function doSkip(){ var q = curQ(); if(q) applyJudgment("×", q, ""); }
+
+  document.getElementById("btnPlay").addEventListener("click", function(){ doPlay(0.85); });
+  document.getElementById("btnSlow").addEventListener("click", function(){ doPlay(0.6); });
+  document.getElementById("btnSlow2").addEventListener("click", function(){ doPlay(0.6); });
+  document.getElementById("btnCheck").addEventListener("click", doCheck1);
+  document.getElementById("btnCheck2").addEventListener("click", doCheck2);
+  document.getElementById("btnSkip").addEventListener("click", doSkip);
+  document.getElementById("btnNext").addEventListener("click", doNext);
+  document.getElementById("ans").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); if(state.stage === 1) doCheck1(); else doCheck2(); }
+  });
+  document.getElementById("btnBack").addEventListener("click", back);
+  document.getElementById("btnResetCur").addEventListener("click", function(){
+    if(confirm("進捗リセット?")){ state = initSt(currentLevel); saveSt(currentLevel, state); render(); }
+  });
+  document.getElementById("btnResetAll").addEventListener("click", function(){
+    if(confirm("全進捗リセット?")){
+      [ALL_KEY,1,2,3].forEach(function(l){ localStorage.removeItem(skey(l)); });
+      renderLevelSel();
+    }
+  });
+
+  if("speechSynthesis" in window){
+    loadVoices();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }
+  renderLevelSel();
+})();
+</script>
+</body>
+</html>
