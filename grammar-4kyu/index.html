@@ -8,22 +8,20 @@
 <link rel="stylesheet" href="../assets/common.css">
 <style>
 .intro{background:#e3f2fd;border:1px solid #64b5f6;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#1565c0;line-height:1.7}
-.cat-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.cat-menu button{background:#fff;border:2px solid #e0e0e0;border-radius:10px;padding:12px 8px;font-size:12px;font-weight:700;color:#333;cursor:pointer;font-family:inherit;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3}
-.cat-menu button:active{transform:scale(.97);background:#fff8e6}
-.cat-menu button.done{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
-.cat-menu button .count{font-size:10px;color:#888;margin-top:3px;font-weight:500}
-.cat-menu button.all{grid-column:span 2;background:linear-gradient(135deg,#fff8f8,#fff);border-color:#da251d;color:#da251d;min-height:60px}
 .round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
 .round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
 .round-bar .sep{width:1px;height:30px;background:#e0e0e0}
-.qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:20px;margin-bottom:14px;position:relative}
-.qcard .qlabel{font-size:11px;color:#888;letter-spacing:1px;font-weight:600;margin-bottom:8px}
-.qcard .qcat{display:inline-block;background:#e3f2fd;color:#1565c0;border-radius:10px;padding:3px 10px;font-size:11px;font-weight:700;margin-bottom:10px}
-.qcard .qhint{color:#e65100;font-size:12px;margin-bottom:10px;font-weight:600}
-.qcard .qfill{font-size:22px;font-weight:700;color:#222;line-height:1.6;margin-bottom:6px}
-.qcard .qfill .blank{color:#da251d;background:#fff8e6;padding:2px 10px;border-radius:6px;border:1px dashed #da251d}
-.qcard .qjp{font-size:13px;color:#666;margin-top:6px}
+.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px}
+.stage-badge.s1{background:#e3f2fd;color:#1565c0}
+.stage-badge.s2{background:#fff3e0;color:#ef6c00}
+.mode-sel{display:flex;gap:8px;margin-bottom:14px}
+.mode-sel button{flex:1;padding:14px 8px;border:2px solid #e0e0e0;border-radius:10px;background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;color:#555}
+.mode-sel button.active{background:#da251d;color:#fff;border-color:#da251d}
+.qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:24px 20px;margin-bottom:14px;position:relative}
+.qcard .qlabel{font-size:11px;color:#888;letter-spacing:1px;font-weight:600;margin-bottom:12px;text-align:center}
+.qcard .qfill{font-size:22px;font-weight:700;color:#222;line-height:1.7;margin-bottom:10px;text-align:center}
+.qcard .qfill .blank{color:#da251d;background:#fff8e6;padding:2px 14px;border-radius:6px;border:1px dashed #da251d;margin:0 2px}
+.qcard .qjp{font-size:13px;color:#666;text-align:center;padding:8px;background:#f8f8f8;border-radius:6px}
 .qcard .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
 .ans-input{width:100%;padding:14px;border:2px solid #1976d2;border-radius:12px;font-size:20px;font-family:inherit;background:#fafbff;text-align:center;color:#222;margin-bottom:14px}
 .ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
@@ -40,7 +38,7 @@
 .judge-box.listen{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff}
 .judge-box .icon{font-size:42px;font-weight:800;display:block;margin-bottom:4px;line-height:1}
 .judge-box .msg{font-size:14px;margin-bottom:8px;opacity:.95}
-.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:10px;font-size:18px;font-weight:700;display:inline-block;margin-top:4px}
+.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:10px;font-size:18px;font-weight:700;display:inline-block;margin-top:4px;max-width:100%;word-break:break-word}
 .judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:4px;font-weight:400}
 .btn-row{display:flex;gap:10px;margin-bottom:10px}
 .btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
@@ -50,9 +48,6 @@
 .btn-speak-big.speaking{background:#3949ab}
 .btn-next{background:#2e7d32;color:#fff}
 .btn-skip{background:#f5f5f5;color:#666;border:1px solid #ddd!important}
-.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px}
-.stage-badge.s1{background:#e3f2fd;color:#1565c0}
-.stage-badge.s2{background:#fff3e0;color:#ef6c00}
 .complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .complete h2{font-size:28px;margin-bottom:8px}
 .complete p{font-size:14px;opacity:.95;margin-bottom:16px}
@@ -66,17 +61,22 @@
 <header class="site">
 <button class="nav-back" onclick="location.href='../'">← ホーム</button>
 <h1>4級 文法ドリル</h1>
-<div class="sub">穴埋めタイピング / 受動態・複文・間接話法・cứ等</div>
+<div class="sub">穴埋めタイピング</div>
 </header>
 <main>
 
-<div id="catArea">
+<div id="introArea">
 <div class="intro">
 <b>📖 このドリルの目的</b><br>
-4級頻出文法パターンを**穴埋め形式**で練習します。受動態 bị/được、複文 (Mặc dù/Vì/Không những/Càng)、間接話法、cứ 用法など、弱点の文法を徹底します。
+4級頻出文法パターンを穴埋め形式で練習します。全問を通して実施し、答えは事前に見せません。<br>
+判定: ◎音声なし一発正解 / 〇声調のみミス / △もう一度聞いて正解 / ×聞き直しても不正解
 </div>
-<div class="section-title">文法パターンを選択</div>
-<div class="cat-menu" id="catMenu"></div>
+<div class="section-title">モード選択</div>
+<div class="mode-sel">
+<button id="modeOrder" class="active">順番</button>
+<button id="modeRandom">ランダム</button>
+</div>
+<button class="btn btn-primary btn-block" id="btnStart" style="margin-top:10px">文法ドリル開始 (全<span id="total-count">-</span>問)</button>
 <div class="reset-bar">
 <button id="btnResetAll">進捗をリセット</button>
 </div>
@@ -93,11 +93,9 @@
 
 <div id="stageBadge" class="stage-badge s1">STEP 1: 音声なしで挑戦</div>
 
-<div class="qcard" id="qcard">
+<div class="qcard">
 <div class="qidx" id="idx">-</div>
-<div class="qcat" id="qcat">-</div>
 <div class="qlabel">下線部に入る語を入力</div>
-<div class="qhint" id="qhint">-</div>
 <div class="qfill" id="qfill">-</div>
 <div class="qjp" id="qjp">-</div>
 </div>
@@ -138,30 +136,32 @@
 </div>
 
 </main>
-<footer class="site">文法パターンを体に染み込ませる</footer>
+<footer class="site">全問通し・答え非表示モード</footer>
 </div>
 
 <script src="data.js"></script>
 <script>
 (function(){
   var MAX_ROUND = 5;
+  var STORAGE_KEY = "vilt_grammar4kyu_all_v2";
   var state = null, rank = null;
-  var currentCat = null;
-  var byCat = {};
-  GRAMMAR_4KYU.forEach(function(q,i){
-    if(!byCat[q.cat]) byCat[q.cat] = [];
-    byCat[q.cat].push(i);
-  });
-  var CATS = Object.keys(byCat);
-  var ALL_KEY = "_ALL_";
+  var mode = "order";
 
-  function skey(cat){ return "vilt_grammar4kyu_"+cat; }
-  function loadSt(cat){ try{ var s = localStorage.getItem(skey(cat)); if(s) return JSON.parse(s); }catch(e){} return null; }
-  function saveSt(cat, st){ try{ localStorage.setItem(skey(cat), JSON.stringify(st)); }catch(e){} }
-  function initSt(cat){
-    var indices = cat === ALL_KEY ? GRAMMAR_4KYU.map(function(_,i){return i;}) : byCat[cat].slice();
-    return { round:1, queue:indices, nextQueue:[], done:[], idx:0, stage:1, finished:false, total:indices.length };
+  function init(){
+    var order = GRAMMAR_4KYU.map(function(_,i){return i;});
+    if(mode === "random"){
+      for(var i=order.length-1;i>0;i--){
+        var j = Math.floor(Math.random()*(i+1));
+        var t = order[i]; order[i] = order[j]; order[j] = t;
+      }
+    }
+    return {
+      round:1, queue:order, nextQueue:[], done:[], idx:0,
+      stage:1, finished:false, total:GRAMMAR_4KYU.length, mode:mode
+    };
   }
+  function load(){ try{ var s = localStorage.getItem(STORAGE_KEY); if(s) return JSON.parse(s); }catch(e){} return null; }
+  function save(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
 
   var viVoice = null;
   function loadVoices(){
@@ -192,44 +192,25 @@
     return "wrong";
   }
 
-  function renderCatMenu(){
-    var menu = document.getElementById("catMenu");
-    menu.innerHTML = "";
-    var allBtn = document.createElement("button");
-    allBtn.className = "all";
-    var allSt = loadSt(ALL_KEY);
-    var allDone = allSt ? allSt.done.length : 0;
-    allBtn.innerHTML = "🎯 全部通しで練習<div class='count'>◎"+allDone+" / "+GRAMMAR_4KYU.length+" 問</div>";
-    allBtn.addEventListener("click", function(){ start(ALL_KEY); });
-    menu.appendChild(allBtn);
-    CATS.forEach(function(cat){
-      var btn = document.createElement("button");
-      var st = loadSt(cat);
-      var count = byCat[cat].length;
-      var doneCount = st ? st.done.length : 0;
-      var isDone = st && st.finished && doneCount === count;
-      btn.className = isDone ? "done" : "";
-      btn.innerHTML = "<div>"+cat+"</div><div class='count'>◎"+doneCount+" / "+count+"問"+(isDone?" ✓":"")+"</div>";
-      btn.addEventListener("click", function(){ start(cat); });
-      menu.appendChild(btn);
-    });
-  }
-
-  function start(cat){
-    currentCat = cat;
-    state = loadSt(cat) || initSt(cat);
-    if(state.finished){ state = initSt(cat); saveSt(cat, state); }
-    document.getElementById("catArea").classList.add("hidden");
+  function start(){
+    var existing = load();
+    if(existing && !existing.finished){
+      if(confirm("前回の続きから再開しますか? (キャンセルで最初から)")) state = existing;
+      else state = init();
+    }else{
+      state = init();
+    }
+    save();
+    document.getElementById("introArea").classList.add("hidden");
     document.getElementById("learnArea").classList.remove("hidden");
     document.getElementById("completeArea").classList.add("hidden");
     render();
   }
   function back(){
-    currentCat = null; state = null;
-    document.getElementById("catArea").classList.remove("hidden");
+    state = null;
+    document.getElementById("introArea").classList.remove("hidden");
     document.getElementById("learnArea").classList.add("hidden");
     document.getElementById("completeArea").classList.add("hidden");
-    renderCatMenu();
   }
 
   function curQ(){
@@ -238,7 +219,6 @@
   }
 
   function renderFill(q){
-    // Replace __ with styled blank
     var text = q.fill.replace(/_{2,}|__/g, '<span class="blank">___</span>');
     document.getElementById("qfill").innerHTML = text;
   }
@@ -252,8 +232,6 @@
   function render(){
     if(state.finished){ showComplete(); return; }
     var q = curQ(); if(!q) return;
-    document.getElementById("qcat").textContent = q.cat;
-    document.getElementById("qhint").textContent = "ヒント: " + q.hint;
     renderFill(q);
     document.getElementById("qjp").textContent = q.jp;
     document.getElementById("idx").textContent = (state.idx+1)+"/"+state.queue.length;
@@ -294,7 +272,7 @@
       document.getElementById("judgeIcon").textContent="△"; document.getElementById("judgeMsg").textContent="音声を聞いて書けました → 次周"; }
     else { input.className="ans-input bad"; jb.className="judge-box show bad";
       document.getElementById("judgeIcon").textContent="×"; document.getElementById("judgeMsg").textContent="音声を聞いても書けず → 次周"; }
-    var filledAns = q.fill.replace(/_{2,}|__/g, '<b style="color:#fff">'+q.ans+'</b>');
+    var filledAns = q.fill.replace(/_{2,}|__/g, '<b style="color:#fff;text-decoration:underline">'+q.ans+'</b>');
     document.getElementById("correctAns").innerHTML = filledAns + "<small>正解: " + q.ans + " | " + q.jp + "</small>";
     input.disabled = true;
     document.getElementById("btnsStage1").classList.add("hidden");
@@ -354,10 +332,12 @@
       if(state.nextQueue.length === 0 || state.round >= MAX_ROUND) state.finished = true;
       else{ state.round++; state.queue = state.nextQueue; state.nextQueue = []; state.idx = 0; }
     }
-    saveSt(currentCat, state); render();
+    save(); render();
   }
   function doSkip(){ var q = curQ(); if(q) applyJudgment("×", q, ""); }
 
+  // Events
+  document.getElementById("btnStart").addEventListener("click", start);
   document.getElementById("btnCheck").addEventListener("click", doCheck1);
   document.getElementById("btnCheck2").addEventListener("click", doCheck2);
   document.getElementById("btnSpeakBig").addEventListener("click", doSpeakAndAdvance);
@@ -368,15 +348,23 @@
   });
   document.getElementById("btnBack").addEventListener("click", back);
   document.getElementById("btnResetCur").addEventListener("click", function(){
-    if(confirm("進捗リセット?")){ state = initSt(currentCat); saveSt(currentCat, state); render(); }
+    if(confirm("進捗リセット?")){ state = init(); save(); render(); }
   });
   document.getElementById("btnResetAll").addEventListener("click", function(){
-    if(confirm("全進捗リセット?")){
-      CATS.forEach(function(c){ localStorage.removeItem(skey(c)); });
-      localStorage.removeItem(skey(ALL_KEY));
-      renderCatMenu();
-    }
+    if(confirm("進捗リセット?")){ localStorage.removeItem(STORAGE_KEY); }
   });
+  document.getElementById("modeOrder").addEventListener("click", function(){
+    mode = "order";
+    this.classList.add("active");
+    document.getElementById("modeRandom").classList.remove("active");
+  });
+  document.getElementById("modeRandom").addEventListener("click", function(){
+    mode = "random";
+    this.classList.add("active");
+    document.getElementById("modeOrder").classList.remove("active");
+  });
+
+  document.getElementById("total-count").textContent = GRAMMAR_4KYU.length;
 
   if("speechSynthesis" in window){
     loadVoices();
@@ -384,7 +372,6 @@
       window.speechSynthesis.onvoiceschanged = loadVoices;
     }
   }
-  renderCatMenu();
 })();
 </script>
 </body>
