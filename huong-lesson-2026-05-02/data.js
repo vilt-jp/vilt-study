@@ -4,7 +4,7 @@
 // 問題I: 適切な動詞を選ぶ穴埋め (25問)
 // confirmed: 添削で正解確定 / unsolved: 未解答
 var FILL_QUESTIONS = [
-{n:1, sentence:"Chúng ta phải (___) những gia đình có hoàn cảnh như thế nào?", ans:null, jp:"私たちはどのような状況の家庭を ? すべきですか?", confirmed:false},
+{n:1, sentence:"Chúng ta phải (___) những gia đình có hoàn cảnh như thế nào?", ans:"mời", jp:"どのような状況の家庭を招待すべきですか?", confirmed:true},
 {n:2, sentence:"Tôi đã (___) môn học xong rồi.", ans:"đăng ký", jp:"私はもう履修登録を済ませた。", confirmed:true},
 {n:3, sentence:"Chị ấy đến Việt Nam (___) 3 tháng rồi.", ans:"được", jp:"彼女がベトナムに来て3ヶ月になります。", confirmed:true},
 {n:4, sentence:"Vấn đề này cần phải (___) ý kiến.", ans:"trao đổi", jp:"この問題は意見を交換する必要がある。", confirmed:true},
@@ -14,7 +14,7 @@ var FILL_QUESTIONS = [
 {n:8, sentence:"Các em (___) chú ý nghe nhé.", ans:"hãy", jp:"皆さん、よく聞いてください。", confirmed:true},
 {n:9, sentence:"Xin lỗi, (___) tôi hỏi một chút.", ans:"cho", jp:"すみません、ちょっと尋ねてもいいですか。", confirmed:true},
 {n:10, sentence:"Chúng ta (___) ăn cơm tối nhé!", ans:"cùng", jp:"一緒に夕食を食べましょう！", confirmed:true},
-{n:11, sentence:"Món ăn này thì có (___) nước mắm không?", ans:null, jp:"この料理にはヌクマムを ? しますか？", confirmed:false},
+{n:11, sentence:"Món ăn này thì có (___) nước mắm không?", ans:"chấm", jp:"この料理はヌクマムをつけて食べますか？", confirmed:true},
 {n:12, sentence:"Anh (___) tình hình Iran gần đây thế nào?", ans:"thấy", jp:"最近のイラン情勢をどう見ますか？", confirmed:true},
 {n:13, sentence:"Trứng thì không được (___) lò vi sóng.", ans:"cho vào", jp:"卵は電子レンジに入れてはいけない。", confirmed:true},
 {n:14, sentence:"Trước khi đến, anh sẽ (___) qua cửa hàng tiện lợi mua đồ uống.", ans:"ghé", jp:"行く前にコンビニに寄って飲み物を買います。", confirmed:true},
@@ -28,7 +28,7 @@ var FILL_QUESTIONS = [
 {n:22, sentence:"Mẹ ơi, cái áo này có (___) với con không?", ans:"hợp", jp:"お母さん、この服は私に似合いますか？", confirmed:true},
 {n:23, sentence:"Bất cứ sinh viên (___) cũng có thể tham gia.", ans:"nào", jp:"どの学生でも参加することができる。", confirmed:true},
 {n:24, sentence:"Tôi ghét cả quả sầu riêng (___) quả mít.", ans:"lẫn", jp:"私はドリアンもジャックフルーツも嫌いです。", confirmed:true},
-{n:25, sentence:"Ngủ đủ thì bạn (___) làm việc được.", ans:null, jp:"十分寝ればあなたは ? 仕事ができる。", confirmed:false}
+{n:25, sentence:"Ngủ đủ thì bạn (___) làm việc được.", ans:"mới", jp:"十分寝てこそ仕事ができる。", confirmed:true}
 ];
 
 // 問題I 選択肢一覧 (参考表示用)
