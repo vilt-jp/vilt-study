@@ -48,10 +48,10 @@
 
 <div class="section-title">学習メニュー</div>
 <div class="menu">
-<a href="vocab-4kyu/" class="menu-vocab">
+<a href="vocab-themed/" class="menu-vocab">
 <div class="ic">📝</div>
-<div>4級 語彙タイピング</div>
-<div class="sub">約300語 / 5周式</div>
+<div>4級 語彙（テーマ別）</div>
+<div class="sub">約690語 / 例文・漢越・品詞</div>
 </a>
 <a href="practice-tones/">
 <div class="ic">🎵</div>
@@ -67,11 +67,6 @@
 <div class="ic">🎧</div>
 <div>4級 リスニング</div>
 <div class="sub">Dictation Lv1-3</div>
-</a>
-<a href="vocab-themed/">
-<div class="ic">📚</div>
-<div>テーマ別 語彙</div>
-<div class="sub">例文・漢越・品詞付き</div>
 </a>
 <a href="huong-lesson-2026-05-02/">
 <div class="ic">👩‍🏫</div>
@@ -93,8 +88,8 @@
 <div class="memo">
 <b>💡 使い方</b><br>
 1. このページを Safari で開いたら「共有 → ホーム画面に追加」でアプリ化<br>
-2. 「4級 語彙タイピング」からカテゴリを選んで学習開始<br>
-3. ✓完全正解なら次周に出ない、△部分正解・✗不正解は次周に残る<br>
+2. 「4級 語彙（テーマ別）」からカテゴリを選んで学習開始<br>
+3. ◎(完全正解)で次周に出ない、〇△×は次周に残る<br>
 4. 進捗は端末の localStorage に自動保存
 </div>
 
@@ -155,13 +150,13 @@ function renderCountdown(){
 }
 
 function renderProgress(){
-  var cats = ["身体","健康","感情","自然","社会","動詞","時間","漢越"];
+  var cats = ["家族・人間関係","身体・健康","食事・食べ物","衣服・買い物","住居・家具","交通・移動","数字・お金","教育・学校","仕事・職場","趣味・娯楽","自然・天気","動物・植物","色・形","時間表現","感情・性格","基本動作","形容詞","副詞・接続詞","社会・経済","漢越語"];
   var list = document.getElementById("progList");
   list.innerHTML = "";
   var totalDone = 0, totalAll = 0;
   cats.forEach(function(cat){
     try{
-      var s = localStorage.getItem("vilt_vocab4kyu_"+cat);
+      var s = localStorage.getItem("vilt_themed_"+cat);
       var done = 0, total = 0, round = 1;
       if(s){
         var st = JSON.parse(s);
@@ -179,7 +174,7 @@ function renderProgress(){
     }catch(e){}
   });
   if(list.children.length === 0){
-    list.innerHTML = "<div class='item' style='text-align:center;color:#888;padding:20px'>まだ学習を開始していません<br>↑「4級 語彙タイピング」から開始</div>";
+    list.innerHTML = "<div class='item' style='text-align:center;color:#888;padding:20px'>まだ学習を開始していません<br>↑「4級 語彙（テーマ別）」から開始</div>";
   }else{
     var pct = totalAll > 0 ? Math.round((totalDone/totalAll)*100) : 0;
     var sum = document.createElement("div");
