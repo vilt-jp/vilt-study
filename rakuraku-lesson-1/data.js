@@ -1,46 +1,31 @@
 // らくらくベトナム語 ViLT試験直前対策ライブ #1 (動画ID: ZBo65P47c6A)
-// 58問: 穴埋め選択31問、間違い探し15問、単語の正しい使い方12問
+// 58問: 穴埋め選択16問、間違い探し15問、単語の正しい使い方12問、正解語の判別15問
 
-// === Fill: 穴埋め選択 (31問) ===
-// sentence: 完成形の文（正解の語が入っている）
-// blankIdx: 文中の何番目の単語が穴埋めか (空欄表示用)
+// === Fill: 穴埋め選択 (16問) ===
+// 4つの選択肢のうち1つだけが文中にあり、それが空欄に入る正解
+// sentence: 完成形の文（正解の語が入っている、括弧内が空欄部分）
 // choices: 4択 / ans: 正解インデックス
-// jp: 日本語訳 / explanation: 解説
 var FILL_QUESTIONS = [
 {n:1, sentence:"( Mỗi ) nơi một phong tục, em nên tìm hiểu trước khi đi du lịch.", blank:"Mỗi", choices:["từng","với","mỗi","các"], ans:2, jp:"場所ごとに風習が異なるので、旅行に行く前に調べておくべきです。", explanation:"mỗi=各〜/〜ごとに / từng=一つ一つの / với=〜と / các=諸〜"},
 {n:2, sentence:"Tết đến, nhà nào cũng chuẩn bị ( nào ) bánh chưng, ( nào ) mứt, ( nào ) hoa đào.", blank:"nào", choices:["này","mọi","những","nào"], ans:3, jp:"旧正月になると、どの家もバインチュンやら、ムット（乾燥果実）やら、桃の花やらを準備します。", explanation:"nào...nào...nào...= 列挙「〜やら〜やら」 / mọi=すべての / những=複数"},
 {n:3, sentence:"Vào ngày Quốc khánh, người dân tập trung rất đông ở ( quảng trường ) để xem pháo hoa.", blank:"quảng trường", choices:["khu công nghiệp","quảng trường","ngoại ô","cửa ra vào"], ans:1, jp:"建国記念日には、人々は花火を見るために広場に大勢集まります。", explanation:"quảng trường=広場 / khu công nghiệp=工業団地 / ngoại ô=郊外 / cửa ra vào=入り口"},
 {n:4, sentence:"( Khói bụi ) từ các nhà máy khiến cho thành phố bị ô nhiễm trầm trọng.", blank:"Khói bụi", choices:["không khí","tiếng ồn","khói bụi","ánh sáng"], ans:2, jp:"工場からの煙や埃（煙塵）が、街を深刻な汚染状態にしています。", explanation:"khói bụi=煙塵 / không khí=空気 / tiếng ồn=騒音 / ánh sáng=光"},
-{n:5, sentence:"Sau khi nói chuyện với bạn bè, cô ấy cảm thấy ( đỡ ) buồn hơn.", blank:"đỡ", choices:["cảm thấy","đỡ","buồn","cô ấy"], ans:1, jp:"友達と話した後、彼女は悲しみが少し和らいだと感じました。", explanation:"S + đỡ + 形/動 + (hơn): 程度が和らぐ・少し楽になる. マイナス状態の軽減"},
-{n:6, sentence:"Đã 2 năm rồi nhưng tôi vẫn chưa thích nghi ( được ) với cuộc sống ở đây.", blank:"được", choices:["được","cuộc sống","đã","thích nghi"], ans:0, jp:"もう2年になりましたが、私はまだここの生活に順応できていません。", explanation:"V + được = 〜できる. đã + 期間 = もう〜（に達している）"},
-{n:7, sentence:"Xong hết việc rồi, ( thoải mái ) làm sao!", blank:"thoải mái", choices:["hết","làm sao","thoải mái","xong"], ans:2, jp:"仕事が全部終わった、なんて気持ちがいいんだろう。", explanation:"S + 形容詞 + làm sao!/biết bao!: なんて〜なのだろう（感嘆）"},
 {n:8, sentence:"Hai công ty này ( hợp tác ) với nhau lâu lắm rồi.", blank:"hợp tác", choices:["hợp tác","cãi nhau","tâm sự","hỗ trợ"], ans:0, jp:"この2つの会社は、かなり前から提携（協力）しています。", explanation:"hợp tác=合作・協力 / cãi nhau=喧嘩 / tâm sự=打ち明け話 / hỗ trợ=援助"},
 {n:9, sentence:"Em muốn thuê một căn nhà có các ( tiện nghi ) cơ bản như: máy giặt, điều hòa, tivi, tủ lạnh.", blank:"tiện nghi", choices:["tiện ích","tiện nghi","dịch vụ","nội thất"], ans:1, jp:"洗濯機、エアコン、テレビ、冷蔵庫などの基本的な設備がある家を借りたいです。", explanation:"tiện nghi=設備・什器 / tiện ích=利便性 / dịch vụ=サービス / nội thất=内装"},
 {n:10, sentence:"Khi còn là sinh viên, em ấy thường sống trong ( ký túc xá ) của trường.", blank:"ký túc xá", choices:["nhà ở","chỗ ở","nhà trọ","ký túc xá"], ans:3, jp:"学生の頃、彼女はよく学校の寮に住んでいました。", explanation:"ký túc xá=学生寮 / nhà ở=住宅 / chỗ ở=住処 / nhà trọ=下宿"},
 {n:11, sentence:"Chị Hoa nghỉ việc ở công ty này vì không chịu được ( áp lực ) của công việc.", blank:"áp lực", choices:["áp lực","mệt mỏi","căng thẳng","bận rộn"], ans:0, jp:"ホアさんは仕事のプレッシャーに耐えられず、この会社を辞めました。", explanation:"áp lực=圧力・プレッシャー / mệt mỏi=疲れ / căng thẳng=ストレス / bận rộn=忙しい"},
-{n:12, sentence:"Thay mặt toàn thể nhân viên, xin gửi ( lời cảm ơn ) chân thành đến công ty.", blank:"lời cảm ơn", choices:["chân thành","lời cảm ơn","gửi","xin"], ans:1, jp:"全従業員を代表して、会社へ心からの感謝を申し上げます。", explanation:"Thay mặt 〜 = 〜に代わって・〜を代表して. lời cảm ơn=感謝の言葉"},
-{n:13, sentence:"Anh đã khỏi đau đầu chưa? ( Hay là ) vẫn cần nghỉ ngơi thêm?", blank:"Hay là", choices:["hay là","khỏi","đau đầu","nghỉ ngơi"], ans:0, jp:"頭痛はもう治りましたか？それともまだもう少し安静が必要ですか。", explanation:"hay là = それとも（疑問の選択肢）"},
-{n:14, sentence:"Công việc bán thời gian này mỗi tháng kiếm được ( 3 triệu ) là nhiều.", blank:"3 triệu", choices:["mỗi tháng","là nhiều","kiếm được","3 triệu"], ans:3, jp:"このアルバイトは、1ヶ月に300万ドン稼げれば良い方（多い方）です。", explanation:"[数値] + là nhiều = 多いときで〜 / [数値] + là ít = 少なくとも〜"},
-{n:15, sentence:"A: Cậu mới mua xe ô tô à, giàu thế! / B: Giàu gì mà ( giàu ). Mình mua trả góp đấy.", blank:"giàu", choices:["giàu","gì","mà","trả góp"], ans:0, jp:"A:車買ったの？金持ちだね！ B:金持ちなもんか。ローンで買ったんだよ。", explanation:"Adj + gì mà + Adj!: 何が〜だ（強い否定・謙遜）"},
 {n:16, sentence:"Ngày mai, em được hẹn đến công ty ( phỏng vấn ) trực tiếp.", blank:"phỏng vấn", choices:["khởi nghiệp","phỏng vấn","trúng tuyển","thảo luận"], ans:1, jp:"明日、会社へ行って直接面接を受けることになっています。", explanation:"phỏng vấn=面接 / khởi nghiệp=起業 / trúng tuyển=採用 / thảo luận=議論"},
 {n:17, sentence:"Công việc này tuy lương thấp nhưng lại rất ( nhàn ).", blank:"nhàn", choices:["hạnh phúc","chính thức","nhàn","vui vẻ"], ans:2, jp:"この仕事は給料が低いですが、とても楽です。", explanation:"nhàn=楽な・暇な / hạnh phúc=幸せ / chính thức=正式 / vui vẻ=陽気"},
 {n:18, sentence:"Công ty sẽ ( đào tạo ) cho tất cả nhân viên trước khi bắt đầu làm việc chính thức.", blank:"đào tạo", choices:["giáo dục","luyện tập","đào tạo","học tập"], ans:2, jp:"会社は、正式に働き始める前に全従業員に対して研修（教育）を行います。", explanation:"đào tạo=研修・養成 / giáo dục=教育 / luyện tập=練習 / học tập=学習"},
 {n:19, sentence:"Công việc của em rất ( linh hoạt ), có thể làm việc tại công ty hoặc ở nhà.", blank:"linh hoạt", choices:["linh hoạt","tiện lợi","tự do","thoải mái"], ans:0, jp:"私の仕事はとても柔軟で、会社でも自宅でも働けます。", explanation:"linh hoạt=柔軟な / tiện lợi=便利 / tự do=自由 / thoải mái=快適"},
-{n:20, sentence:"Mình nên đi sớm một chút kẻo tắc đường ( là ) không kịp giờ họp đâu.", blank:"là", choices:["là","tắc đường","không kịp","kẻo"], ans:0, jp:"道が混んで会議に間に合わなくなるといけないから、少し早めに出発したほうがいいよ。", explanation:"A kẻo B = Bにならないようにあらかじめ A する"},
-{n:21, sentence:"Không chỉ nhân viên mới mà cả ( những người làm ) lâu năm cũng cần tham gia khóa đào tạo này.", blank:"những người làm", choices:["mà cả","không chỉ","những người làm","cũng"], ans:2, jp:"新入社員だけでなく、ベテラン社員もこの研修に参加する必要があります。", explanation:"Không chỉ A mà cả B cũng... = Aだけでなく、Bまでもが〜だ（強調）"},
-{n:22, sentence:"Dù giá hơi cao nhưng ( chiếc máy tính này ) rất bền, rất đáng mua để dùng lâu dài.", blank:"chiếc máy tính này", choices:["rất đáng mua","dù","giá hơi cao","chiếc máy tính này"], ans:3, jp:"価格は少し高いですが、このパソコンはとても丈夫なので、長く使うために買う価値が十分にあります。", explanation:"Dù...nhưng... = 〜だが〜. chiếc máy tính = パソコンの類別詞付き"},
-{n:23, sentence:"Trên đời này làm gì có ma, đó chỉ là do em ( tưởng tượng ra ) thôi.", blank:"tưởng tượng ra", choices:["tưởng tượng ra","do em","thôi","chỉ là"], ans:0, jp:"この世に幽霊なんていないよ。それはただ、君が想像しただけのことだよ。", explanation:"đó chỉ là do 〜 V ra thôi = ただ〜が〜しただけだ"},
 {n:24, sentence:"Bạn có thể gọi taxi, đặt nhà hàng, bắt xe ôm, v.v… trên các ( ứng dụng ) điện thoại một cách dễ dàng.", blank:"ứng dụng", choices:["chương trình","ứng dụng","phiếu bảo hành","mạng xã hội"], ans:1, jp:"スマートフォンの応用ソフト上で、タクシーを呼んだり、レストランを予約したり、バイクタクシーを捕まえたりすることが簡単にできます。", explanation:"ứng dụng=応用ソフト / chương trình=番組 / phiếu bảo hành=保証書 / mạng xã hội=交流サイト"},
 {n:25, sentence:"Ôi, hộ chiếu của tớ sắp ( hết hạn ) rồi, tớ phải đi làm lại thôi.", blank:"hết hạn", choices:["hết hạn","kết thúc","hết sạch","bị hỏng"], ans:0, jp:"ああ、パスポートがもうすぐ期限切れになるので、更新しに行かなければなりません。", explanation:"hết hạn=期限切れ / kết thúc=終了 / hết sạch=すっかりなくなる / bị hỏng=故障"},
 {n:26, sentence:"Với các chuyến bay nội địa, hành khách dưới 14 tuổi cần xuất trình ( giấy khai sinh ).", blank:"giấy khai sinh", choices:["giấy khai sinh","thẻ sinh viên","bằng lái xe","bằng tốt nghiệp"], ans:0, jp:"国内線では、14歳未満の乗客は出生証明書を提示する必要があります。", explanation:"giấy khai sinh=出生証明書 / thẻ sinh viên=学生証 / bằng lái xe=運転免許 / bằng tốt nghiệp=卒業証書"},
-{n:27, sentence:"Muỗi vằn là vật trung gian truyền bệnh ( sốt xuất huyết ) từ người sang người.", blank:"sốt xuất huyết", choices:["sốt cao","chân tay miệng","cảm cúm","sốt xuất huyết"], ans:3, jp:"シマカは、人から人へデング熱を媒介する生き物です。", explanation:"sốt xuất huyết=デング熱 / sốt cao=高熱 / chân tay miệng=手足口病 / cảm cúm=インフルエンザ"},
-{n:28, sentence:"Đừng nhắc lại ( chuyện cũ ) nữa, chúng ta hãy nhìn về tương lai đi.", blank:"chuyện cũ", choices:["chuyện cũ","đừng","nữa","nhắc lại"], ans:0, jp:"もう昔の話を繰り返すのはやめて、未来を見ようよ。", explanation:"đừng + V + nữa = もう〜しないで"},
-{n:29, sentence:"Đợi em một chút, em kiểm tra lại ( lịch họp ) đã.", blank:"lịch họp", choices:["đã","kiểm tra","lịch họp","lại"], ans:2, jp:"ちょっと待ってね、会議のスケジュールをもう一度確認するね。", explanation:"V + đã = まず先に〜する・〜してから. lịch họp = 会議のスケジュール"},
-{n:30, sentence:"Điện thoại rơi xuống đất mà không ( bị ) vỡ màn hình là may rồi.", blank:"bị", choices:["không","mà","may","bị"], ans:3, jp:"スマホが地面に落ちたのに、画面が割れなかったのがラッキーだよ。", explanation:"bị + V = 〜される（受身・不利益）. bị vỡ = 割れる"},
-{n:31, sentence:"Em đã nhận được mail đâu, anh kiểm tra ( lại ) xem có gửi nhầm địa chỉ không?", blank:"lại", choices:["xem","kiểm tra","đâu","lại"], ans:3, jp:"まだメールが届いていないのですが、アドレスを間違えて送っていないか確認していただけますか。", explanation:"V + lại = もう一度〜する. kiểm tra lại=再確認"}
+{n:27, sentence:"Muỗi vằn là vật trung gian truyền bệnh ( sốt xuất huyết ) từ người sang người.", blank:"sốt xuất huyết", choices:["sốt cao","chân tay miệng","cảm cúm","sốt xuất huyết"], ans:3, jp:"シマカは、人から人へデング熱を媒介する生き物です。", explanation:"sốt xuất huyết=デング熱 / sốt cao=高熱 / chân tay miệng=手足口病 / cảm cúm=インフルエンザ"}
 ];
 
 // === Error: 間違い探し (15問) ===
+// 文中4箇所の下線部のうち誤っている語を選ぶ
 // sentence: 元の（誤りを含む）文 / underlines: A,B,C,D の下線部 (4語句)
 // ans: 誤りの位置 / correctSentence: 正しい文 / correctWord: 正解の語
 var ERROR_QUESTIONS = [
@@ -245,4 +230,26 @@ var USAGE_QUESTIONS = [
   ],
   wrongFix:["đâu","à/ đúng không?","","nhé"],
   ans:2, explanation:"mà は「〜だってば・〜じゃない（強く主張）」のみ。 A→đâu(否定), B→à/ đúng không?(確認), D→nhé(依頼)"}
+];
+
+// === Correct: 正解語の判別 (15問) ===
+// 文中4箇所に下線A-Dが引かれており、そのうち1つが空欄に入る重要語
+// sentence: 完成形の文（下線部の語がすべて含まれている）
+// underlines: A,B,C,D の下線部 (4語句、すべて文中に存在) / ans: 正解（空欄に入った語）の位置
+var CORRECT_QUESTIONS = [
+{n:5, sentence:"Sau khi nói chuyện với bạn bè, cô ấy cảm thấy đỡ buồn hơn.", underlines:["cảm thấy","đỡ","buồn","cô ấy"], ans:1, correctWord:"đỡ", jp:"友達と話した後、彼女は悲しみが少し和らいだと感じました。", explanation:"S + đỡ + 形/動 + (hơn): 程度が和らぐ・少し楽になる. マイナス状態の軽減"},
+{n:6, sentence:"Đã 2 năm rồi nhưng tôi vẫn chưa thích nghi được với cuộc sống ở đây.", underlines:["được","cuộc sống","đã","thích nghi"], ans:0, correctWord:"được", jp:"もう2年になりましたが、私はまだここの生活に順応できていません。", explanation:"V + được = 〜できる. đã + 期間 = もう〜（に達している）"},
+{n:7, sentence:"Xong hết việc rồi, thoải mái làm sao!", underlines:["hết","làm sao","thoải mái","xong"], ans:2, correctWord:"thoải mái", jp:"仕事が全部終わった、なんて気持ちがいいんだろう。", explanation:"S + 形容詞 + làm sao!/biết bao!: なんて〜なのだろう（感嘆）"},
+{n:12, sentence:"Thay mặt toàn thể nhân viên, xin gửi lời cảm ơn chân thành đến công ty.", underlines:["chân thành","lời cảm ơn","gửi","xin"], ans:1, correctWord:"lời cảm ơn", jp:"全従業員を代表して、会社へ心からの感謝を申し上げます。", explanation:"Thay mặt 〜 = 〜に代わって・〜を代表して. lời cảm ơn=感謝の言葉"},
+{n:13, sentence:"Anh đã khỏi đau đầu chưa? Hay là vẫn cần nghỉ ngơi thêm?", underlines:["hay là","khỏi","đau đầu","nghỉ ngơi"], ans:0, correctWord:"hay là", jp:"頭痛はもう治りましたか？それともまだもう少し安静が必要ですか。", explanation:"hay là = それとも（疑問の選択肢）"},
+{n:14, sentence:"Công việc bán thời gian này mỗi tháng kiếm được 3 triệu là nhiều.", underlines:["mỗi tháng","là nhiều","kiếm được","3 triệu"], ans:3, correctWord:"3 triệu", jp:"このアルバイトは、1ヶ月に300万ドン稼げれば良い方（多い方）です。", explanation:"[数値] + là nhiều = 多いときで〜 / [数値] + là ít = 少なくとも〜"},
+{n:15, sentence:"A: Cậu mới mua xe ô tô à, giàu thế! / B: Giàu gì mà giàu. Mình mua trả góp đấy.", underlines:["giàu","gì","mà","trả góp"], ans:0, correctWord:"giàu", jp:"A:車買ったの？金持ちだね！ B:金持ちなもんか。ローンで買ったんだよ。", explanation:"Adj + gì mà + Adj!: 何が〜だ（強い否定・謙遜）"},
+{n:20, sentence:"Mình nên đi sớm một chút kẻo tắc đường là không kịp giờ họp đâu.", underlines:["là","tắc đường","không kịp","kẻo"], ans:0, correctWord:"là", jp:"道が混んで会議に間に合わなくなるといけないから、少し早めに出発したほうがいいよ。", explanation:"A kẻo B = Bにならないようにあらかじめ A する"},
+{n:21, sentence:"Không chỉ nhân viên mới mà cả những người làm lâu năm cũng cần tham gia khóa đào tạo này.", underlines:["mà cả","không chỉ","những người làm","cũng"], ans:2, correctWord:"những người làm", jp:"新入社員だけでなく、ベテラン社員もこの研修に参加する必要があります。", explanation:"Không chỉ A mà cả B cũng... = Aだけでなく、Bまでもが〜だ（強調）"},
+{n:22, sentence:"Dù giá hơi cao nhưng chiếc máy tính này rất bền, rất đáng mua để dùng lâu dài.", underlines:["rất đáng mua","dù","giá hơi cao","chiếc máy tính này"], ans:3, correctWord:"chiếc máy tính này", jp:"価格は少し高いですが、このパソコンはとても丈夫なので、長く使うために買う価値が十分にあります。", explanation:"Dù...nhưng... = 〜だが〜. chiếc máy tính = パソコンの類別詞付き"},
+{n:23, sentence:"Trên đời này làm gì có ma, đó chỉ là do em tưởng tượng ra thôi.", underlines:["tưởng tượng ra","do em","thôi","chỉ là"], ans:0, correctWord:"tưởng tượng ra", jp:"この世に幽霊なんていないよ。それはただ、君が想像しただけのことだよ。", explanation:"đó chỉ là do 〜 V ra thôi = ただ〜が〜しただけだ"},
+{n:28, sentence:"Đừng nhắc lại chuyện cũ nữa, chúng ta hãy nhìn về tương lai đi.", underlines:["chuyện cũ","đừng","nữa","nhắc lại"], ans:0, correctWord:"chuyện cũ", jp:"もう昔の話を繰り返すのはやめて、未来を見ようよ。", explanation:"đừng + V + nữa = もう〜しないで"},
+{n:29, sentence:"Đợi em một chút, em kiểm tra lại lịch họp đã.", underlines:["đã","kiểm tra","lịch họp","lại"], ans:2, correctWord:"lịch họp", jp:"ちょっと待ってね、会議のスケジュールをもう一度確認するね。", explanation:"V + đã = まず先に〜する・〜してから. lịch họp = 会議のスケジュール"},
+{n:30, sentence:"Điện thoại rơi xuống đất mà không bị vỡ màn hình là may rồi.", underlines:["không","mà","may","bị"], ans:3, correctWord:"bị", jp:"スマホが地面に落ちたのに、画面が割れなかったのがラッキーだよ。", explanation:"bị + V = 〜される（受身・不利益）. bị vỡ = 割れる"},
+{n:31, sentence:"Em đã nhận được mail đâu, anh kiểm tra lại xem có gửi nhầm địa chỉ không?", underlines:["xem","kiểm tra","đâu","lại"], ans:3, correctWord:"lại", jp:"まだメールが届いていないのですが、アドレスを間違えて送っていないか確認していただけますか。", explanation:"V + lại = もう一度〜する. kiểm tra lại=再確認"}
 ];

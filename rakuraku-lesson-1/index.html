@@ -159,6 +159,7 @@
     if(mode === "fill") return FILL_QUESTIONS;
     if(mode === "error") return ERROR_QUESTIONS;
     if(mode === "usage") return USAGE_QUESTIONS;
+    if(mode === "correct") return CORRECT_QUESTIONS;
     return [];
   }
   function skey(mode){ return "vilt_rakuraku1_" + mode; }
@@ -196,6 +197,7 @@
     menu.innerHTML = "";
     var modes = [
       {id:"fill", icon:"📝", title:"穴埋め選択", count:FILL_QUESTIONS.length},
+      {id:"correct", icon:"🎯", title:"正解語の判別", count:CORRECT_QUESTIONS.length},
       {id:"error", icon:"🔍", title:"間違い探し", count:ERROR_QUESTIONS.length},
       {id:"usage", icon:"📖", title:"単語の正しい使い方", count:USAGE_QUESTIONS.length}
     ];
@@ -235,6 +237,7 @@
 
   function modeLabel(){
     if(currentMode === "fill") return "穴埋め";
+    if(currentMode === "correct") return "正解語の判別";
     if(currentMode === "error") return "間違い探し";
     return "正しい使い方";
   }
@@ -272,8 +275,8 @@
         btn.addEventListener("click", function(){ pickChoice(ci); });
         choicesEl.appendChild(btn);
       });
-    }else if(currentMode === "error"){
-      // sentence + 4 underlined parts
+    }else if(currentMode === "error" || currentMode === "correct"){
+      // sentence + 4 underlined parts (共通UI、error=誤りを選ぶ、correct=正解の語を選ぶ)
       var s = q.sentence;
       // Replace each underline with marked span
       q.underlines.forEach(function(u, ui){
@@ -284,7 +287,10 @@
           s = s.substring(0,pos) + marker + s.substring(pos + u.length);
         }
       });
-      qBody.innerHTML = "<div class='qlabel'>下線部の中で誤っている語を選んでください</div><div class='qsentence'>"+s+"</div>";
+      var instruction = (currentMode === "error")
+        ? "下線部の中で誤っている語を選んでください"
+        : "下線部の中で空欄に入る正解の語を選んでください";
+      qBody.innerHTML = "<div class='qlabel'>"+instruction+"</div><div class='qsentence'>"+s+"</div>";
       qJp.textContent = q.jp;
       q.underlines.forEach(function(u, ui){
         var btn = document.createElement("button");
@@ -364,6 +370,8 @@
       disp.innerHTML = "<b>正解の文:</b><br>" + escapeHtml(q.sentence);
     }else if(currentMode === "error"){
       disp.innerHTML = "<b>正しい文:</b><br>" + escapeHtml(q.correctSentence) + "<br><b>正しい語:</b> " + escapeHtml(q.correctWord);
+    }else if(currentMode === "correct"){
+      disp.innerHTML = "<b>正解 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>文:</b> " + escapeHtml(q.sentence);
     }else{
       disp.innerHTML = "<b>正解の文 ("+labels[q.ans]+"):</b><br>" + escapeHtml(q.sentences[q.ans]);
     }
@@ -403,6 +411,8 @@
       disp.innerHTML = "<b>正解の文:</b><br>" + escapeHtml(q.sentence);
     }else if(currentMode === "error"){
       disp.innerHTML = "<b>正しい文:</b><br>" + escapeHtml(q.correctSentence) + "<br><b>正しい語:</b> " + escapeHtml(q.correctWord);
+    }else if(currentMode === "correct"){
+      disp.innerHTML = "<b>正解 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>文:</b> " + escapeHtml(q.sentence);
     }else{
       disp.innerHTML = "<b>正解の文 ("+labels[q.ans]+"):</b><br>" + escapeHtml(q.sentences[q.ans]);
     }
@@ -434,6 +444,7 @@
     var text = "";
     if(currentMode === "fill") text = q.sentence.replace(/\(\s*([^)]+)\s*\)/g, '$1');
     else if(currentMode === "error") text = q.correctSentence;
+    else if(currentMode === "correct") text = q.sentence;
     else text = q.sentences[q.ans];
     speak(text, document.getElementById("btnSpeak"));
   });
@@ -443,7 +454,7 @@
   });
   document.getElementById("btnResetAll").addEventListener("click", function(){
     if(confirm("全進捗リセット?")){
-      ["fill","error","usage"].forEach(function(m){ localStorage.removeItem(skey(m)); });
+      ["fill","correct","error","usage"].forEach(function(m){ localStorage.removeItem(skey(m)); });
       renderModeMenu();
     }
   });
