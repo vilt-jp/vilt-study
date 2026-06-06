@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Huong先生 4級練習問題 (2026-05-02)</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+.intro{background:#fce4ec;border:1px solid #f48fb1;border-radius:10px;padding:12px;margin-bottom:14px;font-size:12px;color:#ad1457;line-height:1.7}
+.mode-sel{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.mode-sel button{padding:18px 10px;background:#fff;border:2px solid #e0e0e0;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:90px}
+.mode-sel button:active{transform:scale(.97)}
+.mode-sel button .ic{font-size:24px;margin-bottom:6px}
+.mode-sel button .count{font-size:11px;color:#888;margin-top:4px;font-weight:500}
+.mode-sel button.done{border-color:#2e7d32;background:#e8f5e9;color:#1b5e20}
+.round-bar{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-around;align-items:center;font-size:12px;color:#666}
+.round-bar b{display:block;font-size:17px;color:#da251d;font-weight:700;margin-top:2px}
+.round-bar .sep{width:1px;height:30px;background:#e0e0e0}
+.stage-badge{display:inline-block;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-bottom:10px}
+.stage-badge.s1{background:#e3f2fd;color:#1565c0}
+.stage-badge.s2{background:#fff3e0;color:#ef6c00}
+
+/* === Fill mode === */
+.qcard{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:20px;margin-bottom:14px;position:relative}
+.qcard .qidx{position:absolute;top:12px;right:16px;font-size:12px;color:#aaa;font-weight:600}
+.qcard .qlabel{font-size:11px;color:#888;letter-spacing:1px;font-weight:600;margin-bottom:10px;text-align:center}
+.qcard .qfill{font-size:20px;font-weight:700;color:#222;line-height:1.7;margin-bottom:10px;text-align:center}
+.qcard .qfill .blank{color:#da251d;background:#fff8e6;padding:2px 14px;border-radius:6px;border:1px dashed #da251d;margin:0 2px}
+.qcard .qjp{font-size:12px;color:#666;text-align:center;padding:6px 8px;background:#f8f8f8;border-radius:6px;margin-top:6px}
+.choices-hint{background:#fff8e6;border:1px solid #ffd666;border-radius:8px;padding:8px 10px;font-size:11px;color:#8b6914;margin-bottom:12px;line-height:1.6}
+.unsolved{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:10px;font-size:12px;color:#856404;margin-bottom:10px;text-align:center}
+
+.ans-input{width:100%;padding:14px;border:2px solid #1976d2;border-radius:12px;font-size:20px;font-family:inherit;background:#fafbff;text-align:center;color:#222;margin-bottom:14px}
+.ans-input:focus{outline:none;border-color:#0d47a1;background:#fff;box-shadow:0 0 0 3px rgba(25,118,210,.15)}
+.ans-input.excellent{border-color:#1b5e20;background:#c8e6c9;color:#1b5e20}
+.ans-input.good{border-color:#43a047;background:#e8f5e9;color:#2e7d32}
+.ans-input.okay{border-color:#ef6c00;background:#fff3e0;color:#e65100}
+.ans-input.bad{border-color:#c62828;background:#ffebee;color:#b71c1c}
+
+/* === Rearrange mode === */
+.rearrange-area{background:#fff;border:2px solid #e0e0e0;border-radius:16px;padding:14px;margin-bottom:14px}
+.rearrange-row{display:flex;align-items:center;gap:6px;background:#fafbff;border:1px solid #e0e0e0;border-radius:10px;padding:8px 10px;margin-bottom:6px}
+.rearrange-row .pos{font-size:11px;color:#888;font-weight:700;min-width:22px;text-align:center}
+.rearrange-row .word{flex:1;font-size:16px;font-weight:600;color:#222;word-break:break-word}
+.rearrange-row .arrows{display:flex;gap:4px}
+.rearrange-row .arrows button{width:32px;height:32px;border:none;border-radius:6px;background:#1976d2;color:#fff;font-size:14px;cursor:pointer;font-weight:700}
+.rearrange-row .arrows button:active{transform:scale(.9)}
+.rearrange-row .arrows button:disabled{background:#ccc;cursor:not-allowed}
+.rearrange-row.locked{background:#f0f0f0;opacity:.7}
+.rearrange-row.locked .arrows{display:none}
+.rearrange-preview{background:#e8f5e9;border:1px solid #81c784;border-radius:10px;padding:12px;margin-bottom:12px;font-size:14px;color:#1b5e20;line-height:1.6;text-align:center;min-height:50px;display:flex;align-items:center;justify-content:center}
+
+.judge-box{border-radius:12px;padding:14px;margin-bottom:14px;text-align:center;display:none}
+.judge-box.show{display:block}
+.judge-box.excellent{background:linear-gradient(135deg,#2e7d32,#43a047);color:#fff}
+.judge-box.good{background:linear-gradient(135deg,#66bb6a,#81c784);color:#fff}
+.judge-box.okay{background:linear-gradient(135deg,#ffa726,#fb8c00);color:#fff}
+.judge-box.bad{background:linear-gradient(135deg,#ef5350,#e53935);color:#fff}
+.judge-box.listen{background:linear-gradient(135deg,#5c6bc0,#3949ab);color:#fff}
+.judge-box.unsolved{background:linear-gradient(135deg,#ffa726,#ff9800);color:#fff}
+.judge-box .icon{font-size:38px;font-weight:800;display:block;margin-bottom:4px;line-height:1}
+.judge-box .msg{font-size:13px;margin-bottom:6px;opacity:.95}
+.judge-box .correct-ans{background:rgba(255,255,255,.25);border-radius:8px;padding:10px;font-size:16px;font-weight:700;display:inline-block;margin-top:4px;max-width:100%;word-break:break-word;line-height:1.5}
+.judge-box .correct-ans small{display:block;font-size:11px;opacity:.85;margin-top:6px;font-weight:400}
+
+.btn-row{display:flex;gap:10px;margin-bottom:10px}
+.btn-row button{flex:1;padding:16px 8px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-row button:active{opacity:.75;transform:scale(.96)}
+.btn-check{background:#1976d2;color:#fff}
+.btn-speak-big{background:#5c6bc0;color:#fff;font-size:16px!important;padding:20px!important}
+.btn-speak-big.speaking{background:#3949ab}
+.btn-next{background:#2e7d32;color:#fff}
+.btn-skip{background:#f5f5f5;color:#666;border:1px solid #ddd!important}
+
+.voice-info{background:#e3f2fd;border:1px solid #64b5f6;border-radius:8px;padding:8px 12px;font-size:12px;color:#1565c0;margin-bottom:10px}
+.voice-info.warn{background:#fff3e0;border-color:#ffb74d;color:#e65100}
+.voice-info.err{background:#ffebee;border-color:#e57373;color:#c62828}
+
+.complete{background:linear-gradient(135deg,#4caf50,#8bc34a);color:#fff;border-radius:16px;padding:40px 20px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.complete h2{font-size:28px;margin-bottom:8px}
+.complete p{font-size:14px;opacity:.95;margin-bottom:16px}
+.complete button{background:#fff;color:#2e7d32;border:none;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;margin:4px}
+.reset-bar{display:flex;gap:8px;margin-top:12px}
+.reset-bar button{flex:1;padding:8px;background:none;border:1px solid #ccc;border-radius:8px;color:#888;font-size:11px;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="site">
+<button class="nav-back" onclick="location.href='../'">← ホーム</button>
+<h1>Huong先生レッスン</h1>
+<div class="sub">2026-05-02 anh Yata 4級練習問題</div>
+</header>
+<main>
+
+<div id="modeArea">
+<div class="intro">
+<b>👩‍🏫 Trịnh Thị Thùy Hương 先生作成</b><br>
+2026年5月2日のレッスン素材。穴埋め25問 + 並び替え35問。<br>
+未解答の問題は「正解未確定」として表示されます。
+</div>
+<div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
+<div class="section-title">モードを選択</div>
+<div class="mode-sel" id="modeMenu"></div>
+<div class="reset-bar">
+<button id="btnResetAll">全進捗リセット</button>
+</div>
+</div>
+
+<div id="learnArea" class="hidden">
+<div class="round-bar">
+<div>周回<b id="s-round">1 / 5</b></div>
+<div class="sep"></div>
+<div>残り<b id="s-remain">-</b></div>
+<div class="sep"></div>
+<div>習得(◎)<b id="s-done">-</b></div>
+</div>
+
+<div id="stageBadge" class="stage-badge s1">STEP 1: 音声なしで挑戦</div>
+
+<!-- 穴埋めモード -->
+<div id="fillSection">
+<div class="choices-hint" id="choicesHint"></div>
+<div class="qcard">
+<div class="qidx" id="fIdx">-</div>
+<div class="qlabel">下線部に入る語を入力</div>
+<div class="qfill" id="qFill">-</div>
+<div class="qjp" id="qFillJp">-</div>
+</div>
+<div class="unsolved hidden" id="unsolvedFill">⚠️ この問題は正解未確定です。スキップ推奨。</div>
+<input type="text" class="ans-input" id="fillAns" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" placeholder="答えを入力" />
+</div>
+
+<!-- 並び替えモード -->
+<div id="rearrangeSection" class="hidden">
+<div class="qcard">
+<div class="qidx" id="rIdx">-</div>
+<div class="qlabel">語を並び替えて意味の通る文を作る</div>
+<div class="qfill" id="qRearrangeJp" style="font-size:13px;color:#666;background:#f8f8f8;padding:8px;border-radius:6px;text-align:center;"></div>
+</div>
+<div class="rearrange-preview" id="rearrangePreview">↓ 下のボタンで並び替えてください</div>
+<div class="rearrange-area" id="rearrangeArea"></div>
+<div class="unsolved hidden" id="unsolvedRearrange">⚠️ この問題は正解未確定です。並べたら確認してください。</div>
+</div>
+
+<div class="judge-box" id="judge">
+<span class="icon" id="judgeIcon">✓</span>
+<div class="msg" id="judgeMsg"></div>
+<div class="correct-ans" id="correctAns"></div>
+</div>
+
+<div class="btn-row" id="btnsStage1">
+<button class="btn-skip" id="btnSkip">わからない</button>
+<button class="btn-check" id="btnCheck">答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsListen">
+<button class="btn-speak-big" id="btnSpeakBig">🔊 音声で聞く</button>
+</div>
+<div class="btn-row hidden" id="btnsStage2">
+<button class="btn-check" id="btnCheck2">もう一度 答え合わせ</button>
+</div>
+<div class="btn-row hidden" id="btnsNext">
+<button class="btn-next" id="btnNext">次の問題 ▶</button>
+</div>
+
+<div class="progress"><div class="progress-bar" id="bar" style="width:0%"></div></div>
+<div class="reset-bar">
+<button id="btnBack">← モード選択</button>
+<button id="btnResetCur">このモードをリセット</button>
+</div>
+</div>
+
+<div id="completeArea" class="complete hidden">
+<h2>🎉 完了！</h2>
+<p id="completeMsg">レッスン完了</p>
+<button onclick="location.reload()">モード選択に戻る</button>
+</div>
+
+</main>
+<footer class="site">Huong先生レッスン 2026-05-02</footer>
+</div>
+
+<script>
+// Huong先生 4級練習問題 (2026-05-02 anh Yata)
+// Giáo viên: Trịnh Thị Thùy Hương
+
+// 問題I: 適切な動詞を選ぶ穴埋め (25問)
+// confirmed: 添削で正解確定 / unsolved: 未解答
+var FILL_QUESTIONS = [
+{n:1, sentence:"Chúng ta phải (___) những gia đình có hoàn cảnh như thế nào?", ans:"mời", jp:"どのような状況の家庭を招待すべきですか?", confirmed:true},
+{n:2, sentence:"Tôi đã (___) môn học xong rồi.", ans:"đăng ký", jp:"私はもう履修登録を済ませた。", confirmed:true},
+{n:3, sentence:"Chị ấy đến Việt Nam (___) 3 tháng rồi.", ans:"được", jp:"彼女がベトナムに来て3ヶ月になります。", confirmed:true},
+{n:4, sentence:"Vấn đề này cần phải (___) ý kiến.", ans:"trao đổi", jp:"この問題は意見を交換する必要がある。", confirmed:true},
+{n:5, sentence:"Anh hãy (___) máy lạnh nhé.", ans:"tắt", jp:"エアコンを消してね。", confirmed:true},
+{n:6, sentence:"Tôi muốn (___) bạn với du học sinh Việt Nam.", ans:"kết", jp:"ベトナム人留学生と友達になりたい。", confirmed:true},
+{n:7, sentence:"(___) anh vào.", ans:"mời", jp:"どうぞお入りください。", confirmed:true},
+{n:8, sentence:"Các em (___) chú ý nghe nhé.", ans:"hãy", jp:"皆さん、よく聞いてください。", confirmed:true},
+{n:9, sentence:"Xin lỗi, (___) tôi hỏi một chút.", ans:"cho", jp:"すみません、ちょっと尋ねてもいいですか。", confirmed:true},
+{n:10, sentence:"Chúng ta (___) ăn cơm tối nhé!", ans:"cùng", jp:"一緒に夕食を食べましょう！", confirmed:true},
+{n:11, sentence:"Món ăn này thì có (___) nước mắm không?", ans:"chấm", jp:"この料理はヌクマムをつけて食べますか？", confirmed:true},
+{n:12, sentence:"Anh (___) tình hình Iran gần đây thế nào?", ans:"thấy", jp:"最近のイラン情勢をどう見ますか？", confirmed:true},
+{n:13, sentence:"Trứng thì không được (___) lò vi sóng.", ans:"cho vào", jp:"卵は電子レンジに入れてはいけない。", confirmed:true},
+{n:14, sentence:"Trước khi đến, anh sẽ (___) qua cửa hàng tiện lợi mua đồ uống.", ans:"ghé", jp:"行く前にコンビニに寄って飲み物を買います。", confirmed:true},
+{n:15, sentence:"Nghe nói thủ tướng nước Anh đã (___) rồi.", ans:"từ chức", jp:"イギリスの首相がもう辞任したと聞きました。", confirmed:true},
+{n:16, sentence:"Chị tôi chưa biết (___) làm nem rán.", ans:"cách", jp:"姉はまだ揚げ春巻きの作り方を知らない。", confirmed:true},
+{n:17, sentence:"Trường đại học này là một trong những trường đại học (___) ở Nhật.", ans:"lâu đời", jp:"この大学は日本の歴史ある大学の一つです。", confirmed:true},
+{n:18, sentence:"Tôi đã không bán (___) những bức tranh trong nhà.", ans:"hết", jp:"家にある絵を全ては売り切れなかった。", confirmed:true},
+{n:19, sentence:"Bây giờ tôi đang (___) phòng trọ.", ans:"thuê", jp:"今、私は下宿を借りています。", confirmed:true},
+{n:20, sentence:"(___) anh biết kết quả thi, anh hãy báo cho tôi nhé.", ans:"khi nào", jp:"試験結果が分かったら知らせてください。", confirmed:true},
+{n:21, sentence:"Xin lỗi, khách sạn này không còn phòng (___).", ans:"trống", jp:"すみません、このホテルには空き部屋がありません。", confirmed:true},
+{n:22, sentence:"Mẹ ơi, cái áo này có (___) với con không?", ans:"hợp", jp:"お母さん、この服は私に似合いますか？", confirmed:true},
+{n:23, sentence:"Bất cứ sinh viên (___) cũng có thể tham gia.", ans:"nào", jp:"どの学生でも参加することができる。", confirmed:true},
+{n:24, sentence:"Tôi ghét cả quả sầu riêng (___) quả mít.", ans:"lẫn", jp:"私はドリアンもジャックフルーツも嫌いです。", confirmed:true},
+{n:25, sentence:"Ngủ đủ thì bạn (___) làm việc được.", ans:"mới", jp:"十分寝てこそ仕事ができる。", confirmed:true}
+];
+
+// 問題I 選択肢一覧 (参考表示用)
+var FILL_CHOICES = "trao đổi / khi nào / mới / được / đăng ký / tắt / hãy / lẫn / lâu đời / kết / mời / cùng / cho / hợp / hết / nào / trống / ghé / thấy / chấm / cho vào / từ chức / cách / thuê";
+
+// 問題II: 並び替え (35問)
+// words: シャッフル前の語句配列, ans: 正解の文 (空文字列なら未解答)
+var REARRANGE_QUESTIONS = [
+{n:1, words:["cưới","cô ấy","gia đình","dù","vẫn","có phản đối","thì","tôi"], ans:"Dù gia đình có phản đối thì tôi vẫn cưới cô ấy"},
+{n:2, words:["chúng ta","không thể","dù","cố gắng","thay đổi","hết sức","cũng","tình hình","thì"], ans:"Dù chúng ta cố gắng hết sức thì cũng không thể thay đổi tình hình"},
+{n:3, words:["phát minh","mì ăn liền","do","Ando Momofuku","ra"], ans:"Mì ăn liền do Ando Momofuku phát minh ra"},
+{n:4, words:["do","bản báo cáo","chị Vy","này","viết"], ans:"Bản báo cáo này do chị Vy viết"},
+{n:5, words:["nấu được","anh Kimura","không những","món Nhật","mà còn","nữa","món ăn Trung Quốc"], ans:"Anh Kimura không những nấu được món Nhật mà còn món ăn Trung Quốc nữa"},
+{n:6, words:["trời","không những","nữa","mà còn","mưa","lạnh"], ans:"Trời không những mưa mà còn lạnh nữa"},
+{n:7, words:["là","cô ấy","không những","một diễn viên","mà còn là","một nhà văn"], ans:"Cô ấy không những là một diễn viên mà còn là một nhà văn"},
+{n:8, words:["có","Hà Nội","Hồ Tây","hồ nước tự nhiên","ví dụ như","nhiều","Hồ Hoàn Kiếm"], ans:"Hà Nội có nhiều hồ nước tự nhiên ví dụ như Hồ Tây Hồ Hoàn Kiếm"},
+{n:9, words:["tại Việt Nam","cũng có","căn bếp nào","bất cứ","nước mắm"], ans:"Tại Việt Nam bất cứ căn bếp nào cũng có nước mắm"},
+{n:10, words:["bạn","phải","làm","trước khi","bất cứ điều gì","suy nghĩ"], ans:"Trước khi làm bất cứ điều gì bạn phải suy nghĩ"},
+{n:11, words:["chúng ta","giờ đây","bất cứ lúc nào","bất cứ thứ gì","mua sắm trực tuyến","vào","có thể"], ans:"Giờ đây chúng ta có thể mua sắm trực tuyến bất cứ thứ gì vào bất cứ lúc nào"},
+{n:12, words:["ứng biến","tùy cơ"], ans:"Tùy cơ ứng biến"},
+{n:13, words:["thay đổi","trọng lượng","và","tùy theo","kích thước","giá tiền"], ans:"Tùy theo trọng lượng và kích thước giá tiền thay đổi"},
+{n:14, words:["tùy thuộc","của","câu trả lời","vào","mỗi người","cách suy nghĩ"], ans:"Câu trả lời tùy thuộc vào cách suy nghĩ của mỗi người"},
+{n:15, words:["bài tập về nhà","nhiều","đến mức","học sinh","muốn","khóc"], ans:"Bài tập về nhà nhiều đến mức học sinh muốn khóc"},
+{n:16, words:["em trai tôi","mải chơi game","đến nỗi","quên","ăn"], ans:"Em trai tôi mải chơi game đến nỗi quên ăn"},
+{n:17, words:["hành khách","phải","xếp hàng","chờ","hàng giờ","tại sân bay","để","làm thủ tục"], ans:"Hành khách phải xếp hàng chờ hàng giờ tại sân bay để làm thủ tục"},
+// 18-23: 出題ミスで提示順そのままが正解 (Huong先生確認済み 2026-05-04)
+{n:18, words:["chị","muốn mua","bao nhiêu","thì","tôi","sẽ bán","cho chị","bấy nhiêu"], ans:"Chị muốn mua bao nhiêu thì tôi sẽ bán cho chị bấy nhiêu"},
+{n:19, words:["giám đốc","yêu cầu","sao","thì","tôi","làm","vậy"], ans:"Giám đốc yêu cầu sao thì tôi làm vậy"},
+{n:20, words:["cứ","mưa to","là","đường phố Hà Nội","bị","ngập"], ans:"Cứ mưa to là đường phố Hà Nội bị ngập"},
+{n:21, words:["tiếng còi xe tải","khiến","tôi","giật mình"], ans:"Tiếng còi xe tải khiến tôi giật mình"},
+{n:22, words:["câu chuyện","của Lan","làm","tôi","cảm động","đến mức","rơi nước mắt"], ans:"Câu chuyện của Lan làm tôi cảm động đến mức rơi nước mắt"},
+{n:23, words:["Covid-19","đã","làm cho","ngành du lịch","tê liệt","hoàn toàn"], ans:"Covid-19 đã làm cho ngành du lịch tê liệt hoàn toàn"},
+{n:24, words:["luật sư","muốn","thuê","một cách nhanh chóng","thì","anh","nếu","giải quyết","nên"], ans:"Nếu anh muốn giải quyết một cách nhanh chóng thì nên thuê luật sư"},
+{n:25, words:["tôi","lấy","quần áo","tự","may"], ans:"Tôi tự may quần áo lấy"},
+{n:26, words:["Lan","không đồng ý","dù","đi du học","nhưng","vẫn","bố mẹ"], ans:"Dù bố mẹ không đồng ý nhưng Lan vẫn đi du học"},
+{n:27, words:["được diễn ra","xấu","trận đấu","nhưng","mặc dù","vẫn","thời tiết"], ans:"Mặc dù thời tiết xấu nhưng trận đấu vẫn được diễn ra"},
+{n:28, words:["chưa bao giờ","Hiền","đi làm muộn","tuy","nhà xa","nhưng"], ans:"Tuy nhà xa nhưng Hiền chưa bao giờ đi làm muộn"},
+{n:29, words:["ăn trộm","tôi","cũng","không bao giờ","có nghèo","thì","dù"], ans:"Dù có nghèo thì tôi cũng không bao giờ ăn trộm"},
+{n:30, words:["nói lời cảm ơn","nên","chúng ta","dù","khi","thích hay không","thì","được tặng quà"], ans:"Khi được tặng quà dù thích hay không thì chúng ta nên nói lời cảm ơn"},
+{n:31, words:["tôi","gọi điện","cũng","dù","hay rảnh rỗi","bố mẹ","hằng ngày","thì","cho","bận rộn"], ans:"Dù bận rộn hay rảnh rỗi thì tôi cũng gọi điện cho bố mẹ hằng ngày"},
+{n:32, words:["có thể nói","là","núi Phú Sĩ","biểu tượng","Nhật Bản","của"], ans:"Có thể nói núi Phú Sĩ là biểu tượng của Nhật Bản"},
+{n:33, words:["có thể nói","Covid-19","đã","thói quen","người tiêu dùng","thay đổi"], ans:"Có thể nói Covid-19 đã thay đổi thói quen người tiêu dùng"},
+{n:34, words:["đau dạ dày","anh ấy","bị","bỏ","thường xuyên","bữa sáng","nên"], ans:"Anh ấy thường xuyên bỏ bữa sáng nên bị đau dạ dày"},
+{n:35, words:["tôi","do","thi lại","lười học","nên","phải","môn tiếng Pháp"], ans:"Do lười học nên tôi phải thi lại môn tiếng Pháp"}
+];
+
+</script>
+<script>
+(function(){
+  var MAX_ROUND = 5;
+  var state = null, rank = null, currentMode = null;
+  var rArr = []; // 並び替えモードの現在の並び (語インデックス配列)
+
+  function skey(mode){ return "vilt_huong_2026_05_02_"+mode; }
+  function loadSt(mode){ try{ var s = localStorage.getItem(skey(mode)); if(s) return JSON.parse(s); }catch(e){} return null; }
+  function saveSt(mode, st){ try{ localStorage.setItem(skey(mode), JSON.stringify(st)); }catch(e){} }
+  function dataFor(mode){ return mode === "fill" ? FILL_QUESTIONS : REARRANGE_QUESTIONS; }
+  function initSt(mode){
+    var d = dataFor(mode);
+    return { round:1, queue:d.map(function(_,i){return i;}), nextQueue:[], done:[], idx:0, stage:1, finished:false, total:d.length };
+  }
+
+  // ===== Voice =====
+  var viVoice = null;
+  function loadVoices(){
+    var v = window.speechSynthesis.getVoices();
+    viVoice = v.find(function(x){ return x.lang && x.lang.toLowerCase().indexOf("vi") === 0; });
+    var el = document.getElementById("voiceInfo");
+    if(!("speechSynthesis" in window)){ el.className="voice-info err"; el.textContent="❌ 音声未対応"; return; }
+    if(viVoice){ el.className="voice-info"; el.innerHTML="✅ 音声: <b>"+viVoice.name+"</b>"; }
+    else{ el.className="voice-info warn"; el.innerHTML="⚠️ ベトナム語音声なし"; }
+  }
+  function speak(text, btn){
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    var msg = new SpeechSynthesisUtterance(text);
+    msg.lang="vi-VN"; msg.rate=0.85;
+    if(viVoice) msg.voice = viVoice;
+    if(btn) btn.classList.add("speaking");
+    msg.onend = function(){ if(btn) btn.classList.remove("speaking"); };
+    msg.onerror = function(){ if(btn) btn.classList.remove("speaking"); };
+    window.speechSynthesis.speak(msg);
+  }
+
+  // ===== String compare =====
+  function stripDiacritics(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/đ/g,"d").replace(/Đ/g,"D"); }
+  function normalize(s){ return s.trim().toLowerCase().replace(/\s+/g," ").replace(/[.,!?;:]/g,""); }
+  function compareAns(input, correct){
+    var i = normalize(input), a = normalize(correct);
+    if(i === "") return "empty";
+    if(i === a) return "perfect";
+    if(stripDiacritics(i) === stripDiacritics(a)) return "tone_only";
+    return "wrong";
+  }
+
+  // ===== Mode menu =====
+  function renderModeMenu(){
+    var menu = document.getElementById("modeMenu");
+    menu.innerHTML = "";
+    var modes = [
+      {id:"fill", icon:"📝", title:"問題I 穴埋め", count:FILL_QUESTIONS.length},
+      {id:"rearrange", icon:"🔀", title:"問題II 並び替え", count:REARRANGE_QUESTIONS.length}
+    ];
+    modes.forEach(function(m){
+      var btn = document.createElement("button");
+      var st = loadSt(m.id);
+      var doneCount = st ? st.done.length : 0;
+      var isDone = st && st.finished && doneCount === m.count;
+      btn.className = isDone ? "done" : "";
+      btn.innerHTML = "<div class='ic'>"+m.icon+"</div><div>"+m.title+"</div><div class='count'>◎ "+doneCount+" / "+m.count+" 問"+(isDone?" ✓":"")+"</div>";
+      btn.addEventListener("click", function(){ start(m.id); });
+      menu.appendChild(btn);
+    });
+  }
+
+  function start(mode){
+    currentMode = mode;
+    state = loadSt(mode) || initSt(mode);
+    if(state.finished){ state = initSt(mode); saveSt(mode, state); }
+    document.getElementById("modeArea").classList.add("hidden");
+    document.getElementById("learnArea").classList.remove("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    if(mode === "fill"){
+      document.getElementById("fillSection").classList.remove("hidden");
+      document.getElementById("rearrangeSection").classList.add("hidden");
+      document.getElementById("choicesHint").innerHTML = "<b>選択肢一覧</b>: " + FILL_CHOICES;
+    }else{
+      document.getElementById("fillSection").classList.add("hidden");
+      document.getElementById("rearrangeSection").classList.remove("hidden");
+    }
+    render();
+  }
+  function back(){
+    currentMode = null; state = null;
+    document.getElementById("modeArea").classList.remove("hidden");
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.add("hidden");
+    renderModeMenu();
+  }
+
+  function curQ(){
+    if(!state || state.queue.length === 0) return null;
+    return dataFor(currentMode)[state.queue[state.idx]];
+  }
+  function setStage(st){
+    var b = document.getElementById("stageBadge");
+    if(st === 1){ b.className="stage-badge s1"; b.textContent="STEP 1: 音声なしで挑戦"; }
+    else { b.className="stage-badge s2"; b.textContent="STEP 2: 音声を聞いてから入力"; }
+  }
+
+  // ===== Fill mode rendering =====
+  function renderFill(q){
+    document.getElementById("qFill").innerHTML = q.sentence.replace(/_{2,}|\(___\)/g, '<span class="blank">___</span>');
+    document.getElementById("qFillJp").textContent = q.jp;
+    document.getElementById("fIdx").textContent = (state.idx+1)+"/"+state.queue.length;
+    var unsolved = document.getElementById("unsolvedFill");
+    if(q.confirmed){ unsolved.classList.add("hidden"); }
+    else { unsolved.classList.remove("hidden"); }
+    var i = document.getElementById("fillAns");
+    i.value = ""; i.className = "ans-input"; i.disabled = false;
+    setTimeout(function(){ try{ i.focus(); }catch(e){} }, 50);
+  }
+
+  // ===== Rearrange mode rendering =====
+  function renderRearrange(q){
+    document.getElementById("rIdx").textContent = (state.idx+1)+"/"+state.queue.length;
+    document.getElementById("qRearrangeJp").textContent = q.ans ? "正解例あり (添削済み)" : "⚠️ 正解未確定 - 並べたら自分で確認";
+    // Shuffle words for initial display
+    rArr = q.words.map(function(_,i){return i;});
+    for(var i=rArr.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t = rArr[i]; rArr[i] = rArr[j]; rArr[j] = t;
+    }
+    drawRearrange(q);
+    var unsolved = document.getElementById("unsolvedRearrange");
+    if(q.ans){ unsolved.classList.add("hidden"); }
+    else { unsolved.classList.remove("hidden"); }
+  }
+
+  function drawRearrange(q){
+    var area = document.getElementById("rearrangeArea");
+    area.innerHTML = "";
+    rArr.forEach(function(wIdx, pos){
+      var row = document.createElement("div");
+      row.className = "rearrange-row";
+      var posLabel = document.createElement("div"); posLabel.className = "pos"; posLabel.textContent = (pos+1);
+      var word = document.createElement("div"); word.className = "word"; word.textContent = q.words[wIdx];
+      var arrows = document.createElement("div"); arrows.className = "arrows";
+      var up = document.createElement("button"); up.textContent = "↑"; up.disabled = (pos === 0);
+      up.addEventListener("click", function(){ moveItem(pos, -1); });
+      var down = document.createElement("button"); down.textContent = "↓"; down.disabled = (pos === rArr.length-1);
+      down.addEventListener("click", function(){ moveItem(pos, 1); });
+      arrows.appendChild(up); arrows.appendChild(down);
+      row.appendChild(posLabel); row.appendChild(word); row.appendChild(arrows);
+      area.appendChild(row);
+    });
+    // Update preview
+    var preview = document.getElementById("rearrangePreview");
+    var sentence = rArr.map(function(wIdx){ return q.words[wIdx]; }).join(" ");
+    preview.textContent = sentence;
+  }
+
+  function moveItem(pos, dir){
+    var newPos = pos + dir;
+    if(newPos < 0 || newPos >= rArr.length) return;
+    var t = rArr[pos]; rArr[pos] = rArr[newPos]; rArr[newPos] = t;
+    var q = curQ(); if(q) drawRearrange(q);
+  }
+
+  function render(){
+    if(state.finished){ showComplete(); return; }
+    var q = curQ(); if(!q) return;
+    document.getElementById("s-round").textContent = state.round+" / "+MAX_ROUND;
+    document.getElementById("s-remain").textContent = state.queue.length;
+    document.getElementById("s-done").textContent = state.done.length+" / "+state.total;
+    document.getElementById("bar").style.width = Math.round((state.done.length/state.total)*100)+"%";
+
+    if(currentMode === "fill") renderFill(q);
+    else renderRearrange(q);
+
+    document.getElementById("judge").classList.remove("show");
+    document.getElementById("btnsStage1").classList.remove("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.add("hidden");
+    state.stage = 1; setStage(1); rank = null;
+  }
+
+  function showComplete(){
+    document.getElementById("learnArea").classList.add("hidden");
+    document.getElementById("completeArea").classList.remove("hidden");
+    var label = currentMode === "fill" ? "穴埋め" : "並び替え";
+    document.getElementById("completeMsg").textContent =
+      state.done.length === state.total
+        ? label+" 全"+state.total+"問 ◎ で完了！"
+        : MAX_ROUND+"周終了。◎ "+state.done.length+"/"+state.total+"問";
+  }
+
+  // ===== Judgment =====
+  function applyJudgment(r, q, val){
+    var jb = document.getElementById("judge");
+    rank = r;
+    var cls = "";
+    if(r === "◎"){ cls="excellent"; document.getElementById("judgeIcon").textContent="◎"; document.getElementById("judgeMsg").textContent="完全正解！合格"; }
+    else if(r === "〇"){ cls="good"; document.getElementById("judgeIcon").textContent="〇"; document.getElementById("judgeMsg").textContent="声調記号のみミス → 次周"; }
+    else if(r === "△"){ cls="okay"; document.getElementById("judgeIcon").textContent="△"; document.getElementById("judgeMsg").textContent="音声を聞いて書けました → 次周"; }
+    else if(r === "?"){ cls="unsolved"; document.getElementById("judgeIcon").textContent="?"; document.getElementById("judgeMsg").textContent="正解未確定。Huong先生に確認推奨"; }
+    else { cls="bad"; document.getElementById("judgeIcon").textContent="×"; document.getElementById("judgeMsg").textContent="不正解 → 次周"; }
+    jb.className = "judge-box show " + cls;
+
+    var input = document.getElementById("fillAns");
+    if(currentMode === "fill"){
+      if(r === "◎") input.className="ans-input excellent";
+      else if(r === "〇") input.className="ans-input good";
+      else if(r === "△") input.className="ans-input okay";
+      else input.className="ans-input bad";
+      input.disabled = true;
+      if(q.confirmed && q.ans){
+        var filled = q.sentence.replace(/_{2,}|\(___\)/g, '<b style="color:#fff;text-decoration:underline">'+q.ans+'</b>');
+        document.getElementById("correctAns").innerHTML = filled + "<small>正解: "+q.ans+" | "+q.jp+"</small>";
+      }else{
+        document.getElementById("correctAns").innerHTML = "<b>正解未確定</b><small>Huong先生に確認してください<br>あなたの答え: "+(val||"(未入力)")+"</small>";
+      }
+    }else{
+      // rearrange mode
+      var userSentence = rArr.map(function(wi){ return q.words[wi]; }).join(" ");
+      if(q.ans){
+        document.getElementById("correctAns").innerHTML = q.ans + "<small>あなた: "+userSentence+"</small>";
+      }else{
+        document.getElementById("correctAns").innerHTML = "<b>正解未確定</b><small>あなたの並び: "+userSentence+"</small>";
+      }
+    }
+
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.add("hidden");
+    document.getElementById("btnsStage2").classList.add("hidden");
+    document.getElementById("btnsNext").classList.remove("hidden");
+  }
+
+  function doCheckFill1(){
+    var q = curQ(); if(!q) return;
+    if(!q.confirmed){
+      // 正解未確定 → スキップ的扱い、次周に残す
+      applyJudgment("?", q, document.getElementById("fillAns").value);
+      return;
+    }
+    var v = document.getElementById("fillAns").value;
+    var r = compareAns(v, q.ans);
+    if(r === "empty"){ document.getElementById("fillAns").focus(); return; }
+    if(r === "perfect") applyJudgment("◎", q, v);
+    else if(r === "tone_only") applyJudgment("〇", q, v);
+    else showListenFill(v);
+  }
+  function doCheckFill2(){
+    var q = curQ(); if(!q) return;
+    var v = document.getElementById("fillAns").value;
+    var r = compareAns(v, q.ans);
+    if(r === "empty"){ document.getElementById("fillAns").focus(); return; }
+    if(r === "perfect" || r === "tone_only") applyJudgment("△", q, v);
+    else applyJudgment("×", q, v);
+  }
+  function showListenFill(prev){
+    var i = document.getElementById("fillAns");
+    i.className="ans-input bad"; i.disabled=true;
+    var jb = document.getElementById("judge");
+    jb.className="judge-box show listen";
+    document.getElementById("judgeIcon").textContent="🔊";
+    document.getElementById("judgeMsg").textContent="不正解。音声を聞いてもう一度";
+    document.getElementById("correctAns").innerHTML = "あなた: " + (prev || "(未入力)");
+    document.getElementById("btnsStage1").classList.add("hidden");
+    document.getElementById("btnsListen").classList.remove("hidden");
+  }
+  function doSpeakAndAdvanceFill(){
+    var q = curQ(); if(!q || !q.ans) return;
+    var full = q.sentence.replace(/_{2,}|\(___\)/g, q.ans);
+    speak(full, document.getElementById("btnSpeakBig"));
+    setTimeout(function(){
+      state.stage = 2; setStage(2);
+      var i = document.getElementById("fillAns");
+      i.value=""; i.className="ans-input"; i.disabled=false;
+      document.getElementById("judge").classList.remove("show");
+      document.getElementById("btnsListen").classList.add("hidden");
+      document.getElementById("btnsStage2").classList.remove("hidden");
+      try{ i.focus(); }catch(e){}
+    }, 500);
+  }
+
+  function doCheckRearrange(){
+    var q = curQ(); if(!q) return;
+    var userSentence = rArr.map(function(wi){ return q.words[wi]; }).join(" ");
+    if(!q.ans){
+      applyJudgment("?", q, userSentence);
+      return;
+    }
+    var r = compareAns(userSentence, q.ans);
+    if(r === "perfect") applyJudgment("◎", q, userSentence);
+    else if(r === "tone_only") applyJudgment("〇", q, userSentence);
+    else applyJudgment("×", q, userSentence);
+  }
+
+  function doSkip(){
+    var q = curQ(); if(!q) return;
+    applyJudgment("×", q, "");
+  }
+
+  function doNext(){
+    var qi = state.queue[state.idx];
+    if(rank === "◎"){ if(state.done.indexOf(qi) < 0) state.done.push(qi); }
+    else{ if(state.nextQueue.indexOf(qi) < 0) state.nextQueue.push(qi); }
+    state.queue.splice(state.idx, 1);
+    if(state.idx >= state.queue.length){
+      if(state.nextQueue.length === 0 || state.round >= MAX_ROUND) state.finished = true;
+      else{ state.round++; state.queue = state.nextQueue; state.nextQueue = []; state.idx = 0; }
+    }
+    saveSt(currentMode, state);
+    render();
+  }
+
+  // ===== Events =====
+  document.getElementById("btnCheck").addEventListener("click", function(){
+    if(currentMode === "fill") doCheckFill1();
+    else doCheckRearrange();
+  });
+  document.getElementById("btnCheck2").addEventListener("click", function(){
+    if(currentMode === "fill") doCheckFill2();
+  });
+  document.getElementById("btnSpeakBig").addEventListener("click", function(){
+    if(currentMode === "fill") doSpeakAndAdvanceFill();
+  });
+  document.getElementById("btnSkip").addEventListener("click", doSkip);
+  document.getElementById("btnNext").addEventListener("click", doNext);
+  document.getElementById("fillAns").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); if(state && state.stage === 1) doCheckFill1(); else doCheckFill2(); }
+  });
+  document.getElementById("btnBack").addEventListener("click", back);
+  document.getElementById("btnResetCur").addEventListener("click", function(){
+    if(confirm("このモードをリセット?")){ state = initSt(currentMode); saveSt(currentMode, state); render(); }
+  });
+  document.getElementById("btnResetAll").addEventListener("click", function(){
+    if(confirm("全進捗リセット?")){ ["fill","rearrange"].forEach(function(m){ localStorage.removeItem(skey(m)); }); renderModeMenu(); }
+  });
+
+  if("speechSynthesis" in window){
+    loadVoices();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }
+  renderModeMenu();
+})();
+</script>
+</body>
+</html>
