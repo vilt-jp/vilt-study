@@ -1,0 +1,691 @@
+gia đình
+bố
+mẹ
+con
+con trai
+con gái
+anh trai
+chị gái
+em trai
+em gái
+ông
+bà
+cháu
+vợ
+chồng
+bạn
+bạn thân
+hàng xóm
+người yêu
+kết hôn
+ly hôn
+quen
+giúp đỡ
+chăm sóc
+yêu
+ghét
+tin
+tha thứ
+cãi nhau
+làm quen
+đầu
+tóc
+mặt
+mắt
+mũi
+miệng
+răng
+lưỡi
+tai
+cổ
+vai
+lưng
+ngực
+bụng
+tay
+chân
+ngón tay
+da
+máu
+tim
+sức khỏe
+bệnh
+bệnh viện
+bác sĩ
+y tá
+thuốc
+khám bệnh
+chữa bệnh
+đau
+sốt
+ho
+cảm
+mệt
+khỏe
+yếu
+ngủ
+thức dậy
+tập thể dục
+cao
+thấp
+béo
+gầy
+chóng mặt
+buồn nôn
+đau bụng
+viên thuốc
+đơn thuốc
+tiêm
+phẫu thuật
+hồi phục
+ăn
+uống
+cơm
+phở
+bún
+bánh mì
+thịt
+thịt bò
+thịt gà
+thịt lợn
+cá
+tôm
+trứng
+rau
+hoa quả
+chuối
+táo
+cam
+xoài
+dưa hấu
+sầu riêng
+đường
+muối
+nước mắm
+tương ớt
+dầu ăn
+cà phê
+trà
+nước
+bia
+rượu
+sữa
+nấu ăn
+luộc
+chiên
+rán
+nướng
+hấp
+xào
+ngon
+ngọt
+chua
+cay
+mặn
+đắng
+nhạt
+đói
+no
+khát
+nhà hàng
+quán ăn
+quần áo
+áo
+quần
+váy
+giày
+dép
+mũ
+kính
+túi xách
+ví
+đồng hồ
+mặc
+cởi
+đội
+mua
+bán
+chọn
+thử
+giảm giá
+đắt
+rẻ
+vừa
+rộng
+chật
+cửa hàng
+siêu thị
+chợ
+hóa đơn
+mặc cả
+trả lại
+nhà
+phòng
+phòng ngủ
+phòng khách
+phòng tắm
+nhà bếp
+bàn
+ghế
+giường
+tủ
+tủ lạnh
+máy giặt
+máy lạnh
+điều hòa
+quạt
+đèn
+ti vi
+điện thoại
+máy tính
+cửa
+cửa sổ
+sàn nhà
+trần
+chìa khóa
+thuê
+chuyển nhà
+sạch
+bẩn
+dọn dẹp
+trang trí
+đi
+đến
+về
+đi bộ
+chạy
+xe máy
+xe đạp
+xe ô tô
+xe buýt
+taxi
+tàu hỏa
+máy bay
+thuyền
+sân bay
+bến xe
+ga
+đường
+ngã tư
+đèn giao thông
+lái xe
+rẽ
+đi thẳng
+dừng
+qua đường
+vé
+hành lý
+bản đồ
+tắc đường
+tai nạn
+đến nơi
+một
+hai
+ba
+mười
+trăm
+nghìn
+triệu
+tiền
+đồng
+yên
+đô la
+giá
+tiền mặt
+thẻ
+ngân hàng
+rút tiền
+gửi tiền
+trả tiền
+đổi tiền
+nhiều
+ít
+tăng
+giảm
+tổng cộng
+phần trăm
+đếm
+tính toán
+tiết kiệm
+vay
+tỷ
+trường học
+đại học
+lớp
+học sinh
+sinh viên
+giáo viên
+thầy giáo
+cô giáo
+học
+dạy
+đi học
+giảng dạy
+môn học
+tiếng Anh
+tiếng Nhật
+tiếng Việt
+toán
+lịch sử
+sách
+vở
+bút
+bài tập
+thi
+kỳ thi
+đỗ
+trượt
+điểm
+chăm chỉ
+lười
+hiểu
+công việc
+làm việc
+công ty
+văn phòng
+giám đốc
+trưởng phòng
+nhân viên
+đồng nghiệp
+khách hàng
+đối tác
+hợp đồng
+họp
+cuộc họp
+báo cáo
+tài liệu
+dự án
+lương
+thưởng
+nghỉ phép
+làm thêm giờ
+đi công tác
+tuyển dụng
+phỏng vấn
+nghỉ việc
+sản phẩm
+dịch vụ
+thị trường
+quản lý
+kế hoạch
+hoàn thành
+sở thích
+đọc sách
+xem phim
+nghe nhạc
+hát
+nhảy
+chụp ảnh
+vẽ
+chơi
+trò chơi
+phim
+nhạc
+bài hát
+truyện
+du lịch
+đi chơi
+thể thao
+bóng đá
+bóng rổ
+bơi
+chạy bộ
+yoga
+đi dạo
+câu cá
+leo núi
+vui
+chán
+thú vị
+thư giãn
+công viên
+thời tiết
+khí hậu
+nhiệt độ
+trời
+mặt trời
+mặt trăng
+sao
+mây
+mưa
+gió
+bão
+tuyết
+sương mù
+sấm
+sét
+cầu vồng
+núi
+sông
+hồ
+biển
+rừng
+đảo
+bãi biển
+môi trường
+ô nhiễm
+không khí
+mùa
+mùa xuân
+mùa hè
+mùa thu
+mùa đông
+nóng
+lạnh
+ấm
+mát
+nắng
+khô
+ẩm
+động đất
+lũ lụt
+chó
+mèo
+con
+chim
+gà
+vịt
+bò
+lợn
+ngựa
+voi
+hổ
+khỉ
+rắn
+cây
+hoa
+lá
+cỏ
+hoa hồng
+hoa mai
+trồng
+rau muống
+hoa quả
+cá vàng
+con muỗi
+con kiến
+màu
+đỏ
+xanh
+vàng
+trắng
+đen
+hồng
+tím
+nâu
+xám
+cam
+hình
+tròn
+vuông
+dài
+ngắn
+to
+nhỏ
+dày
+mỏng
+thời gian
+giờ
+phút
+giây
+ngày
+tuần
+tháng
+năm
+hôm nay
+hôm qua
+ngày mai
+sáng
+trưa
+chiều
+tối
+đêm
+hiện tại
+quá khứ
+tương lai
+đúng giờ
+sớm
+muộn
+ngay
+đột nhiên
+thường xuyên
+đôi khi
+luôn luôn
+không bao giờ
+trước
+sau
+vui vẻ
+hạnh phúc
+buồn
+tức giận
+sợ
+lo lắng
+ngạc nhiên
+xấu hổ
+cô đơn
+thất vọng
+hài lòng
+thoải mái
+căng thẳng
+hồi hộp
+yên tâm
+thích
+tốt bụng
+hiền
+thông minh
+trung thực
+vui tính
+nghiêm túc
+lười biếng
+ích kỷ
+keo kiệt
+nhút nhát
+tự tin
+khiêm tốn
+kiên nhẫn
+hy vọng
+yêu thương
+nhớ
+quên
+hối hận
+tin tưởng
+nghi ngờ
+khó chịu
+chán
+yêu
+đáng yêu
+đứng
+ngồi
+nằm
+đi
+chạy
+nhảy
+nhìn
+xem
+nghe
+nói
+đọc
+viết
+hỏi
+trả lời
+gọi
+đợi
+tìm
+tìm thấy
+mở
+đóng
+bật
+tắt
+cầm
+đưa
+nhận
+cho
+lấy
+gửi
+đến
+đi ra
+đi vào
+lên
+xuống
+bắt đầu
+kết thúc
+tiếp tục
+dừng lại
+quên
+giúp
+sử dụng
+tốt
+xấu
+đẹp
+mới
+cũ
+trẻ
+già
+nhanh
+chậm
+khó
+dễ
+đúng
+sai
+quan trọng
+đặc biệt
+bình thường
+đầy
+trống
+đông
+vắng
+giàu
+nghèo
+nhẹ
+nặng
+mạnh
+yếu
+cao
+thấp
+sâu
+cạn
+giỏi
+kém
+thuận tiện
+bất tiện
+an toàn
+nguy hiểm
+thật
+giả
+rảnh
+bận
+rất
+quá
+hơi
+khá
+chỉ
+cũng
+vẫn
+đã
+đang
+sẽ
+và
+hoặc
+nhưng
+vì
+nên
+nếu
+thì
+mặc dù
+để
+với
+trong
+ngoài
+trên
+dưới
+cạnh
+chính phủ
+nhà nước
+pháp luật
+xã hội
+kinh tế
+chính trị
+văn hóa
+giáo dục
+y tế
+bảo hiểm
+thuế
+giá cả
+lãi suất
+đầu tư
+sản xuất
+tiêu thụ
+xuất khẩu
+nhập khẩu
+phát triển
+nghiên cứu
+công nghệ
+khoa học
+môi trường
+dân số
+thanh niên
+trẻ em
+người già
+nông nghiệp
+công nghiệp
+du lịch
+chiến tranh
+hòa bình
+tự do
+dân chủ
+luật sư
+cảnh sát
+tội phạm
+thị trường
+cạnh tranh
+hợp tác
+quốc gia
+dân tộc
+thế giới
+thiên nhiên
+truyền thống
+hiện đại
+tự nhiên
+đồng nhất
+phương pháp
+phương tiện
+mục đích
+mục tiêu
+kết quả
+nguyên nhân
+hiệu quả
+ảnh hưởng
+trách nhiệm
+nghĩa vụ
+quyền lợi
+kinh nghiệm
+khả năng
+năng lực
+chuyên môn
+kiến thức
+trình độ
+chất lượng
+số lượng
+đặc điểm
+ưu điểm
+khuyết điểm
+vấn đề
+giải pháp
+sự kiện
+hiện tượng
+tình hình
+tình trạng
+giá trị
+tinh thần
+thái độ
+hành động
+ý kiến
+ý nghĩa
+quan điểm
+quan hệ
+hợp tác
+thành công
+thất bại
+phát minh
+sáng tạo
+phát triển

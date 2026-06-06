@@ -86,35 +86,5 @@ var GRAMMAR_4KYU = [
 // === vả lại / ngoài ra ===
 {cat:"ngoài ra",hint:"その上",fill:"__ ra, còn có một vấn đề khác.",ans:"Ngoài",jp:"その上、別の問題がある"},
 // === sao + hoặc ===
-{cat:"hoặc",hint:"または",fill:"Anh uống cà phê __ trà?",ans:"hoặc",jp:"コーヒーか紅茶か"},
-// === PDF(矢田さん4級/5級)より追加 2026-06-06 ===
-{cat:"頻度 thường",hint:"よく〜する",fill:"Anh __ đi siêu thị lúc 6 giờ.",ans:"thường",jp:"彼はよく6時にスーパーへ行く"},
-{cat:"頻度 hay",hint:"よく〜する(=thường)",fill:"Buổi sáng anh __ ăn phở gà.",ans:"hay",jp:"朝はよくフォーを食べる"},
-{cat:"頻度 ít khi",hint:"めったに〜しない",fill:"Anh __ khi ăn đồ Nhật.",ans:"ít",jp:"彼はめったに日本食を食べない"},
-{cat:"頻度 hiếm khi",hint:"ごくまれにしか〜しない",fill:"Anh __ khi đi tàu lượn cao tốc.",ans:"hiếm",jp:"彼はめったにジェットコースターに乗らない"},
-{cat:"頻度 thỉnh thoảng",hint:"時々(=đôi khi)",fill:"Anh __ đi xe đạp ra Hồ Tây.",ans:"thỉnh thoảng",jp:"彼は時々自転車で西湖へ行く"},
-{cat:"頻度 lúc nào cũng",hint:"いつも",fill:"Anh ấy lúc nào __ bận.",ans:"cũng",jp:"彼はいつも忙しい"},
-{cat:"頻度 ngày nào cũng",hint:"毎日(=hàng ngày)",fill:"Ngày __ anh cũng đi chạy bộ.",ans:"nào",jp:"彼は毎日ジョギングする"},
-{cat:"頻度 không bao giờ",hint:"絶対に〜しない",fill:"Anh __ bao giờ hút thuốc lá.",ans:"không",jp:"彼は絶対にタバコを吸わない"},
-{cat:"頻度 chưa bao giờ",hint:"一度も〜したことがない",fill:"Anh __ bao giờ lái xe máy ở Việt Nam.",ans:"chưa",jp:"ベトナムでバイクを運転したことがない"},
-{cat:"複文 Tuy...nhưng",hint:"〜だけれど(=Mặc dù)",fill:"__ rất cố gắng nhưng anh ấy vẫn trượt.",ans:"Tuy",jp:"頑張ったけれど彼は落ちた"},
-{cat:"複文 Tuy...nhưng vẫn",hint:"〜だが それでも",fill:"Tuy cố gắng nhưng anh ấy __ bị trượt.",ans:"vẫn",jp:"努力したが それでも落ちた"},
-{cat:"禁止 không được",hint:"〜してはいけない",fill:"Em __ được hút thuốc ở đây.",ans:"không",jp:"ここでタバコを吸ってはいけない"},
-{cat:"受動態 được",hint:"〜される(利益)",fill:"Cái xe __ sửa xong rồi.",ans:"được",jp:"車は修理が終わった"},
-{cat:"可能 V được",hint:"〜できる",fill:"Em nói tiếng Việt __.",ans:"được",jp:"私はベトナム語が話せる"},
-{cat:"自分で tự",hint:"自分で〜する",fill:"Tôi __ nấu cơm ăn.",ans:"tự",jp:"私は自分でご飯を作って食べる"},
-{cat:"依頼 hãy",hint:"〜してください",fill:"__ trả lời câu hỏi này.",ans:"Hãy",jp:"この質問に答えてください"},
-{cat:"促し V đi",hint:"〜して(促し)",fill:"Cậu tự đi xem __.",ans:"đi",jp:"自分で見てきて"},
-{cat:"伝聞 nghe nói",hint:"〜だそうだ",fill:"__ nói anh ấy đã nghỉ việc.",ans:"Nghe",jp:"彼は仕事を辞めたそうだ"},
-{cat:"不可能 không...nổi",hint:"〜しきれない",fill:"Cay quá, tôi không ăn __.",ans:"nổi",jp:"辛すぎて食べきれない"},
-{cat:"丁寧に cẩn thận",hint:"注意して〜する",fill:"Hãy bảo quản tài liệu __.",ans:"cẩn thận",jp:"資料を大切に保管して"},
-{cat:"投資 đầu tư vào",hint:"〜に投資する",fill:"Anh ấy đầu tư __ công ty.",ans:"vào",jp:"彼は会社に投資する"},
-{cat:"基づく dựa trên",hint:"〜に基づく",fill:"Cuốn sách __ trên một câu chuyện có thật.",ans:"dựa",jp:"その本は実話に基づいている"},
-{cat:"進学 học tiếp",hint:"続けて〜する",fill:"Em gái tôi sẽ học __ lên đại học.",ans:"tiếp",jp:"妹は大学へ進学する"},
-{cat:"進行 vẫn đang",hint:"まだ〜している",fill:"Bây giờ anh ấy __ đang ngủ.",ans:"vẫn",jp:"彼は今もまだ寝ている"},
-{cat:"選択 hay là",hint:"それとも",fill:"Anh uống cà phê __ là trà?",ans:"hay",jp:"コーヒーそれとも紅茶?"},
-{cat:"〜の前に trước lúc",hint:"〜の前に〜したい",fill:"Tôi muốn về __ lúc họp 15 phút.",ans:"trước",jp:"会議の15分前に帰りたい"},
-{cat:"〜のに rồi mà",hint:"もう〜したのに",fill:"Tôi nói rồi __ anh vẫn quên.",ans:"mà",jp:"もう言ったのに彼は忘れる"},
-{cat:"願望 A muốn B+V",hint:"AはBに〜してほしい",fill:"Giám đốc __ tôi làm nhanh.",ans:"muốn",jp:"社長は私に早くしてほしい"},
-{cat:"授与 đưa...cho",hint:"(人)に(物)を渡す",fill:"Tôi đưa danh thiếp __ anh ấy.",ans:"cho",jp:"私は彼に名刺を渡す"}
+{cat:"hoặc",hint:"または",fill:"Anh uống cà phê __ trà?",ans:"hoặc",jp:"コーヒーか紅茶か"}
 ];
