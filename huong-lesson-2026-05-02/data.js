@@ -38,12 +38,12 @@ var FILL_CHOICES = "trao đổi / khi nào / mới / được / đăng ký / t�
 // words: シャッフル前の語句配列, ans: 正解の文 (空文字列なら未解答)
 var REARRANGE_QUESTIONS = [
 {n:1, words:["cưới","cô ấy","gia đình","dù","vẫn","có phản đối","thì","tôi"], ans:"Dù gia đình có phản đối thì tôi vẫn cưới cô ấy"},
-{n:2, words:["chúng ta","không thể","dù","cố gắng","các anh","thay đổi","hết sức","cũng","tình hình","thì"], ans:"Dù chúng ta cố gắng hết sức thì cũng không thể thay đổi tình hình"},
+{n:2, words:["chúng ta","không thể","dù","cố gắng","thay đổi","hết sức","cũng","tình hình","thì"], ans:"Dù chúng ta cố gắng hết sức thì cũng không thể thay đổi tình hình"},
 {n:3, words:["phát minh","mì ăn liền","do","Ando Momofuku","ra"], ans:"Mì ăn liền do Ando Momofuku phát minh ra"},
 {n:4, words:["do","bản báo cáo","chị Vy","này","viết"], ans:"Bản báo cáo này do chị Vy viết"},
 {n:5, words:["nấu được","anh Kimura","không những","món Nhật","mà còn","nữa","món ăn Trung Quốc"], ans:"Anh Kimura không những nấu được món Nhật mà còn món ăn Trung Quốc nữa"},
 {n:6, words:["trời","không những","nữa","mà còn","mưa","lạnh"], ans:"Trời không những mưa mà còn lạnh nữa"},
-{n:7, words:["là","cô ấy","không những","một diễn viên","mà còn","một nhà văn"], ans:"Cô ấy không những là một diễn viên mà còn là một nhà văn"},
+{n:7, words:["là","cô ấy","không những","một diễn viên","mà còn là","một nhà văn"], ans:"Cô ấy không những là một diễn viên mà còn là một nhà văn"},
 {n:8, words:["có","Hà Nội","Hồ Tây","hồ nước tự nhiên","ví dụ như","nhiều","Hồ Hoàn Kiếm"], ans:"Hà Nội có nhiều hồ nước tự nhiên ví dụ như Hồ Tây Hồ Hoàn Kiếm"},
 {n:9, words:["tại Việt Nam","cũng có","căn bếp nào","bất cứ","nước mắm"], ans:"Tại Việt Nam bất cứ căn bếp nào cũng có nước mắm"},
 {n:10, words:["bạn","phải","làm","trước khi","bất cứ điều gì","suy nghĩ"], ans:"Trước khi làm bất cứ điều gì bạn phải suy nghĩ"},
@@ -67,10 +67,10 @@ var REARRANGE_QUESTIONS = [
 {n:27, words:["được diễn ra","xấu","trận đấu","nhưng","mặc dù","vẫn","thời tiết"], ans:"Mặc dù thời tiết xấu nhưng trận đấu vẫn được diễn ra"},
 {n:28, words:["chưa bao giờ","Hiền","đi làm muộn","tuy","nhà xa","nhưng"], ans:"Tuy nhà xa nhưng Hiền chưa bao giờ đi làm muộn"},
 {n:29, words:["ăn trộm","tôi","cũng","không bao giờ","có nghèo","thì","dù"], ans:"Dù có nghèo thì tôi cũng không bao giờ ăn trộm"},
-{n:30, words:["nói lời cảm ơn","nên","chúng ta","dù","khi","thích hay không","cũng","thì","được tặng quà"], ans:"Khi được tặng quà dù thích hay không thì chúng ta nên nói lời cảm ơn"},
+{n:30, words:["nói lời cảm ơn","nên","chúng ta","dù","khi","thích hay không","thì","được tặng quà"], ans:"Khi được tặng quà dù thích hay không thì chúng ta nên nói lời cảm ơn"},
 {n:31, words:["tôi","gọi điện","cũng","dù","hay rảnh rỗi","bố mẹ","hằng ngày","thì","cho","bận rộn"], ans:"Dù bận rộn hay rảnh rỗi thì tôi cũng gọi điện cho bố mẹ hằng ngày"},
 {n:32, words:["có thể nói","là","núi Phú Sĩ","biểu tượng","Nhật Bản","của"], ans:"Có thể nói núi Phú Sĩ là biểu tượng của Nhật Bản"},
 {n:33, words:["có thể nói","Covid-19","đã","thói quen","người tiêu dùng","thay đổi"], ans:"Có thể nói Covid-19 đã thay đổi thói quen người tiêu dùng"},
-{n:34, words:["đau dạ dày","anh ấy","do","bị","bỏ","thường xuyên","bữa sáng","nên"], ans:"Anh ấy thường xuyên bỏ bữa sáng nên bị đau dạ dày"},
+{n:34, words:["đau dạ dày","anh ấy","bị","bỏ","thường xuyên","bữa sáng","nên"], ans:"Anh ấy thường xuyên bỏ bữa sáng nên bị đau dạ dày"},
 {n:35, words:["tôi","do","thi lại","lười học","nên","phải","môn tiếng Pháp"], ans:"Do lười học nên tôi phải thi lại môn tiếng Pháp"}
 ];
