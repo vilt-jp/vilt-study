@@ -103,7 +103,6 @@
 <div class="voice-info" id="voiceInfo">🔊 音声エンジン確認中...</div>
 <div class="section-title">モードを選択</div>
 <div class="mode-sel" id="modeMenu"></div>
-<div style="text-align:center;margin-top:12px;"><button onclick="huongShowExplain()" style="background:#00897b;color:#fff;border:0;border-radius:12px;padding:14px 22px;font-size:16px;font-weight:bold;cursor:pointer;">📖 解説（文法・単語）を読む</button></div>
 <div class="reset-bar">
 <button id="btnResetAll">全進捗リセット</button>
 </div>
@@ -178,136 +177,6 @@
 <button onclick="location.reload()">モード選択に戻る</button>
 </div>
 
-<div id="explainArea" class="hidden" style="max-width:760px;margin:0 auto;padding:16px;">
-<button onclick="huongExplainBack()" style="background:#1976d2;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:15px;margin-bottom:14px;">← モード選択に戻る</button>
-<h2 style="font-size:20px;color:#0d47a1;margin:6px 0;">解説：文法と単語（漢越語つき）</h2>
-<p style="color:#666;font-size:13px;margin:0 0 14px;">Huong先生 並び替え35問・4級対策</p>
-<h3 style="font-size:17px;color:#1565c0;border-bottom:2px solid #1565c0;padding-bottom:4px;">Ⅰ. 文法パターン</h3>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">1. 〜だけれども（譲歩）</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">Dù / Mặc dù / Tuy … (nhưng) … vẫn / cũng</div>
-<div style="color:#333;font-size:14px;">逆のことが起きても「それでも〜」。後ろに vẫn（それでも）や cũng（〜も）。Tuy が一番かたい言い方。（第1・26・27・28問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">2. 〜であろうとなかろうと</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">Dù … hay (không) … thì … cũng</div>
-<div style="color:#333;font-size:14px;">二つのどちらでも結果は同じ。（第30・31問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">3. do（行為者）＋動詞 ＝ 〜によって…される</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">… do 人 … (ra)</div>
-<div style="color:#333;font-size:14px;">英語の受け身に近い。「誰がやったか」を do(=by) の後ろに置く。ra は外に広めるイメージ。（第3・4問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">4. 〜なので…（理由→結果）</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">(Do/Vì) … nên …</div>
-<div style="color:#333;font-size:14px;">前に理由、nên のあとに結果。（第34・35問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">5. 〜だけでなく…も</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">không những … mà còn … (nữa)</div>
-<div style="color:#333;font-size:14px;">二つの良い点・特徴を並べる。là が必要な文では2回要る。（第5・6・7問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">6. 例えば</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">ví dụ như</div>
-<div style="color:#333;font-size:14px;">例を挙げるときの言い方。（第8問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">7. どんな〜でも</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">bất cứ + 名詞 + nào cũng / bất cứ điều gì / bất cứ thứ gì / bất cứ lúc nào</div>
-<div style="color:#333;font-size:14px;">「どれでも・何でも・いつでも」と全部を指す。（第9・10・11問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">8. 〜次第・〜に応じて</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">tùy theo / tùy thuộc vào（成句 tùy cơ ứng biến）</div>
-<div style="color:#333;font-size:14px;">条件によって結果が変わる。（第12・13・14問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">9. 〜するほど・〜するあまり</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">đến mức / đến nỗi</div>
-<div style="color:#333;font-size:14px;">程度が大きいことを強調する。（第15・16・22問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">10. 〜するために</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">để + 動詞</div>
-<div style="color:#333;font-size:14px;">目的を表す。（第17問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">11. 〜だけ…する（同じ量）</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">bao nhiêu … bấy nhiêu</div>
-<div style="color:#333;font-size:14px;">前の量と同じだけ後ろもする。（第18問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">12. 〜のとおりに…する</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">sao … vậy</div>
-<div style="color:#333;font-size:14px;">言われたとおりに行う。（第19問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">13. 〜すると決まって…</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">cứ … là …</div>
-<div style="color:#333;font-size:14px;">あることが起きると必ず次が起きる。（第20問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">14. 〜させる（引き起こす）</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">khiến / làm / làm cho</div>
-<div style="color:#333;font-size:14px;">原因が結果を引き起こす。（第21・22・23問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">15. もし〜なら…（すべき）</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">nếu … thì (nên) …</div>
-<div style="color:#333;font-size:14px;">条件と、それに対する助言・結果。（第24問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">16. 自分で〜する</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">tự … lấy</div>
-<div style="color:#333;font-size:14px;">自分の力で行うことを強める。（第25問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">17. 〜と言える</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">có thể nói</div>
-<div style="color:#333;font-size:14px;">「〜と言ってよい」という前置き。文頭に来る。（第32・33問）</div>
-</div>
-<div style="margin:12px 0;padding:10px 12px;background:#f4f8ff;border-left:4px solid #1976d2;border-radius:6px;">
-<div style="font-weight:bold;color:#0d47a1;font-size:15px;">18. その他</div>
-<div style="color:#c2185b;font-size:15px;margin:3px 0;">trước khi＋動詞 / chưa bao giờ / không bao giờ</div>
-<div style="color:#333;font-size:14px;">〜する前に（第10）／一度も〜ない（第28）／決して〜ない（第29）。</div>
-</div>
-<h3 style="font-size:17px;color:#1565c0;border-bottom:2px solid #1565c0;padding-bottom:4px;margin-top:22px;">Ⅱ. 単語（漢越語つき）</h3>
-<p style="color:#666;font-size:13px;">「漢越語」＝漢字に対応するベトナム語。— は固有語（漢越語でない）。一部だけ漢越語の場合はその部分を示す。</p>
-<table style="width:100%;border-collapse:collapse;font-size:14px;">
-<tr style="background:#1565c0;color:#fff;"><th style="padding:7px;border:1px solid #ccc;text-align:left;">ベトナム語</th><th style="padding:7px;border:1px solid #ccc;text-align:left;">意味</th><th style="padding:7px;border:1px solid #ccc;text-align:left;">漢越語</th></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">phản đối</td><td style="padding:6px;border:1px solid #ddd;">反対する</td><td style="padding:6px;border:1px solid #ddd;color:#555;">反対</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">cố gắng hết sức</td><td style="padding:6px;border:1px solid #ddd;">全力を尽くす</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">diễn viên</td><td style="padding:6px;border:1px solid #ddd;">俳優</td><td style="padding:6px;border:1px solid #ddd;color:#555;">演員</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">nhà văn</td><td style="padding:6px;border:1px solid #ddd;">作家</td><td style="padding:6px;border:1px solid #ddd;color:#555;">文(văn)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">căn bếp</td><td style="padding:6px;border:1px solid #ddd;">台所</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">trọng lượng</td><td style="padding:6px;border:1px solid #ddd;">重さ</td><td style="padding:6px;border:1px solid #ddd;color:#555;">重量</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">kích thước</td><td style="padding:6px;border:1px solid #ddd;">大きさ・寸法</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">giá tiền</td><td style="padding:6px;border:1px solid #ddd;">値段</td><td style="padding:6px;border:1px solid #ddd;color:#555;">価(giá)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">câu trả lời</td><td style="padding:6px;border:1px solid #ddd;">答え</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">xếp hàng</td><td style="padding:6px;border:1px solid #ddd;">列に並ぶ</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">làm thủ tục</td><td style="padding:6px;border:1px solid #ddd;">手続きをする</td><td style="padding:6px;border:1px solid #ddd;color:#555;">手続(thủ tục)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">bị ngập</td><td style="padding:6px;border:1px solid #ddd;">水浸しになる</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">giật mình</td><td style="padding:6px;border:1px solid #ddd;">びっくりする</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">cảm động</td><td style="padding:6px;border:1px solid #ddd;">感動する</td><td style="padding:6px;border:1px solid #ddd;color:#555;">感動</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">rơi nước mắt</td><td style="padding:6px;border:1px solid #ddd;">涙を流す</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">ngành du lịch</td><td style="padding:6px;border:1px solid #ddd;">観光業</td><td style="padding:6px;border:1px solid #ddd;color:#555;">遊歴(du lịch)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">tê liệt</td><td style="padding:6px;border:1px solid #ddd;">麻痺する</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">giải quyết</td><td style="padding:6px;border:1px solid #ddd;">解決する</td><td style="padding:6px;border:1px solid #ddd;color:#555;">解決</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">trận đấu</td><td style="padding:6px;border:1px solid #ddd;">試合</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">diễn ra</td><td style="padding:6px;border:1px solid #ddd;">行われる</td><td style="padding:6px;border:1px solid #ddd;color:#555;">演(diễn)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">ăn trộm</td><td style="padding:6px;border:1px solid #ddd;">盗む</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">tặng quà</td><td style="padding:6px;border:1px solid #ddd;">贈り物をする</td><td style="padding:6px;border:1px solid #ddd;color:#555;">贈(tặng)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">bận rộn</td><td style="padding:6px;border:1px solid #ddd;">忙しい</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">rảnh rỗi</td><td style="padding:6px;border:1px solid #ddd;">暇</td><td style="padding:6px;border:1px solid #ddd;color:#555;">—</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">biểu tượng</td><td style="padding:6px;border:1px solid #ddd;">象徴</td><td style="padding:6px;border:1px solid #ddd;color:#555;">表象</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">người tiêu dùng</td><td style="padding:6px;border:1px solid #ddd;">消費者</td><td style="padding:6px;border:1px solid #ddd;color:#555;">消(tiêu)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">lười học</td><td style="padding:6px;border:1px solid #ddd;">勉強を怠ける</td><td style="padding:6px;border:1px solid #ddd;color:#555;">学(học)</td></tr>
-<tr><td style="padding:6px;border:1px solid #ddd;color:#c2185b;">thi lại</td><td style="padding:6px;border:1px solid #ddd;">追試・再試験</td><td style="padding:6px;border:1px solid #ddd;color:#555;">試(thi)</td></tr>
-</table>
-<button onclick="huongExplainBack()" style="background:#1976d2;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-size:15px;margin:18px 0;">← モード選択に戻る</button>
-</div>
 </main>
 <footer class="site">Huong先生レッスン 2026-05-02</footer>
 </div>
@@ -656,19 +525,6 @@
   }
   renderModeMenu();
 })();
-</script>
-
-<script>
-function huongShowExplain(){
-  ["modeArea","learnArea","completeArea"].forEach(function(id){var e=document.getElementById(id);if(e)e.classList.add("hidden");});
-  var x=document.getElementById("explainArea"); if(x) x.classList.remove("hidden");
-  window.scrollTo(0,0);
-}
-function huongExplainBack(){
-  var x=document.getElementById("explainArea"); if(x) x.classList.add("hidden");
-  var m=document.getElementById("modeArea"); if(m) m.classList.remove("hidden");
-  window.scrollTo(0,0);
-}
 </script>
 </body>
 </html>
