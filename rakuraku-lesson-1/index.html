@@ -149,7 +149,7 @@
 <footer class="site">出典: らくらくベトナム語 動画 #1</footer>
 </div>
 
-<script src="data.js"></script>
+<script src="data.js?v=20260613b"></script>
 <script>
 (function(){
   var MAX_ROUND = 5;
@@ -242,7 +242,30 @@
     return "正しい使い方";
   }
 
-  function escapeHtml(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  function escapeHtml(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  // 骨組み文を取得。data.js が古くて skeleton が無くても落ちないよう、その場で組み立てる安全網
+  function buildSkeleton(q){
+    if(q.skeleton) return q.skeleton;
+    var sent = q.sentence || "", uls = q.underlines || [], ans = q.ans;
+    var W = /[0-9A-Za-zÀ-ỹĐđ]/;
+    function findPos(w){
+      var lc = sent.toLowerCase(), lw = w.toLowerCase(), from = 0, idx;
+      while((idx = lc.indexOf(lw, from)) >= 0){
+        var before = idx > 0 ? sent[idx-1] : " ";
+        var after = (idx + w.length < sent.length) ? sent[idx + w.length] : " ";
+        if(!W.test(before) && !W.test(after)) return idx;
+        from = idx + 1;
+      }
+      return lc.indexOf(lw);
+    }
+    var spans = uls.map(function(w, i){ var p = findPos(w); return {s:p, e:p + w.length, ans:(i === ans)}; })
+                   .filter(function(x){ return x.s >= 0; })
+                   .sort(function(a, b){ return b.s - a.s; });
+    var sk = sent;
+    spans.forEach(function(x){ sk = sk.slice(0, x.s) + (x.ans ? "[(_)]" : "[_]") + sk.slice(x.e); });
+    return sk;
+  }
 
   function render(){
     if(state.finished){ showComplete(); return; }
@@ -296,7 +319,7 @@
       });
     }else if(currentMode === "correct"){
       // 並び替え: 骨組みの文（空欄＋括弧）を表示し、4語を ( ) に入る語として選ぶ
-      var sk = escapeHtml(q.skeleton)
+      var sk = escapeHtml(buildSkeleton(q))
         .replace(/\[\(_\)\]/g, '(<span class="blank">___</span>)')
         .replace(/\[_\]/g, '<span class="blank">___</span>');
       qBody.innerHTML = "<div class='qlabel'>4つの語を並び替えて意味の通る文にし、( ) に入る語を選んでください</div><div class='qsentence'>"+sk+"</div>";
