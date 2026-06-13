@@ -332,7 +332,7 @@
       });
     }else{
       // usage: keyword + 4 sentences
-      qBody.innerHTML = "<div class='qlabel'>この語が正しく使われている文を選んでください</div><div class='qkeyword'>"+escapeHtml(q.keyword)+"</div><div class='qkeyword-jp'>("+escapeHtml(q.keywordJp)+")</div>";
+      qBody.innerHTML = "<div class='qlabel'>この語が正しく使われている文を選んでください</div><div class='qkeyword'>"+escapeHtml(q.keyword)+"</div>";
       qJp.textContent = "正解の文の意味: " + q.jp[q.ans];
       q.sentences.forEach(function(s, si){
         var btn = document.createElement("button");
