@@ -289,7 +289,7 @@
       });
       var instruction = (currentMode === "error")
         ? "下線部の中で誤っている語を選んでください"
-        : "下線部の中で空欄に入る正解の語を選んでください";
+        : "下線部の中で正しい（重要な）語を選んでください";
       qBody.innerHTML = "<div class='qlabel'>"+instruction+"</div><div class='qsentence'>"+s+"</div>";
       qJp.textContent = q.jp;
       q.underlines.forEach(function(u, ui){
