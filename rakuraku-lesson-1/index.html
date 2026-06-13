@@ -275,10 +275,9 @@
         btn.addEventListener("click", function(){ pickChoice(ci); });
         choicesEl.appendChild(btn);
       });
-    }else if(currentMode === "error" || currentMode === "correct"){
-      // sentence + 4 underlined parts (共通UI、error=誤りを選ぶ、correct=正解の語を選ぶ)
+    }else if(currentMode === "error"){
+      // sentence + 4 underlined parts: 誤っている語を選ぶ
       var s = q.sentence;
-      // Replace each underline with marked span
       q.underlines.forEach(function(u, ui){
         var label = labels[ui];
         var marker = '<span class="ul">'+escapeHtml(u)+'</span><sup style="color:#ef6c00;font-weight:700">('+label+')</sup>';
@@ -287,10 +286,20 @@
           s = s.substring(0,pos) + marker + s.substring(pos + u.length);
         }
       });
-      var instruction = (currentMode === "error")
-        ? "下線部の中で誤っている語を選んでください"
-        : "下線部の中で正しい（重要な）語を選んでください";
-      qBody.innerHTML = "<div class='qlabel'>"+instruction+"</div><div class='qsentence'>"+s+"</div>";
+      qBody.innerHTML = "<div class='qlabel'>下線部の中で誤っている語を選んでください</div><div class='qsentence'>"+s+"</div>";
+      qJp.textContent = q.jp;
+      q.underlines.forEach(function(u, ui){
+        var btn = document.createElement("button");
+        btn.innerHTML = "<span class='label'>"+labels[ui]+"</span><span class='body'>"+escapeHtml(u)+"</span>";
+        btn.addEventListener("click", function(){ pickChoice(ui); });
+        choicesEl.appendChild(btn);
+      });
+    }else if(currentMode === "correct"){
+      // 並び替え: 骨組みの文（空欄＋括弧）を表示し、4語を ( ) に入る語として選ぶ
+      var sk = escapeHtml(q.skeleton)
+        .replace(/\[\(_\)\]/g, '(<span class="blank">___</span>)')
+        .replace(/\[_\]/g, '<span class="blank">___</span>');
+      qBody.innerHTML = "<div class='qlabel'>4つの語を並び替えて意味の通る文にし、( ) に入る語を選んでください</div><div class='qsentence'>"+sk+"</div>";
       qJp.textContent = q.jp;
       q.underlines.forEach(function(u, ui){
         var btn = document.createElement("button");
@@ -371,7 +380,7 @@
     }else if(currentMode === "error"){
       disp.innerHTML = "<b>正しい文:</b><br>" + escapeHtml(q.correctSentence) + "<br><b>正しい語:</b> " + escapeHtml(q.correctWord);
     }else if(currentMode === "correct"){
-      disp.innerHTML = "<b>正解 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>文:</b> " + escapeHtml(q.sentence);
+      disp.innerHTML = "<b>( ) に入る語 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>完成した文:</b> " + escapeHtml(q.sentence);
     }else{
       disp.innerHTML = "<b>正解の文 ("+labels[q.ans]+"):</b><br>" + escapeHtml(q.sentences[q.ans]);
     }
@@ -412,7 +421,7 @@
     }else if(currentMode === "error"){
       disp.innerHTML = "<b>正しい文:</b><br>" + escapeHtml(q.correctSentence) + "<br><b>正しい語:</b> " + escapeHtml(q.correctWord);
     }else if(currentMode === "correct"){
-      disp.innerHTML = "<b>正解 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>文:</b> " + escapeHtml(q.sentence);
+      disp.innerHTML = "<b>( ) に入る語 ("+labels[q.ans]+"):</b> " + escapeHtml(q.correctWord) + "<br><b>完成した文:</b> " + escapeHtml(q.sentence);
     }else{
       disp.innerHTML = "<b>正解の文 ("+labels[q.ans]+"):</b><br>" + escapeHtml(q.sentences[q.ans]);
     }
